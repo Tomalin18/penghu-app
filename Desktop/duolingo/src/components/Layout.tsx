@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, SafeAreaView } from 'react-native';
+import { View, SafeAreaView, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import NavBar from './NavBar';
 
@@ -10,11 +10,11 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, showNavBar = true }) => {
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
-      <View className="flex-1">
+      <View style={styles.content}>
         {/* 主要內容區域 */}
-        <View className="flex-1">
+        <View style={styles.mainContent}>
           {children}
         </View>
         
@@ -24,5 +24,18 @@ const Layout: React.FC<LayoutProps> = ({ children, showNavBar = true }) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  content: {
+    flex: 1,
+  },
+  mainContent: {
+    flex: 1,
+  },
+});
 
 export default Layout;

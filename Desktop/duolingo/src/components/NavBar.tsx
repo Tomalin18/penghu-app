@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
@@ -54,13 +54,13 @@ const NavBar: React.FC<NavBarProps> = () => {
   };
 
   return (
-    <View className="flex-row bg-white border-t border-gray-200 px-2 py-1">
+    <View style={styles.container}>
       {navItems.map((item) => {
         const active = isActive(item.name);
         return (
           <TouchableOpacity
             key={item.name}
-            className="flex-1 items-center py-2"
+            style={styles.navItem}
             onPress={() => navigation.navigate(item.name)}
           >
             <Ionicons
@@ -69,9 +69,10 @@ const NavBar: React.FC<NavBarProps> = () => {
               color={active ? '#1DA1F2' : '#A0AEC0'}
             />
             <Text
-              className={`text-xs mt-1 ${
-                active ? 'text-nav-active' : 'text-gray-light'
-              }`}
+              style={[
+                styles.label,
+                { color: active ? '#1DA1F2' : '#A0AEC0' }
+              ]}
             >
               {item.label}
             </Text>
@@ -81,5 +82,25 @@ const NavBar: React.FC<NavBarProps> = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderTopWidth: 1,
+    borderTopColor: '#E2E8F0',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+  },
+  navItem: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  label: {
+    fontSize: 12,
+    marginTop: 4,
+  },
+});
 
 export default NavBar;
