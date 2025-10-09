@@ -111,7 +111,7 @@ const HomePage = () => {
     attractions.find((a) => a.id === "tongliang-ancient-banyan"),
     attractions.find((a) => a.id === "shanshui-beach"),
     attractions.find((a) => a.id === "fengguei-cave"),
-  ].filter(Boolean)
+  ].filter((attraction): attraction is NonNullable<typeof attraction> => attraction !== undefined)
 
   return (
     <div className="min-h-screen bg-background pb-20">
