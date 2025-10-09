@@ -14,9 +14,7 @@ import { Send } from "lucide-react"
 import { Input } from "@/components/ui/input"
 
 const HomePage = () => {
-  const autoplayPlugin = useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
-  )
+  const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }))
   const [searchQuery, setSearchQuery] = useState("")
 
   const handleSearch = () => {
@@ -123,45 +121,38 @@ const HomePage = () => {
       <main className="max-w-md mx-auto pt-16">
         <div className="relative">
           <Carousel
-            plugins={[autoplayPlugin.current]}
+            plugins={[plugin.current]}
             className="w-full"
-            onMouseEnter={autoplayPlugin.current?.stop}
-            onMouseLeave={autoplayPlugin.current?.reset}
+            onMouseEnter={plugin.current.stop}
+            onMouseLeave={plugin.current.reset}
           >
             <CarouselContent>
               <CarouselItem>
                 <img
-                  src="/images/cross-sea-bridge-1.png"
-                  alt="澎湖跨海大橋"
-                  className="w-full h-48 object-cover"
+                  src="/images/home-carousel/好行BN_01.png"
+                  alt="澎湖好行宣傳圖1"
+                  className="w-full"
                 />
               </CarouselItem>
               <CarouselItem>
                 <img
-                  src="/images/erkan-1.png"
-                  alt="二崁古厝"
-                  className="w-full h-48 object-cover"
+                  src="/images/home-carousel/好行BN_02.png"
+                  alt="澎湖好行宣傳圖2"
+                  className="w-full"
                 />
               </CarouselItem>
               <CarouselItem>
                 <img
-                  src="/images/kuibishan-1.png"
-                  alt="奎壁山摩西分海"
-                  className="w-full h-48 object-cover"
+                  src="/images/home-carousel/好行BN_03.png"
+                  alt="澎湖好行宣傳圖3"
+                  className="w-full"
                 />
               </CarouselItem>
               <CarouselItem>
                 <img
-                  src="/images/shanshui-beach-1.png"
-                  alt="山水沙灘"
-                  className="w-full h-48 object-cover"
-                />
-              </CarouselItem>
-              <CarouselItem>
-                <img
-                  src="/images/tianhou-1.png"
-                  alt="天后宮"
-                  className="w-full h-48 object-cover"
+                  src="/images/home-carousel/好行BN_04.png"
+                  alt="澎湖好行宣傳圖4"
+                  className="w-full"
                 />
               </CarouselItem>
             </CarouselContent>
