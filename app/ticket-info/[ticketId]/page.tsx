@@ -256,7 +256,7 @@ export default function TicketInfoPage({ params }: { params: { ticketId: string 
       <HeaderWithMenu title="票券資訊" />
 
       <div className="flex-1 overflow-y-auto">
-        <div className="max-w-md mx-auto pb-6">
+        <div className="max-w-md mx-auto pb-20">
           {/* Title */}
           <div className="px-4 py-4">
             <h2 className="text-xl font-bold text-foreground mb-1">{ticket.name}</h2>

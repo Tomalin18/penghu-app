@@ -78,7 +78,7 @@ export default function ProfilePage() {
       <HeaderWithMenu title="會員中心" />
 
       {/* User Profile Card */}
-      <main className="px-4 pt-16 pb-6 max-w-md mx-auto space-y-6">
+      <main className="px-4 pt-16 pb-20 max-w-md mx-auto space-y-6">
         <Card className="shadow-sm border-primary/20">
           <CardContent className="p-6">
             <div className="flex items-center space-x-4">

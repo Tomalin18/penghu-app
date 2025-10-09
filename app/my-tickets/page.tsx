@@ -739,7 +739,7 @@ export default function MyTicketsPage() {
     <div className="min-h-screen bg-background pb-20">
       <HeaderWithMenu title="我的車票" />
 
-      <main className="px-4 pb-6 pt-16 max-w-md mx-auto">
+      <main className="px-4 pb-20 pt-16 max-w-md mx-auto">
         {tickets.length === 0 ? (
           <div className="text-center py-12">
             <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">

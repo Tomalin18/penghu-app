@@ -20,7 +20,7 @@ export default function MorePage() {
       <HeaderWithMenu title="其他" />
 
       {/* Transportation Information Section */}
-      <main className="px-4 pt-16 pb-6 max-w-md mx-auto space-y-6">
+      <main className="px-4 pt-16 pb-20 max-w-md mx-auto space-y-6">
         <div className="space-y-3">
           <h2 className="text-lg font-semibold text-foreground">交通資訊</h2>
           <div className="space-y-3">

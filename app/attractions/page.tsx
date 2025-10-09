@@ -105,7 +105,7 @@ export default function AttractionsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-surface via-background to-gradient-end pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-surface via-background to-gradient-end">
       <HeaderWithMenu title="景點導覽" />
 
       <div className="sticky top-16 z-30 bg-surface-elevated/95 backdrop-blur-md border-b border-border/50 px-4 py-6 space-y-4">
@@ -168,7 +168,7 @@ export default function AttractionsPage() {
         </div>
       </div>
 
-      <main className="px-4 pb-8 max-w-md mx-auto">
+      <main className="px-4 pb-20 max-w-md mx-auto pt-24">
         {selectedContentTab === "景點介紹" && (
           <div className="space-y-6">
             {filteredAttractions.map((attraction, index) => (
@@ -427,7 +427,7 @@ export default function AttractionsPage() {
         )}
 
         {selectedContentTab === "電子折頁" && (
-          <div className="space-y-4">
+          <div className="space-y-6">
             {filteredTravelGuides.map((guide) => (
               <div
                 key={guide.id}

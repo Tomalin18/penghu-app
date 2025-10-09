@@ -52,7 +52,7 @@ export default function EditProfilePage() {
     <div className="min-h-screen bg-background pb-8">
       <HeaderWithMenu title="修改個人資料" showBack onBack={() => router.back()} />
 
-      <main className="px-4 pt-16 pb-6 max-w-md mx-auto">
+      <main className="px-4 pt-16 pb-20 max-w-md mx-auto">
         <Card className="shadow-sm border-primary/20">
           <CardContent className="p-6">
             <form onSubmit={handleSubmit} className="space-y-5">
