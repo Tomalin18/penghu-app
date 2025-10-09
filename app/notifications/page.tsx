@@ -121,7 +121,7 @@ export default function NotificationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background pb-6">
+    <div className="min-h-screen bg-background pb-20">
       <HeaderWithMenu title="通知" showBackButton={true} />
 
       <main className="max-w-md mx-auto px-3 pt-20 pb-4">
