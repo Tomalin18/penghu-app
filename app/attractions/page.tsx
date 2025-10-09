@@ -168,7 +168,7 @@ export default function AttractionsPage() {
         </div>
       </div>
 
-      <main className="px-4 py-8 max-w-md mx-auto">
+      <main className="px-4 pb-8 max-w-md mx-auto">
         {selectedContentTab === "景點介紹" && (
           <div className="space-y-6">
             {filteredAttractions.map((attraction, index) => (

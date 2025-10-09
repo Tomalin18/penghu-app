@@ -72,7 +72,7 @@ export default function RouteMapPage() {
     <div className="min-h-screen bg-background pb-20">
       <HeaderWithMenu />
 
-      <main className="max-w-md mx-auto">
+      <main className="max-w-md mx-auto pt-16">
         {/* Header */}
         <div className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground p-4 mx-3 mt-3 rounded-2xl">
           <h1 className="text-xl font-bold mb-2">路線圖</h1>

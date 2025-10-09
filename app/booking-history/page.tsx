@@ -99,7 +99,7 @@ export default function BookingHistoryPage() {
     <div className="min-h-screen bg-background pb-20">
       <HeaderWithMenu title="訂票紀錄" showBack onBack={() => router.back()} />
 
-      <main className="px-4 py-6 max-w-md mx-auto space-y-4">
+      <main className="px-4 pt-20 pb-6 max-w-md mx-auto space-y-4">
         {bookings.length > 0 ? (
           bookings.map((booking) => (
             <Card key={booking.id} className="shadow-sm border-border/50 hover:shadow-md transition-shadow">

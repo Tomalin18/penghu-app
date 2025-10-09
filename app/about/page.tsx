@@ -34,7 +34,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-background">
       <HeaderWithMenu title="關於" showBackButton />
 
-      <main className="px-4 py-8 max-w-md mx-auto">
+      <main className="px-4 pt-20 pb-8 max-w-md mx-auto">
         {/* App Icon and Info */}
         <div className="flex flex-col items-center mb-8 space-y-4">
           <div className="w-24 h-24 rounded-2xl bg-primary flex items-center justify-center shadow-lg">
