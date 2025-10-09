@@ -14,7 +14,9 @@ import { Send } from "lucide-react"
 import { Input } from "@/components/ui/input"
 
 const HomePage = () => {
-  const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }))
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  )
   const [searchQuery, setSearchQuery] = useState("")
 
   const handleSearch = () => {
@@ -121,38 +123,45 @@ const HomePage = () => {
       <main className="max-w-md mx-auto pt-16">
         <div className="relative">
           <Carousel
-            plugins={[plugin.current]}
+            plugins={[autoplayPlugin.current]}
             className="w-full"
-            onMouseEnter={plugin.current.stop}
-            onMouseLeave={plugin.current.reset}
+            onMouseEnter={autoplayPlugin.current?.stop}
+            onMouseLeave={autoplayPlugin.current?.reset}
           >
             <CarouselContent>
               <CarouselItem>
                 <img
-                  src="/images/design-mode/image(1).png"
-                  alt="澎湖海龜地標"
-                  className="w-full"
-                />
-              </CarouselItem>
-              <CarouselItem>
-                <img
-                  src="/images/design-mode/image(1).png"
-                  alt="澎湖好行打卡抽好禮"
-                  className="w-full"
-                />
-              </CarouselItem>
-              <CarouselItem>
-                <img
-                  src="/images/design-mode/image(1).png"
+                  src="/images/cross-sea-bridge-1.png"
                   alt="澎湖跨海大橋"
-                  className="w-full"
+                  className="w-full h-48 object-cover"
                 />
               </CarouselItem>
               <CarouselItem>
                 <img
-                  src="/images/design-mode/image(1).png"
-                  alt="2025澎湖國際海上花火節"
-                  className="w-full"
+                  src="/images/erkan-1.png"
+                  alt="二崁古厝"
+                  className="w-full h-48 object-cover"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <img
+                  src="/images/kuibishan-1.png"
+                  alt="奎壁山摩西分海"
+                  className="w-full h-48 object-cover"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <img
+                  src="/images/shanshui-beach-1.png"
+                  alt="山水沙灘"
+                  className="w-full h-48 object-cover"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <img
+                  src="/images/tianhou-1.png"
+                  alt="天后宮"
+                  className="w-full h-48 object-cover"
                 />
               </CarouselItem>
             </CarouselContent>
