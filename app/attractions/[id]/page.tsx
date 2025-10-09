@@ -64,7 +64,7 @@ export default function AttractionDetailPage({ params }: { params: { id: string 
       {/* Header */}
       <HeaderWithMenu title="景點詳情" />
 
-      <main className="max-w-md mx-auto">
+      <main className="max-w-md mx-auto pt-16">
         {/* Hero Image Carousel */}
         <div className="bg-muted">
           {attraction.images && attraction.images.length > 1 ? (

@@ -24,7 +24,7 @@ export default function ForgotPasswordPage() {
     <div className="min-h-screen bg-background">
       <HeaderWithMenu title="忘記密碼" />
 
-      <main className="max-w-md mx-auto px-4 py-8">
+      <main className="max-w-md mx-auto px-4 pt-20 pb-8">
         {!submitted ? (
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="text-center mb-6">

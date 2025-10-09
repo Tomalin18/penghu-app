@@ -124,7 +124,7 @@ export default function NotificationsPage() {
     <div className="min-h-screen bg-background pb-6">
       <HeaderWithMenu title="通知" showBackButton={true} />
 
-      <main className="max-w-md mx-auto px-3 py-4">
+      <main className="max-w-md mx-auto px-3 pt-20 pb-4">
         {/* Header with Mark All Read Button */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">

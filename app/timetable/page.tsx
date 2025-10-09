@@ -216,7 +216,7 @@ export default function TimetablePage() {
     <div className="min-h-screen bg-background pb-20">
       <HeaderWithMenu />
 
-      <main className="max-w-md mx-auto">
+      <main className="max-w-md mx-auto pt-16">
         {/* Header */}
         <div className="mx-3 mt-3 rounded-2xl overflow-hidden">
           <Image

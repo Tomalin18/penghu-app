@@ -35,7 +35,7 @@ export default function FavoritesPage() {
     <div className="min-h-screen bg-background pb-20">
       <HeaderWithMenu title="景點收藏" showBack onBack={() => router.back()} />
 
-      <main className="px-4 py-6 max-w-md mx-auto">
+      <main className="px-4 pt-20 pb-6 max-w-md mx-auto">
         {favoriteAttractions.length > 0 ? (
           <div className="space-y-6">
             {favoriteAttractions.map((attraction) => (

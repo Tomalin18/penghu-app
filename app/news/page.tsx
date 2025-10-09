@@ -97,7 +97,7 @@ export default function NewsPage() {
     <div className="min-h-screen bg-background pb-20">
       <HeaderWithMenu />
 
-      <main className="max-w-md mx-auto">
+      <main className="max-w-md mx-auto pt-16">
         <div className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground p-4 mx-3 mt-3 rounded-2xl">
           <h1 className="text-xl font-bold mb-2">最新消息</h1>
           <p className="text-primary-foreground/90 text-sm">掌握最新公告與活動資訊</p>

@@ -74,7 +74,7 @@ export default function SurveyPage() {
       <HeaderWithMenu title="購票體驗問卷" />
 
       <div className="flex-1 overflow-y-auto">
-        <div className="px-4 py-6 max-w-md mx-auto pb-24">
+        <div className="px-4 pt-20 pb-24 max-w-md mx-auto">
           <div className="mb-6">
             <p className="text-center text-muted-foreground">請花一分鐘時間，協助我們了解您的購票體驗</p>
           </div>
