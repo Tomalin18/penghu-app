@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { MobileNavigation } from "@/components/mobile-navigation"
 import { HeaderWithMenu } from "@/components/header-with-menu"
 import { attractions } from "@/data/attractions"
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 import { useRef, useState } from "react"
 import { Send } from "lucide-react"
@@ -121,6 +121,7 @@ const HomePage = () => {
       <main className="max-w-md mx-auto pt-16">
         <div className="relative">
           <Carousel
+            opts={{ loop: true }}
             plugins={[plugin.current]}
             className="w-full"
             onMouseEnter={plugin.current.stop}
@@ -156,6 +157,8 @@ const HomePage = () => {
                 />
               </CarouselItem>
             </CarouselContent>
+            <CarouselPrevious className="left-4 bg-white/80 hover:bg-white" />
+            <CarouselNext className="right-4 bg-white/80 hover:bg-white" />
           </Carousel>
 
           <div className="absolute bottom-0 left-0 right-0 transform translate-y-1/2 px-4 z-10">
