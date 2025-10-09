@@ -111,7 +111,7 @@ const HomePage = () => {
     attractions.find((a) => a.id === "tongliang-ancient-banyan"),
     attractions.find((a) => a.id === "shanshui-beach"),
     attractions.find((a) => a.id === "fengguei-cave"),
-  ].filter(Boolean)
+  ].filter((attraction): attraction is NonNullable<typeof attraction> => attraction !== undefined)
 
   return (
     <div className="min-h-screen bg-background pb-20">
@@ -129,29 +129,29 @@ const HomePage = () => {
             <CarouselContent>
               <CarouselItem>
                 <img
-                  src="/images/design-mode/image(1).png"
-                  alt="澎湖海龜地標"
+                  src="/images/home-carousel/好行BN_01.png"
+                  alt="澎湖好行宣傳圖1"
                   className="w-full"
                 />
               </CarouselItem>
               <CarouselItem>
                 <img
-                  src="/images/design-mode/image(1).png"
-                  alt="澎湖好行打卡抽好禮"
+                  src="/images/home-carousel/好行BN_02.png"
+                  alt="澎湖好行宣傳圖2"
                   className="w-full"
                 />
               </CarouselItem>
               <CarouselItem>
                 <img
-                  src="/images/design-mode/image(1).png"
-                  alt="澎湖跨海大橋"
+                  src="/images/home-carousel/好行BN_03.png"
+                  alt="澎湖好行宣傳圖3"
                   className="w-full"
                 />
               </CarouselItem>
               <CarouselItem>
                 <img
-                  src="/images/design-mode/image(1).png"
-                  alt="2025澎湖國際海上花火節"
+                  src="/images/home-carousel/好行BN_04.png"
+                  alt="澎湖好行宣傳圖4"
                   className="w-full"
                 />
               </CarouselItem>
