@@ -434,7 +434,7 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
           "通樑古榕樹景點介紹",
           "二崁古厝文化體驗",
           "小門鯨魚洞地質奇觀",
-          "竹灣���蟹博物館參觀",
+          "竹灣螃蟹博物館參觀",
         ],
         usageInstructions: [
           "**預約制購票流程：**\n\n• **預約時間**：須於乘車日前一日 20:00 前完成購票與劃位\n\n• **購票方式**：\n  - **實體票券** → 7-11 ibon、全家 FamiPort、和盟電子商務股份有限公司澎湖分公司、KLOOK、Trip.com\n  - **電子票證** → 悠遊卡、一卡通\n  - **行動支付** → 悠遊付、iPASS Money\n\n• **搭乘方式**：使用 QR Code 或電子票證感應即可上車",

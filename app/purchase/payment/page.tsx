@@ -55,7 +55,10 @@ export default function PaymentPage() {
     setIsLoading(false)
   }, []) // Removed searchParams from dependency array to prevent infinite loop
 
-  const paymentMethods = [{ id: "credit", name: "信用卡", icon: "💳", color: "#438EA7" }]
+  const paymentMethods = [
+    { id: "credit", name: "信用卡", color: "#438EA7" },
+    { id: "linepay", name: "LINE Pay", color: "#00B900" }
+  ]
 
   const handlePayment = () => {
     const orderDataString = encodeURIComponent(JSON.stringify(orderData))
