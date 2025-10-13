@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Bus, Plane, Ship, MapIcon, Headphones } from "lucide-react"
+import { Bus, Plane, Ship, MapIcon, Headphones, Bike, Wifi, BatteryCharging, DoorOpen } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Image from "next/image"
 import { attractions } from "@/data/attractions"
@@ -112,6 +112,10 @@ export default function TimetablePage() {
       }
       flights: string[]
       ships: string[]
+      youbike: string[]
+      wifi: string[]
+      charging: string[]
+      restroom: string[]
     }
   > = {
     西衛東站: {
@@ -121,6 +125,10 @@ export default function TimetablePage() {
       },
       flights: [],
       ships: ["馬公港渡輪"],
+      youbike: ["西衛站"],
+      wifi: ["iTaiwan"],
+      charging: ["7-11西衛門市"],
+      restroom: ["西衛東站公廁"],
     },
     馬公港站: {
       buses: {
@@ -129,6 +137,10 @@ export default function TimetablePage() {
       },
       flights: ["澎湖機場接駁車"],
       ships: ["嘉義布袋港", "高雄港", "台南安平港", "七美島", "望安島"],
+      youbike: ["馬公港站", "第一漁港站"],
+      wifi: ["iTaiwan", "Penghu Free WiFi"],
+      charging: ["馬公遊客服務中心", "全家馬公港門市"],
+      restroom: ["馬公港公廁", "遊客服務中心"],
     },
     公車總站: {
       buses: {
@@ -137,6 +149,10 @@ export default function TimetablePage() {
       },
       flights: ["澎湖機場接駁車"],
       ships: [],
+      youbike: ["公車總站", "縣政府站"],
+      wifi: ["iTaiwan", "Penghu Free WiFi"],
+      charging: ["全家公車總站門市", "OK超商馬公店"],
+      restroom: ["公車總站公廁"],
     },
     澎湖機場站: {
       buses: {
@@ -145,6 +161,10 @@ export default function TimetablePage() {
       },
       flights: ["台北松山", "台中清泉崗", "高雄小港", "嘉義", "台南"],
       ships: [],
+      youbike: ["澎湖機場站"],
+      wifi: ["iTaiwan", "Airport Free WiFi"],
+      charging: ["機場航廈充電站", "7-11機場門市"],
+      restroom: ["機場航廈公廁"],
     },
     "跨海大橋(西嶼端)": {
       buses: {
@@ -153,6 +173,10 @@ export default function TimetablePage() {
       },
       flights: [],
       ships: [],
+      youbike: [],
+      wifi: ["iTaiwan"],
+      charging: ["漁翁島遊客中心"],
+      restroom: ["跨海大橋公廁"],
     },
     風櫃洞: {
       buses: {
@@ -161,6 +185,10 @@ export default function TimetablePage() {
       },
       flights: [],
       ships: ["觀光遊艇"],
+      youbike: [],
+      wifi: ["iTaiwan"],
+      charging: ["風櫃溫王殿"],
+      restroom: ["風櫃洞景點公廁"],
     },
     山水沙灘: {
       buses: {
@@ -169,6 +197,10 @@ export default function TimetablePage() {
       },
       flights: [],
       ships: ["海上活動船隻"],
+      youbike: [],
+      wifi: ["iTaiwan"],
+      charging: ["山水30沙灘"],
+      restroom: ["山水沙灘公廁"],
     },
     北寮奎壁山: {
       buses: {
@@ -177,6 +209,10 @@ export default function TimetablePage() {
       },
       flights: [],
       ships: ["潮間帶導覽船"],
+      youbike: [],
+      wifi: ["iTaiwan"],
+      charging: ["北寮社區活動中心"],
+      restroom: ["奎壁山景點公廁"],
     },
     大菓葉玄武岩柱: {
       buses: {
@@ -185,6 +221,10 @@ export default function TimetablePage() {
       },
       flights: [],
       ships: [],
+      youbike: [],
+      wifi: ["iTaiwan"],
+      charging: [],
+      restroom: ["大菓葉景點公廁"],
     },
   }
 
@@ -197,6 +237,10 @@ export default function TimetablePage() {
         },
         flights: [],
         ships: [],
+        youbike: [],
+        wifi: [],
+        charging: [],
+        restroom: [],
       }
     )
   }
@@ -699,10 +743,78 @@ export default function TimetablePage() {
                               </div>
                             )}
 
+                            {nearbyTransport.youbike.length > 0 && (
+                              <div>
+                                <h4 className="font-medium text-sm flex items-center mb-2">
+                                  <Bike className="h-4 w-4 mr-2 text-orange-600" />
+                                  YouBike站點
+                                </h4>
+                                <div className="flex flex-wrap gap-1">
+                                  {nearbyTransport.youbike.map((bike, idx) => (
+                                    <Badge key={idx} variant="outline" className="text-xs">
+                                      {bike}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {nearbyTransport.wifi.length > 0 && (
+                              <div>
+                                <h4 className="font-medium text-sm flex items-center mb-2">
+                                  <Wifi className="h-4 w-4 mr-2 text-cyan-600" />
+                                  WiFi熱點
+                                </h4>
+                                <div className="flex flex-wrap gap-1">
+                                  {nearbyTransport.wifi.map((wifi, idx) => (
+                                    <Badge key={idx} variant="outline" className="text-xs">
+                                      {wifi}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {nearbyTransport.charging.length > 0 && (
+                              <div>
+                                <h4 className="font-medium text-sm flex items-center mb-2">
+                                  <BatteryCharging className="h-4 w-4 mr-2 text-emerald-600" />
+                                  充電站
+                                </h4>
+                                <div className="flex flex-wrap gap-1">
+                                  {nearbyTransport.charging.map((charging, idx) => (
+                                    <Badge key={idx} variant="outline" className="text-xs">
+                                      {charging}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {nearbyTransport.restroom.length > 0 && (
+                              <div>
+                                <h4 className="font-medium text-sm flex items-center mb-2">
+                                  <DoorOpen className="h-4 w-4 mr-2 text-pink-600" />
+                                  洗手間
+                                </h4>
+                                <div className="flex flex-wrap gap-1">
+                                  {nearbyTransport.restroom.map((restroom, idx) => (
+                                    <Badge key={idx} variant="outline" className="text-xs">
+                                      {restroom}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
                             {nearbyTransport.buses.government.length === 0 &&
                               nearbyTransport.buses.scenic.length === 0 &&
                               nearbyTransport.flights.length === 0 &&
-                              nearbyTransport.ships.length === 0 && (
+                              nearbyTransport.ships.length === 0 &&
+                              nearbyTransport.youbike.length === 0 &&
+                              nearbyTransport.wifi.length === 0 &&
+                              nearbyTransport.charging.length === 0 &&
+                              nearbyTransport.restroom.length === 0 && (
                                 <p className="text-sm text-muted-foreground text-center py-4">此站點暫無其他交通資訊</p>
                               )}
                           </div>
