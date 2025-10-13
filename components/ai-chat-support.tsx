@@ -615,7 +615,6 @@ const cardTranslations = {
       title: "智慧路線規劃",
       startPoint: "起點",
       endPoint: "終點",
-      dateTimePlaceholder: "年/月/日 ----:--",
       planButton: "規劃路線",
     },
     schedule: {
@@ -673,7 +672,6 @@ const cardTranslations = {
       title: "Smart Route Planning",
       startPoint: "Start Point",
       endPoint: "End Point",
-      dateTimePlaceholder: "YYYY/MM/DD HH:MM",
       planButton: "Plan Route",
     },
     schedule: {
@@ -731,7 +729,6 @@ const cardTranslations = {
       title: "スマートルートプランニング",
       startPoint: "出発地",
       endPoint: "目的地",
-      dateTimePlaceholder: "年/月/日 時:分",
       planButton: "ルートを計画",
     },
     schedule: {
@@ -903,7 +900,6 @@ function RouteQueryCard({ language = "zh-TW" }: { language?: string }) {
   const router = useRouter()
   const [startPoint, setStartPoint] = useState("")
   const [endPoint, setEndPoint] = useState("")
-  const [selectedDateTime, setSelectedDateTime] = useState("")
 
   const t = cardTranslations[language as keyof typeof cardTranslations]?.route || cardTranslations["zh-TW"].route
 
@@ -941,16 +937,6 @@ function RouteQueryCard({ language = "zh-TW" }: { language?: string }) {
               className="text-sm"
             />
           </div>
-        </div>
-
-        <div>
-          <Input
-            type="datetime-local"
-            value={selectedDateTime}
-            onChange={(e) => setSelectedDateTime(e.target.value)}
-            className="text-sm"
-            placeholder={t.dateTimePlaceholder}
-          />
         </div>
 
         <Button onClick={handlePlanRoute} className="w-full bg-blue-600 hover:bg-blue-700 text-white">
