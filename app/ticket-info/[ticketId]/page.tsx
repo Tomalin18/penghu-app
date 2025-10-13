@@ -1,5 +1,6 @@
 "use client"
-import { MapPin, Clock, Users, AlertCircle, Bus, Plane, Ship, MapIcon, Headphones } from "lucide-react"
+
+import { MapPin, Clock, Users, AlertCircle, Bus, Plane, Ship, MapIcon, Headphones, Bike, Wifi, BatteryCharging, DoorOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
@@ -140,47 +141,83 @@ export default function TicketInfoPage({ params }: { params: { ticketId: string 
       buses: string[]
       flights: string[]
       ships: string[]
+      youbike: string[]
+      wifi: string[]
+      charging: string[]
+      restroom: string[]
     }
   > = {
     西衛東站: {
       buses: ["1路公車", "2路公車", "7路公車"],
       flights: [],
       ships: ["馬公港渡輪"],
+      youbike: ["西衛站"],
+      wifi: ["iTaiwan"],
+      charging: ["7-11西衛門市"],
+      restroom: ["西衛東站公廁"],
     },
     馬公港站: {
       buses: ["1路公車", "2路公車", "3路公車", "4路公車", "5路公車"],
       flights: ["澎湖機場接駁車"],
       ships: ["嘉義布袋港", "高雄港", "台南安平港", "七美島", "望安島"],
+      youbike: ["馬公港站", "第一漁港站"],
+      wifi: ["iTaiwan", "Penghu Free WiFi"],
+      charging: ["馬公遊客服務中心", "全家馬公港門市"],
+      restroom: ["馬公港公廁", "遊客服務中心"],
     },
     公車總站: {
       buses: ["1路公車", "2路公車", "3路公車", "4路公車", "5路公車", "6路公車", "7路公車", "8路公車"],
       flights: ["澎湖機場接駁車"],
       ships: [],
+      youbike: ["公車總站", "縣政府站"],
+      wifi: ["iTaiwan", "Penghu Free WiFi"],
+      charging: ["全家公車總站門市", "OK超商馬公店"],
+      restroom: ["公車總站公廁"],
     },
     澎湖機場站: {
       buses: ["機場接駁車", "3路公車"],
       flights: ["台北松山", "台中清泉崗", "高雄小港", "嘉義", "台南"],
       ships: [],
+      youbike: ["澎湖機場站"],
+      wifi: ["iTaiwan", "Airport Free WiFi"],
+      charging: ["機場航廈充電站", "7-11機場門市"],
+      restroom: ["機場航廈公廁"],
     },
     "跨海大橋(西嶼端)": {
       buses: ["西嶼環島公車"],
       flights: [],
       ships: [],
+      youbike: [],
+      wifi: ["iTaiwan"],
+      charging: ["漁翁島遊客中心"],
+      restroom: ["跨海大橋公廁"],
     },
     風櫃洞: {
       buses: ["澎南線公車", "5路公車"],
       flights: [],
       ships: ["觀光遊艇"],
+      youbike: [],
+      wifi: ["iTaiwan"],
+      charging: ["風櫃溫王殿"],
+      restroom: ["風櫃洞景點公廁"],
     },
     山水沙灘: {
       buses: ["澎南線公車", "5路公車"],
       flights: [],
       ships: ["海上活動船隻"],
+      youbike: [],
+      wifi: ["iTaiwan"],
+      charging: ["山水30沙灘"],
+      restroom: ["山水沙灘公廁"],
     },
     北寮奎壁山: {
       buses: ["湖西線公車", "3路公車"],
       flights: [],
       ships: ["潮間帶導覽船"],
+      youbike: [],
+      wifi: ["iTaiwan"],
+      charging: ["北寮社區活動中心"],
+      restroom: ["奎壁山景點公廁"],
     },
   }
 
@@ -190,6 +227,10 @@ export default function TicketInfoPage({ params }: { params: { ticketId: string 
         buses: ["當地接駁車"],
         flights: [],
         ships: [],
+        youbike: [],
+        wifi: [],
+        charging: [],
+        restroom: [],
       }
     )
   }
@@ -544,11 +585,83 @@ export default function TicketInfoPage({ params }: { params: { ticketId: string 
                                         </div>
                                       )}
 
+                                      {/* YouBike Information */}
+                                      {nearbyTransport.youbike.length > 0 && (
+                                        <div>
+                                          <h4 className="font-medium text-sm flex items-center mb-2">
+                                            <Bike className="h-4 w-4 mr-2 text-orange-600" />
+                                            YouBike站點
+                                          </h4>
+                                          <div className="flex flex-wrap gap-1">
+                                            {nearbyTransport.youbike.map((bike, idx) => (
+                                              <Badge key={idx} variant="outline" className="text-xs">
+                                                {bike}
+                                              </Badge>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      )}
+
+                                      {/* WiFi Information */}
+                                      {nearbyTransport.wifi.length > 0 && (
+                                        <div>
+                                          <h4 className="font-medium text-sm flex items-center mb-2">
+                                            <Wifi className="h-4 w-4 mr-2 text-cyan-600" />
+                                            WiFi熱點
+                                          </h4>
+                                          <div className="flex flex-wrap gap-1">
+                                            {nearbyTransport.wifi.map((wifi, idx) => (
+                                              <Badge key={idx} variant="outline" className="text-xs">
+                                                {wifi}
+                                              </Badge>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      )}
+
+                                      {/* Charging Station Information */}
+                                      {nearbyTransport.charging.length > 0 && (
+                                        <div>
+                                          <h4 className="font-medium text-sm flex items-center mb-2">
+                                            <BatteryCharging className="h-4 w-4 mr-2 text-emerald-600" />
+                                            充電站
+                                          </h4>
+                                          <div className="flex flex-wrap gap-1">
+                                            {nearbyTransport.charging.map((charging, idx) => (
+                                              <Badge key={idx} variant="outline" className="text-xs">
+                                                {charging}
+                                              </Badge>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      )}
+
+                                      {/* Restroom Information */}
+                                      {nearbyTransport.restroom.length > 0 && (
+                                        <div>
+                                          <h4 className="font-medium text-sm flex items-center mb-2">
+                                            <DoorOpen className="h-4 w-4 mr-2 text-pink-600" />
+                                            洗手間
+                                          </h4>
+                                          <div className="flex flex-wrap gap-1">
+                                            {nearbyTransport.restroom.map((restroom, idx) => (
+                                              <Badge key={idx} variant="outline" className="text-xs">
+                                                {restroom}
+                                              </Badge>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      )}
+
                                       {nearbyTransport.buses.length === 0 &&
                                         nearbyTransport.flights.length === 0 &&
-                                        nearbyTransport.ships.length === 0 && (
+                                        nearbyTransport.ships.length === 0 &&
+                                        nearbyTransport.youbike.length === 0 &&
+                                        nearbyTransport.wifi.length === 0 &&
+                                        nearbyTransport.charging.length === 0 &&
+                                        nearbyTransport.restroom.length === 0 && (
                                           <p className="text-sm text-muted-foreground text-center py-4">
-                                            此點暫無其他交通資訊
+                                            此站點暫無其他交通資訊
                                           </p>
                                         )}
                                     </div>
