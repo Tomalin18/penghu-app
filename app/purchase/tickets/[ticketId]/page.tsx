@@ -17,11 +17,15 @@ import { Button } from "@/components/ui/button"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Card, CardContent } from "@/components/ui/card"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle } from "@/components/ui/drawer"
 import { TicketTypeSelector } from "@/components/ticket-type-selector"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
+import Image from "next/image"
+import { attractions } from "@/data/attractions"
 
 interface TicketDetail {
   id: string
@@ -226,6 +230,31 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
         ships: [],
       }
     )
+  }
+
+  // 根據站點名稱找到對應的景點資料
+  const getAttractionByStation = (stationName: string) => {
+    const stationToAttractionMap: Record<string, string> = {
+      "跨海大橋(西嶼端)": "penghu-cross-sea-bridge",
+      "三仙塔": "waian-sanxian-tower",
+      "大菓葉玄武岩柱": "daguoye-basalt",
+      "二崁聚落": "erkan-village",
+      "通梁古榕": "tongliang-ancient-banyan",
+      "風櫃洞": "fengguei-cave",
+      "澎湖縣水產種苗繁殖場": "penghu-aquarium",
+      "山水沙灘": "shanshui-beach",
+      "鎖港子午塔": "suogang-tower",
+      "北寮奎壁山": "kuibishan-moses-sea",
+      "南寮社區": "nanliao-community",
+      "龍門閉鎖陣地": "longmen-closed-stronghold",
+      "澎湖生活博物館": "penghu-living-museum",
+    }
+
+    const attractionId = stationToAttractionMap[stationName]
+    if (attractionId) {
+      return attractions.find((a) => a.id === attractionId)
+    }
+    return undefined
   }
 
   useEffect(() => {
@@ -688,6 +717,7 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                           }
 
                           const nearbyTransport = getNearbyTransport(schedule.station)
+                          const attraction = getAttractionByStation(schedule.station)
 
                           return (
                             <div key={index} className="flex items-center">
@@ -698,7 +728,110 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
 
                               <div className="flex-1 flex items-center justify-between ml-4 py-3">
                                 <div className="flex items-center space-x-3">
-                                  <span className="font-medium text-foreground text-sm">{schedule.station}</span>
+                                  {attraction ? (
+                                    <Dialog>
+                                      <DialogTrigger asChild>
+                                        <span className="font-medium text-primary text-sm cursor-pointer underline hover:text-primary/80 transition-colors">
+                                          {schedule.station}
+                                        </span>
+                                      </DialogTrigger>
+                                      <DialogContent className="max-w-sm max-h-[80vh]">
+                                        <DialogHeader>
+                                          <DialogTitle>{attraction.title}</DialogTitle>
+                                        </DialogHeader>
+                                        <ScrollArea className="h-[60vh] pr-4">
+                                          <div className="space-y-4">
+                                            {/* Image */}
+                                            {attraction.image && (
+                                              <div className="relative w-full h-48 rounded-lg overflow-hidden">
+                                                <Image
+                                                  src={attraction.image || "/placeholder.svg"}
+                                                  alt={attraction.title}
+                                                  fill
+                                                  className="object-cover"
+                                                />
+                                              </div>
+                                            )}
+
+                                            {/* Categories */}
+                                            <div className="flex flex-wrap gap-2">
+                                              {attraction.category.map((cat) => (
+                                                <Badge key={cat} variant="secondary">
+                                                  {cat}
+                                                </Badge>
+                                              ))}
+                                            </div>
+
+                                            {/* Description */}
+                                            <p className="text-sm text-muted-foreground">{attraction.description}</p>
+
+                                            {/* Detailed Description */}
+                                            <Card>
+                                              <CardContent className="pt-4">
+                                                <p className="text-sm leading-relaxed whitespace-pre-line">
+                                                  {attraction.detailedDescription}
+                                                </p>
+                                              </CardContent>
+                                            </Card>
+
+                                            {/* Highlights */}
+                                            {attraction.highlights && (
+                                              <Card>
+                                                <CardContent className="pt-4">
+                                                  <h4 className="font-medium mb-2">景點特色</h4>
+                                                  <ul className="space-y-2">
+                                                    {attraction.highlights.map((highlight, idx) => (
+                                                      <li key={idx} className="flex items-start gap-2 text-sm">
+                                                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                                                        <span>{highlight}</span>
+                                                      </li>
+                                                    ))}
+                                                  </ul>
+                                                </CardContent>
+                                              </Card>
+                                            )}
+
+                                            {/* Visit Info */}
+                                            <Card>
+                                              <CardContent className="pt-4 space-y-2">
+                                                <h4 className="font-medium mb-2">參觀資訊</h4>
+                                                <div className="flex justify-between text-sm">
+                                                  <span className="text-muted-foreground">開放時間</span>
+                                                  <span>{attraction.visitInfo.openingHours}</span>
+                                                </div>
+                                                {attraction.visitInfo.recommendedDuration && (
+                                                  <div className="flex justify-between text-sm">
+                                                    <span className="text-muted-foreground">建議停留</span>
+                                                    <span>{attraction.visitInfo.recommendedDuration}</span>
+                                                  </div>
+                                                )}
+                                                <div className="flex justify-between text-sm">
+                                                  <span className="text-muted-foreground">門票費用</span>
+                                                  <span>{attraction.visitInfo.admission}</span>
+                                                </div>
+                                              </CardContent>
+                                            </Card>
+
+                                            {/* Location */}
+                                            <Card>
+                                              <CardContent className="pt-4">
+                                                <h4 className="font-medium mb-2">地點資訊</h4>
+                                                <p className="text-sm text-muted-foreground">{attraction.location.address}</p>
+                                                {attraction.transportation?.fromMagong && (
+                                                  <p className="text-sm text-muted-foreground mt-2">
+                                                    <span className="font-medium text-foreground">交通：</span>
+                                                    {attraction.transportation.fromMagong}
+                                                  </p>
+                                                )}
+                                              </CardContent>
+                                            </Card>
+                                          </div>
+                                        </ScrollArea>
+                                      </DialogContent>
+                                    </Dialog>
+                                  ) : (
+                                    <span className="font-medium text-foreground text-sm">{schedule.station}</span>
+                                  )}
                                   <Dialog>
                                     <DialogTrigger asChild>
                                       <Badge
@@ -835,6 +968,7 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                           }
 
                           const nearbyTransport = getNearbyTransport(schedule.station)
+                          const attraction = getAttractionByStation(schedule.station)
 
                           return (
                             <div key={index} className="flex items-center">
@@ -845,7 +979,110 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
 
                               <div className="flex-1 flex items-center justify-between ml-4 py-3">
                                 <div className="flex items-center space-x-3">
-                                  <span className="font-medium text-foreground text-sm">{schedule.station}</span>
+                                  {attraction ? (
+                                    <Dialog>
+                                      <DialogTrigger asChild>
+                                        <span className="font-medium text-primary text-sm cursor-pointer underline hover:text-primary/80 transition-colors">
+                                          {schedule.station}
+                                        </span>
+                                      </DialogTrigger>
+                                      <DialogContent className="max-w-sm max-h-[80vh]">
+                                        <DialogHeader>
+                                          <DialogTitle>{attraction.title}</DialogTitle>
+                                        </DialogHeader>
+                                        <ScrollArea className="h-[60vh] pr-4">
+                                          <div className="space-y-4">
+                                            {/* Image */}
+                                            {attraction.image && (
+                                              <div className="relative w-full h-48 rounded-lg overflow-hidden">
+                                                <Image
+                                                  src={attraction.image || "/placeholder.svg"}
+                                                  alt={attraction.title}
+                                                  fill
+                                                  className="object-cover"
+                                                />
+                                              </div>
+                                            )}
+
+                                            {/* Categories */}
+                                            <div className="flex flex-wrap gap-2">
+                                              {attraction.category.map((cat) => (
+                                                <Badge key={cat} variant="secondary">
+                                                  {cat}
+                                                </Badge>
+                                              ))}
+                                            </div>
+
+                                            {/* Description */}
+                                            <p className="text-sm text-muted-foreground">{attraction.description}</p>
+
+                                            {/* Detailed Description */}
+                                            <Card>
+                                              <CardContent className="pt-4">
+                                                <p className="text-sm leading-relaxed whitespace-pre-line">
+                                                  {attraction.detailedDescription}
+                                                </p>
+                                              </CardContent>
+                                            </Card>
+
+                                            {/* Highlights */}
+                                            {attraction.highlights && (
+                                              <Card>
+                                                <CardContent className="pt-4">
+                                                  <h4 className="font-medium mb-2">景點特色</h4>
+                                                  <ul className="space-y-2">
+                                                    {attraction.highlights.map((highlight, idx) => (
+                                                      <li key={idx} className="flex items-start gap-2 text-sm">
+                                                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                                                        <span>{highlight}</span>
+                                                      </li>
+                                                    ))}
+                                                  </ul>
+                                                </CardContent>
+                                              </Card>
+                                            )}
+
+                                            {/* Visit Info */}
+                                            <Card>
+                                              <CardContent className="pt-4 space-y-2">
+                                                <h4 className="font-medium mb-2">參觀資訊</h4>
+                                                <div className="flex justify-between text-sm">
+                                                  <span className="text-muted-foreground">開放時間</span>
+                                                  <span>{attraction.visitInfo.openingHours}</span>
+                                                </div>
+                                                {attraction.visitInfo.recommendedDuration && (
+                                                  <div className="flex justify-between text-sm">
+                                                    <span className="text-muted-foreground">建議停留</span>
+                                                    <span>{attraction.visitInfo.recommendedDuration}</span>
+                                                  </div>
+                                                )}
+                                                <div className="flex justify-between text-sm">
+                                                  <span className="text-muted-foreground">門票費用</span>
+                                                  <span>{attraction.visitInfo.admission}</span>
+                                                </div>
+                                              </CardContent>
+                                            </Card>
+
+                                            {/* Location */}
+                                            <Card>
+                                              <CardContent className="pt-4">
+                                                <h4 className="font-medium mb-2">地點資訊</h4>
+                                                <p className="text-sm text-muted-foreground">{attraction.location.address}</p>
+                                                {attraction.transportation?.fromMagong && (
+                                                  <p className="text-sm text-muted-foreground mt-2">
+                                                    <span className="font-medium text-foreground">交通：</span>
+                                                    {attraction.transportation.fromMagong}
+                                                  </p>
+                                                )}
+                                              </CardContent>
+                                            </Card>
+                                          </div>
+                                        </ScrollArea>
+                                      </DialogContent>
+                                    </Dialog>
+                                  ) : (
+                                    <span className="font-medium text-foreground text-sm">{schedule.station}</span>
+                                  )}
                                   <Dialog>
                                     <DialogTrigger asChild>
                                       <Badge
