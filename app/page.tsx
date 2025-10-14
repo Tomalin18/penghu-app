@@ -155,42 +155,6 @@ const HomePage = () => {
 
         <div className="mt-8"></div>
 
-        {/* Latest News */}
-        <div className="px-3 py-4 space-y-3">
-          <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-foreground text-2xl">最新消息</h2>
-            <Link href="/news">
-              <Button variant="outline" size="sm" className="rounded-full px-3 py-1 h-7 bg-transparent text-base">
-                MORE &gt;
-              </Button>
-            </Link>
-          </div>
-          <div className="space-y-4 bg-white rounded-lg p-4">
-            {newsData.map((news, index) => (
-              <div key={news.id} className="flex items-start gap-4 py-2">
-                {/* Date column */}
-                <div className="text-sm text-muted-foreground font-medium min-w-[80px]">{news.date}</div>
-
-                {/* Category badge */}
-                <Badge
-                  className={`${getBadgeColor(index)} px-3 py-1 text-sm font-medium min-w-fit`}
-                  style={getBadgeStyle(index)}
-                >
-                  {getCategoryName(news.category)}
-                </Badge>
-
-                {/* News title */}
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm text-foreground leading-relaxed">
-                    <span className="font-medium">【{getCategoryName(news.category)}】</span>
-                    {news.title}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Popular Tickets */}
         <div className="px-3 space-y-3">
           <div className="flex items-center justify-between">
@@ -234,7 +198,7 @@ const HomePage = () => {
         </div>
 
         {/* Popular Attractions */}
-        <div className="px-3 pb-4 space-y-3 mt-6">
+        <div className="px-3 space-y-3 mt-6">
           <div className="flex items-center justify-between">
             <h2 className="font-semibold text-foreground text-2xl">熱門景點</h2>
             <Link href="/attractions">
@@ -243,10 +207,10 @@ const HomePage = () => {
               </Button>
             </Link>
           </div>
-          <div className="flex space-x-3 overflow-x-auto pb-2">
+          <div className="grid grid-cols-2 gap-3">
             {popularAttractions.map((attraction) => (
               <Link key={attraction.id} href={`/attractions/${attraction.id}`}>
-                <Card className="flex-shrink-0 w-36 overflow-hidden hover:shadow-lg transition-shadow">
+                <Card className="overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="aspect-[4/3] bg-muted">
                     <img
                       src={attraction.image || "/placeholder.svg"}
@@ -254,11 +218,47 @@ const HomePage = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <CardContent className="p-2 py-0">
-                    <p className="text-xs font-medium text-foreground text-center">{attraction.title}</p>
+                  <CardContent className="p-3">
+                    <p className="text-sm font-medium text-foreground text-center">{attraction.title}</p>
                   </CardContent>
                 </Card>
               </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Latest News */}
+        <div className="px-3 py-4 space-y-3 mt-6">
+          <div className="flex items-center justify-between">
+            <h2 className="font-semibold text-foreground text-2xl">最新消息</h2>
+            <Link href="/news">
+              <Button variant="outline" size="sm" className="rounded-full px-3 py-1 h-7 bg-transparent text-base">
+                MORE &gt;
+              </Button>
+            </Link>
+          </div>
+          <div className="space-y-4 bg-white rounded-lg p-4">
+            {newsData.map((news, index) => (
+              <div key={news.id} className="flex items-start gap-4 py-2">
+                {/* Date column */}
+                <div className="text-sm text-muted-foreground font-medium min-w-[80px]">{news.date}</div>
+
+                {/* Category badge */}
+                <Badge
+                  className={`${getBadgeColor(index)} px-3 py-1 text-sm font-medium min-w-fit`}
+                  style={getBadgeStyle(index)}
+                >
+                  {getCategoryName(news.category)}
+                </Badge>
+
+                {/* News title */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-foreground leading-relaxed">
+                    <span className="font-medium">【{getCategoryName(news.category)}】</span>
+                    {news.title}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
