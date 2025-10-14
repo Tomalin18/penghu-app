@@ -8,6 +8,7 @@ import { MobileNavigation } from "@/components/mobile-navigation"
 import { HeaderWithMenu } from "@/components/header-with-menu"
 import { attractions } from "@/data/attractions"
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
+import { Headphones } from "lucide-react"
 import Autoplay from "embla-carousel-autoplay"
 import { useRef } from "react"
 
@@ -210,7 +211,7 @@ const HomePage = () => {
           <div className="grid grid-cols-2 gap-3">
             {popularAttractions.map((attraction) => (
               <Link key={attraction.id} href={`/attractions/${attraction.id}`}>
-                <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+                <Card className="overflow-hidden hover:shadow-lg transition-shadow py-0 gap-0">
                   <div className="aspect-[4/3] bg-muted">
                     <img
                       src={attraction.image || "/placeholder.svg"}
@@ -218,9 +219,41 @@ const HomePage = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <CardContent className="p-3">
-                    <p className="text-sm font-medium text-foreground text-center">{attraction.title}</p>
-                  </CardContent>
+                  <div className="px-2 py-1">
+                    <div className="space-y-1.5">
+                      {/* Category Badges */}
+                      <div className="flex flex-wrap gap-1">
+                        {attraction.category.slice(0, 2).map((cat) => (
+                          <Badge key={cat} variant="secondary" className="text-xs px-2 py-0.5">
+                            {cat}
+                          </Badge>
+                        ))}
+                      </div>
+                      
+                      {/* Title and Audio Icon */}
+                      <div className="flex items-center justify-between gap-2">
+                        <h3 className="text-sm font-bold text-foreground leading-tight flex-1">
+                          {attraction.title}
+                        </h3>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 w-6 p-0 hover:bg-accent flex-shrink-0"
+                          onClick={(e) => {
+                            e.preventDefault()
+                            console.log(`[v0] Audio guide clicked for attraction: ${attraction.title}`)
+                          }}
+                        >
+                          <Headphones className="h-4 w-4 text-foreground font-bold stroke-[2.5]" />
+                        </Button>
+                      </div>
+                      
+                      {/* Description */}
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        {attraction.description}
+                      </p>
+                    </div>
+                  </div>
                 </Card>
               </Link>
             ))}

@@ -819,24 +819,24 @@ export default function TimetablePage() {
                           </DialogHeader>
                           
                           <ScrollArea className="max-h-[60vh]">
-                            <div className="space-y-4 pr-2">
+                            <div className="space-y-2 pr-2">
                               {/* 公車路線 */}
                               {(nearbyTransport.buses.government.length > 0 ||
                                 nearbyTransport.buses.scenic.length > 0) && (
                                 <Card className="border-l-4 border-l-blue-500">
-                                  <CardContent className="p-4">
-                                    <div className="flex items-center mb-3">
+                                  <CardContent className="p-3">
+                                    <div className="flex items-center mb-2">
                                       <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
                                         <Bus className="h-4 w-4 text-blue-600" />
                                       </div>
                                       <h4 className="font-semibold text-foreground">公車路線</h4>
                                     </div>
                                     
-                                    <div className="space-y-3">
+                                    <div className="space-y-2">
                                       {/* Government buses */}
                                       {nearbyTransport.buses.government.length > 0 && (
                                         <div>
-                                          <p className="text-xs font-medium text-muted-foreground mb-2">澎湖縣政府公共車船管理處</p>
+                                          <p className="text-xs font-medium text-muted-foreground mb-1">澎湖縣政府公共車船管理處</p>
                                           <div className="grid grid-cols-2 gap-2">
                                             {nearbyTransport.buses.government.map((bus, idx) => (
                                               <div key={idx} className="bg-blue-50 text-blue-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
@@ -850,7 +850,7 @@ export default function TimetablePage() {
                                       {/* Scenic area buses */}
                                       {nearbyTransport.buses.scenic.length > 0 && (
                                         <div>
-                                          <p className="text-xs font-medium text-muted-foreground mb-2">澎湖國家風景區管理處</p>
+                                          <p className="text-xs font-medium text-muted-foreground mb-1">澎湖國家風景區管理處</p>
                                           <div className="grid grid-cols-2 gap-2">
                                             {nearbyTransport.buses.scenic.map((bus, idx) => (
                                               <div key={idx} className="bg-blue-50 text-blue-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
@@ -868,8 +868,8 @@ export default function TimetablePage() {
                               {/* 航班資訊 */}
                               {nearbyTransport.flights.length > 0 && (
                                 <Card className="border-l-4 border-l-green-500">
-                                  <CardContent className="p-4">
-                                    <div className="flex items-center mb-3">
+                                  <CardContent className="p-3">
+                                    <div className="flex items-center mb-2">
                                       <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
                                         <Plane className="h-4 w-4 text-green-600" />
                                       </div>
@@ -889,8 +889,8 @@ export default function TimetablePage() {
                               {/* 船班資訊 */}
                               {nearbyTransport.ships.length > 0 && (
                                 <Card className="border-l-4 border-l-purple-500">
-                                  <CardContent className="p-4">
-                                    <div className="flex items-center mb-3">
+                                  <CardContent className="p-3">
+                                    <div className="flex items-center mb-2">
                                       <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
                                         <Ship className="h-4 w-4 text-purple-600" />
                                       </div>
@@ -910,8 +910,8 @@ export default function TimetablePage() {
                               {/* YouBike站點 */}
                               {nearbyTransport.youbike.length > 0 && (
                                 <Card className="border-l-4 border-l-orange-500">
-                                  <CardContent className="p-4">
-                                    <div className="flex items-center mb-3">
+                                  <CardContent className="p-3">
+                                    <div className="flex items-center mb-2">
                                       <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-3">
                                         <Bike className="h-4 w-4 text-orange-600" />
                                       </div>
@@ -929,7 +929,7 @@ export default function TimetablePage() {
                               )}
 
                               {/* 設施服務 */}
-                              <div className="grid grid-cols-2 gap-3">
+                              <div className="grid grid-cols-2 gap-2">
                                 {/* WiFi熱點 */}
                                 {nearbyTransport.wifi.length > 0 && (
                                   <Card className="border-l-4 border-l-cyan-500">
@@ -940,7 +940,7 @@ export default function TimetablePage() {
                                         </div>
                                         <h5 className="font-medium text-xs text-foreground">WiFi熱點</h5>
                                       </div>
-                                      <div className="space-y-1">
+                                      <div className="space-y-0.5">
                                         {nearbyTransport.wifi.map((wifi, idx) => (
                                           <div key={idx} className="bg-cyan-50 text-cyan-700 px-2 py-1 rounded text-xs text-center">
                                             {wifi}
@@ -961,7 +961,7 @@ export default function TimetablePage() {
                                         </div>
                                         <h5 className="font-medium text-xs text-foreground">充電站</h5>
                                       </div>
-                                      <div className="space-y-1">
+                                      <div className="space-y-0.5">
                                         {nearbyTransport.charging.map((charging, idx) => (
                                           <div key={idx} className="bg-emerald-50 text-emerald-700 px-2 py-1 rounded text-xs text-center">
                                             {charging}
@@ -982,7 +982,7 @@ export default function TimetablePage() {
                                         </div>
                                         <h5 className="font-medium text-xs text-foreground">洗手間</h5>
                                       </div>
-                                      <div className="space-y-1">
+                                      <div className="space-y-0.5">
                                         {nearbyTransport.restroom.map((restroom, idx) => (
                                           <div key={idx} className="bg-pink-50 text-pink-700 px-2 py-1 rounded text-xs text-center">
                                             {restroom}
