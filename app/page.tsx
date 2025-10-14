@@ -9,20 +9,10 @@ import { HeaderWithMenu } from "@/components/header-with-menu"
 import { attractions } from "@/data/attractions"
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
-import { useRef, useState } from "react"
-import { Send } from "lucide-react"
-import { Input } from "@/components/ui/input"
+import { useRef } from "react"
 
 const HomePage = () => {
   const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }))
-  const [searchQuery, setSearchQuery] = useState("")
-
-  const handleSearch = () => {
-    if (searchQuery.trim()) {
-      console.log("[v0] Search query:", searchQuery)
-      // TODO: Implement search functionality
-    }
-  }
 
   const popularTickets = [
     {
@@ -161,35 +151,6 @@ const HomePage = () => {
             <CarouselNext className="right-4 bg-white/80 hover:bg-white" />
           </Carousel>
 
-          <div className="absolute bottom-0 left-0 right-0 transform translate-y-1/2 px-4 z-10">
-            <div className="relative flex items-center bg-white rounded-full shadow-lg border-2 border-primary/20 overflow-hidden">
-              {/* Mascot/Icon on the left */}
-              <div className="flex-shrink-0 pl-2"></div>
-
-              {/* Search Input */}
-              <Input
-                type="text"
-                placeholder="請輸入文字！"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSearch()
-                  }
-                }}
-                className="flex-1 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-base placeholder:text-muted-foreground/60 px-2"
-              />
-
-              {/* Send Button */}
-              <Button
-                onClick={handleSearch}
-                size="icon"
-                className="flex-shrink-0 mr-0.5 rounded-full bg-primary hover:bg-primary/90 h-10 w-10"
-              >
-                <Send className="h-5 w-5 text-white" />
-              </Button>
-            </div>
-          </div>
         </div>
 
         <div className="mt-8"></div>

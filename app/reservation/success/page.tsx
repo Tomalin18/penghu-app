@@ -1,11 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { CheckCircle, Download, MapPin, Calendar } from "lucide-react"
+import { CheckCircle, Download, MapPin, Calendar, QrCode } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import MobileNavigation from "@/components/mobile-navigation"
 import { useRouter } from "next/navigation"
 
@@ -42,6 +43,8 @@ interface ReservationData {
 export default function ReservationSuccessPage() {
   const router = useRouter()
   const [reservationData, setReservationData] = useState<ReservationData | null>(null)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [selectedTicket, setSelectedTicket] = useState<any>(null)
 
   useEffect(() => {
     const storedData = localStorage.getItem("reservationData")
@@ -78,6 +81,116 @@ export default function ReservationSuccessPage() {
     }
     return labels[ticketType] || ticketType
   }
+
+  const handleViewTicketDetails = (ticketData: any) => {
+    setSelectedTicket(ticketData)
+    setIsDialogOpen(true)
+  }
+
+  const TicketInfoDisplay = ({ ticketData }: { ticketData: any }) => (
+    <div className="space-y-4">
+      <div className="flex flex-col items-center pb-4 border-b border-border">
+        <div className="bg-white p-3 rounded-lg border-2 border-gray-200">
+          <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded">
+            <div className="text-center">
+              <QrCode className="h-12 w-12 mx-auto mb-2 text-gray-400" />
+              <div className="text-xs text-gray-500">QR Code</div>
+              <div className="text-xs text-gray-400 mt-1 truncate max-w-[140px]">
+                {ticketData.reservationId || "RESERVATION-" + Date.now()}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-muted/50 p-4 rounded-lg">
+        <h3 className="font-semibold text-foreground mb-2">{ticketData.ticketInfo?.name || "澎湖好行票券"}</h3>
+        <div className="space-y-1 text-sm">
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">路線</span>
+            <span className="font-medium">{ticketData.routes?.[0]?.name || "未指定"}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">日期</span>
+            <span className="font-medium">{ticketData.routes?.[0]?.date?.toLocaleDateString('zh-TW') || "未指定"}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">票券類型</span>
+            <span className="font-medium">一日券</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <h4 className="font-semibold text-sm text-foreground">票券明細</h4>
+        <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+          {ticketData.ticketQuantities && Object.entries(ticketData.ticketQuantities).map(([key, count]: [string, any]) => (
+            <div key={key} className="flex justify-between text-sm">
+              <span className="text-muted-foreground">
+                {getTicketTypeLabel(key)} x {count || 1}
+              </span>
+              <span className="font-medium">NT${150 * (count || 1)}</span>
+            </div>
+          ))}
+          <div className="pt-2 border-t border-border flex justify-between font-semibold">
+            <span>總計</span>
+            <span className="text-primary">NT${ticketData.totalAmount || 0}</span>
+          </div>
+        </div>
+      </div>
+
+      {ticketData.passengers && ticketData.passengers.length > 0 && (
+        <div className="space-y-2">
+          <h4 className="font-semibold text-sm text-foreground">乘客資訊</h4>
+          <div className="bg-muted/50 p-4 rounded-lg space-y-3">
+            {ticketData.passengers.map((passenger: any, index: number) => (
+              <div key={index} className="pb-3 border-b border-border last:border-b-0 last:pb-0">
+                <div className="font-medium text-sm mb-2">
+                  {ticketData.passengers.length > 1 ? `乘客 ${index + 1}` : "乘客資訊"}
+                </div>
+                <div className="space-y-1 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">姓名</span>
+                    <span className="font-medium">{passenger.name}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">電話</span>
+                    <span className="font-medium">{passenger.phone}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Email</span>
+                    <span className="font-medium text-xs">{passenger.email}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-2">
+        <h4 className="font-semibold text-sm text-foreground">劃位資訊</h4>
+        <div className="bg-muted/50 p-4 rounded-lg space-y-2 text-sm">
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">劃位編號</span>
+            <span className="font-mono text-xs">{ticketData.reservationId || "RESERVATION-" + Date.now()}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">劃位日期</span>
+            <span className="font-medium">{new Date().toLocaleDateString('zh-TW')}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">有效期限</span>
+            <span className="font-medium">{new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('zh-TW')}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">數量</span>
+            <span className="font-medium">{ticketData.totalPassengers || 0} 張</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 
   if (!reservationData) {
     return (
@@ -129,61 +242,76 @@ export default function ReservationSuccessPage() {
           {/* Ticket Cards */}
           <div className="space-y-4 mb-8">
             {reservationData.routes.map((route, routeIndex) => (
-              <Card key={routeIndex} className="shadow-sm border-l-4 border-l-primary">
-                <CardContent className="p-4">
-                  <div className="flex justify-between items-start mb-3">
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-foreground text-sm mb-1">
-                        {reservationData.ticketInfo.name}
-                      </h3>
-                      <div className="flex items-center text-xs text-muted-foreground mb-2">
-                        <MapPin className="h-3 w-3 mr-1" />
-                        {route.name} • {route.date.getFullYear()}/{String(route.date.getMonth() + 1).padStart(2, "0")}/{String(route.date.getDate()).padStart(2, "0")}
+              <Dialog key={routeIndex} open={isDialogOpen && selectedTicket === reservationData} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <Card className="shadow-sm border-l-4 border-l-primary cursor-pointer hover:shadow-md transition-shadow">
+                    <CardContent className="p-4">
+                      <div className="flex justify-between items-start mb-3">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-foreground text-sm mb-1">
+                            {reservationData.ticketInfo.name}
+                          </h3>
+                          <div className="flex items-center text-xs text-muted-foreground mb-2">
+                            <MapPin className="h-3 w-3 mr-1" />
+                            {route.name} • {route.date.getFullYear()}/{String(route.date.getMonth() + 1).padStart(2, "0")}/{String(route.date.getDate()).padStart(2, "0")}
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-end">
+                          <Badge variant="default" className="text-xs">
+                            已劃位
+                          </Badge>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex flex-col items-end">
-                      <Badge variant="default" className="text-xs">
-                        已劃位
-                      </Badge>
-                    </div>
-                  </div>
 
-                  <div className="flex justify-between items-center mb-3">
-                    <div className="text-xs text-muted-foreground">
-                      <div>數量: {reservationData.passengers.length} 張</div>
-                      <div>票券類型: {reservationData.ticketInfo.type}</div>
-                    </div>
-                    <div className="text-xs text-muted-foreground text-right">
-                      <div>劃位: {new Date().toLocaleDateString('zh-TW')}</div>
-                      <div>路線: {route.name}</div>
-                    </div>
-                  </div>
+                      <div className="flex justify-between items-center mb-3">
+                        <div className="text-xs text-muted-foreground">
+                          <div>數量: {reservationData.passengers.length} 張</div>
+                          <div>票券類型: {reservationData.ticketInfo.type}</div>
+                        </div>
+                        <div className="text-xs text-muted-foreground text-right">
+                          <div>劃位: {new Date().toLocaleDateString('zh-TW')}</div>
+                          <div>路線: {route.name}</div>
+                        </div>
+                      </div>
 
-                  <div className="flex gap-2">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="flex-1 h-8 text-xs bg-transparent"
-                      onClick={() => {
-                        // TODO: Show detailed ticket info
-                        console.log("Show detailed ticket info")
-                      }}
-                    >
-                      <MapPin className="h-3 w-3 mr-1" />
-                      查看詳情
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="flex-1 h-8 text-xs bg-transparent"
-                      onClick={() => router.push("/my-tickets")}
-                    >
-                      <Calendar className="h-3 w-3 mr-1" />
-                      我的車票
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="flex-1 h-8 text-xs bg-transparent"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handleViewTicketDetails(reservationData)
+                          }}
+                        >
+                          <MapPin className="h-3 w-3 mr-1" />
+                          查看詳情
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="flex-1 h-8 text-xs bg-transparent"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            router.push("/my-tickets")
+                          }}
+                        >
+                          <Calendar className="h-3 w-3 mr-1" />
+                          我的車票
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </DialogTrigger>
+                <DialogContent className="max-w-sm mx-auto max-h-[85vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle className="text-lg">票券詳情</DialogTitle>
+                  </DialogHeader>
+                  <ScrollArea className="max-h-[70vh]">
+                    <TicketInfoDisplay ticketData={selectedTicket} />
+                  </ScrollArea>
+                </DialogContent>
+              </Dialog>
             ))}
           </div>
         </div>
