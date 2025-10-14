@@ -101,7 +101,7 @@ export default function MyTicketsPage() {
         seatAssigned: true,
         seatNumber: "A12, A13",
         purchaseDate: "2025/9/10",
-        validUntil: "2025/10/10",
+        validUntil: "2025/12/10",
         type: "一日券",
         breakdown: {
           adult: {
@@ -138,6 +138,47 @@ export default function MyTicketsPage() {
           },
         ],
       },
+      // 已搭乘 (Completed) - past date
+      {
+        id: "TK250920",
+        name: "媽宮・湖西線 一日券",
+        routeName: "湖西線",
+        date: "2025/9/20",
+        quantity: 1,
+        totalAmount: 300,
+        status: "purchased",
+        seatAssigned: true,
+        seatNumber: "B08",
+        purchaseDate: "2025/9/15",
+        validUntil: "2025/12/15",
+        type: "一日券",
+        breakdown: {
+          adult: {
+            label: "全票（非澎湖籍）",
+            count: 1,
+            price: 300,
+            subtotal: 300,
+          },
+        },
+        selectedDates: [
+          {
+            routeId: "xihu",
+            routeName: "湖西線",
+            date: "2025/9/20",
+          },
+        ],
+        passengers: [
+          {
+            ticketType: "adult",
+            name: "陳小美",
+            email: "chen@example.com",
+            phone: "0934567890",
+            id: "B234567890",
+            needsAccessibility: "no",
+            pickupLocations: { xihu: "magonggang-0830" },
+          },
+        ],
+      },
       // 已取消 (Cancelled)
       {
         id: "TK251010",
@@ -150,7 +191,7 @@ export default function MyTicketsPage() {
         seatAssigned: true,
         seatNumber: "C10, C11, C12",
         purchaseDate: "2025/9/25",
-        validUntil: "2025/10/25",
+        validUntil: "2025/12/25",
         type: "一日券",
         breakdown: {
           adult: {
@@ -192,55 +233,6 @@ export default function MyTicketsPage() {
             phone: "0967890123",
             needsAccessibility: "no",
             pickupLocations: { south: "magong-port" },
-          },
-        ],
-      },
-      // 已失效 (Expired) - validUntil date in the past
-      {
-        id: "TK250820",
-        name: "媽宮・北環線 一日券",
-        routeName: "北環線",
-        date: "2025/9/5",
-        quantity: 2,
-        totalAmount: 600,
-        status: "purchased",
-        seatAssigned: true,
-        seatNumber: "D15, D16",
-        purchaseDate: "2025/8/20",
-        validUntil: "2025/9/1",
-        type: "一日券",
-        breakdown: {
-          adult: {
-            label: "全票（非澎湖籍）",
-            count: 2,
-            price: 300,
-            subtotal: 600,
-          },
-        },
-        selectedDates: [
-          {
-            routeId: "north",
-            routeName: "北環線",
-            date: "2025/9/5",
-          },
-        ],
-        passengers: [
-          {
-            ticketType: "adult",
-            name: "黃小龍",
-            email: "huang@example.com",
-            phone: "0978901234",
-            id: "D456789012",
-            needsAccessibility: "no",
-            pickupLocations: { north: "xiweidong-0828" },
-          },
-          {
-            ticketType: "adult",
-            name: "吳小鳳",
-            email: "wu@example.com",
-            phone: "0989012345",
-            needsAccessibility: "no",
-            pickupLocations: { north: "xiweidong-0828" },
           },
         ],
       },
@@ -466,19 +458,21 @@ export default function MyTicketsPage() {
     </div>
   )
 
-  const TicketInfoDisplay = ({ ticket }: { ticket: StoredTicket }) => (
+  const TicketInfoDisplay = ({ ticket, showQRCode = true }: { ticket: StoredTicket; showQRCode?: boolean }) => (
     <div className="space-y-4">
-      <div className="flex flex-col items-center pb-4 border-b border-border">
-        <div className="bg-white p-3 rounded-lg border-2 border-gray-200">
-          <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded">
-            <div className="text-center">
-              <QrCode className="h-12 w-12 mx-auto mb-2 text-gray-400" />
-              <div className="text-xs text-gray-500">QR Code</div>
-              <div className="text-xs text-gray-400 mt-1 truncate max-w-[140px]">{ticket.id}</div>
+      {showQRCode && (
+        <div className="flex flex-col items-center pb-4 border-b border-border">
+          <div className="bg-white p-3 rounded-lg border-2 border-gray-200">
+            <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded">
+              <div className="text-center">
+                <QrCode className="h-12 w-12 mx-auto mb-2 text-gray-400" />
+                <div className="text-xs text-gray-500">QR Code</div>
+                <div className="text-xs text-gray-400 mt-1 truncate max-w-[140px]">{ticket.id}</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       <div className="bg-muted/50 p-4 rounded-lg">
         <h3 className="font-semibold text-foreground mb-2">{ticket.name}</h3>
@@ -606,8 +600,8 @@ export default function MyTicketsPage() {
 
     return (
       <Card className="shadow-sm border-l-4 border-l-primary">
-        <CardContent className="p-4">
-          <div className="flex justify-between items-start mb-3">
+        <CardContent className="px-3 py-1">
+          <div className="flex justify-between items-start mb-1">
             <div className="flex-1">
               <h3 className="font-semibold text-foreground text-sm mb-1">{ticket.name}</h3>
               <div className="flex items-center text-xs text-muted-foreground mb-2">
@@ -630,7 +624,7 @@ export default function MyTicketsPage() {
             </div>
           </div>
 
-          <div className="flex justify-between items-center mb-3">
+          <div className="flex justify-between items-center mb-1 pl-4 pr-1">
             <div className="text-xs text-muted-foreground">
               <div>數量: {ticket.quantity} 張</div>
               <div>金額: NT${ticket.totalAmount}</div>
@@ -642,49 +636,48 @@ export default function MyTicketsPage() {
           </div>
 
           <div className="flex gap-2">
-            {ticket.seatAssigned ? (
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className={`${canEdit ? "flex-1" : isPastTicket ? "flex-1" : "w-full"} h-8 text-xs bg-transparent`}
-                    onClick={() => handleQRCodeClick(ticket)}
-                  >
-                    <QrCode className="h-3 w-3 mr-1" />
-                    票券QR碼
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-sm max-h-[80vh] overflow-y-auto">
-                  <DialogHeader>
-                    <DialogTitle className="text-center">票券資訊</DialogTitle>
-                  </DialogHeader>
-                  {selectedTicket && <TicketInfoDisplay ticket={selectedTicket} />}
-                </DialogContent>
-              </Dialog>
-            ) : (
+            {status.label === "已取消" ? (
+              // 已取消：車票詳情（不顯示QR碼）
               <Dialog open={isTicketInfoDialogOpen} onOpenChange={setIsTicketInfoDialogOpen}>
                 <DialogTrigger asChild>
                   <Button
                     size="sm"
                     variant="outline"
-                    className={`${canEdit ? "flex-1" : isPastTicket ? "flex-1" : "w-full"} h-8 text-xs bg-transparent`}
+                    className="w-full h-8 text-xs bg-transparent"
                     onClick={() => handleViewTicketInfo(ticket)}
                   >
-                    查看票券資訊
+                    車票詳情
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-sm max-h-[80vh] overflow-y-auto">
                   <DialogHeader>
-                    <DialogTitle className="text-center">票券資訊</DialogTitle>
+                    <DialogTitle className="text-center">車票詳情</DialogTitle>
                   </DialogHeader>
-                  {selectedTicket && <TicketInfoDisplay ticket={selectedTicket} />}
+                  {selectedTicket && <TicketInfoDisplay ticket={selectedTicket} showQRCode={false} />}
                 </DialogContent>
               </Dialog>
-            )}
-
-            {canEdit && (
+            ) : status.label === "已劃位" ? (
+              // 已劃位：票券QR碼、修改、取消
               <>
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="flex-1 h-8 text-xs bg-transparent"
+                      onClick={() => handleQRCodeClick(ticket)}
+                    >
+                      <QrCode className="h-3 w-3 mr-1" />
+                      票券QR碼
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-sm max-h-[80vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="text-center">票券資訊</DialogTitle>
+                    </DialogHeader>
+                    {selectedTicket && <TicketInfoDisplay ticket={selectedTicket} showQRCode={true} />}
+                  </DialogContent>
+                </Dialog>
                 <Button
                   size="sm"
                   variant="outline"
@@ -705,18 +698,57 @@ export default function MyTicketsPage() {
                   取消
                 </Button>
               </>
-            )}
-
-            {isPastTicket && (
-              <Button
-                size="sm"
-                variant="outline"
-                className="flex-1 h-8 text-xs bg-accent"
-                onClick={() => handleRatingClick(ticket)}
-              >
-                <Star className="h-3 w-3 mr-1" />
-                為此行程評分
-              </Button>
+            ) : status.label === "已搭乘" ? (
+              // 已搭乘：車票詳情（不顯示QR碼）、為此行程評分
+              <>
+                <Dialog open={isTicketInfoDialogOpen} onOpenChange={setIsTicketInfoDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="flex-1 h-8 text-xs bg-transparent"
+                      onClick={() => handleViewTicketInfo(ticket)}
+                    >
+                      車票詳情
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-sm max-h-[80vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="text-center">車票詳情</DialogTitle>
+                    </DialogHeader>
+                    {selectedTicket && <TicketInfoDisplay ticket={selectedTicket} showQRCode={false} />}
+                  </DialogContent>
+                </Dialog>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 h-8 text-xs bg-accent"
+                  onClick={() => handleRatingClick(ticket)}
+                >
+                  <Star className="h-3 w-3 mr-1" />
+                  為此行程評分
+                </Button>
+              </>
+            ) : (
+              // 其他狀態（如已失效）
+              <Dialog open={isTicketInfoDialogOpen} onOpenChange={setIsTicketInfoDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="w-full h-8 text-xs bg-transparent"
+                    onClick={() => handleViewTicketInfo(ticket)}
+                  >
+                    車票詳情
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-sm max-h-[80vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle className="text-center">車票詳情</DialogTitle>
+                  </DialogHeader>
+                  {selectedTicket && <TicketInfoDisplay ticket={selectedTicket} showQRCode={false} />}
+                </DialogContent>
+              </Dialog>
             )}
           </div>
         </CardContent>
@@ -756,12 +788,10 @@ export default function MyTicketsPage() {
           </div>
         ) : (
           <>
-            <div className="space-y-4">
-              {tickets
-                .filter((ticket) => ticket.status !== "cancelled")
-                .map((ticket) => (
-                  <TicketCard key={ticket.id} ticket={ticket} />
-                ))}
+            <div className="space-y-3">
+              {tickets.map((ticket) => (
+                <TicketCard key={ticket.id} ticket={ticket} />
+              ))}
             </div>
 
             <div className="mt-8 space-y-3">
