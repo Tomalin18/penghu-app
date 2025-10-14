@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { Trash2 } from "lucide-react"
 import { HeaderWithMenu } from "@/components/header-with-menu"
 import { MobileNavigation } from "@/components/mobile-navigation"
 import { Button } from "@/components/ui/button"
@@ -13,6 +14,7 @@ import { Label } from "@/components/ui/label"
 import {
   AlertDialog,
   AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -23,6 +25,7 @@ import {
 export default function EditProfilePage() {
   const router = useRouter()
   const [showSuccessDialog, setShowSuccessDialog] = useState(false)
+  const [showDeleteAccountDialog, setShowDeleteAccountDialog] = useState(false)
 
   // Mock user data - in real app this would come from auth context/state
   const [formData, setFormData] = useState({
@@ -46,6 +49,13 @@ export default function EditProfilePage() {
   const handleSuccessConfirm = () => {
     setShowSuccessDialog(false)
     router.push("/profile")
+  }
+
+  const handleDeleteAccount = () => {
+    console.log("[v0] User account deleted")
+    // In real app: call API to delete account, clear all user data, etc.
+    alert("帳號已成功刪除")
+    router.push("/")
   }
 
   return (
@@ -152,6 +162,18 @@ export default function EditProfilePage() {
             </form>
           </CardContent>
         </Card>
+
+        {/* Delete Account Button */}
+        <div className="mt-6">
+          <Button
+            variant="outline"
+            className="w-full h-12 text-red-600 border-red-300 hover:bg-red-50 hover:text-red-700 hover:border-red-400 bg-transparent"
+            onClick={() => setShowDeleteAccountDialog(true)}
+          >
+            <Trash2 className="h-4 w-4 mr-2" />
+            刪除帳號
+          </Button>
+        </div>
       </main>
 
       {/* Success Dialog */}
@@ -163,6 +185,30 @@ export default function EditProfilePage() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogAction onClick={handleSuccessConfirm}>確定</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Delete Account Confirmation Dialog */}
+      <AlertDialog open={showDeleteAccountDialog} onOpenChange={setShowDeleteAccountDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-red-600">確定要刪除帳號嗎？</AlertDialogTitle>
+            <AlertDialogDescription>
+              此操作無法復原！刪除帳號後，您的所有資料（包括車票、收藏等）都將永久刪除。
+              <br />
+              <br />
+              <strong>請確認您真的要刪除此帳號。</strong>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>取消</AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={handleDeleteAccount} 
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              確定刪除
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
