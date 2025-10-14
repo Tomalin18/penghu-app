@@ -29,7 +29,6 @@ interface PassengerInfo {
 interface ReservationData {
   ticketInfo: {
     name: string
-    englishName: string
     price: string
     type: string
   }
@@ -136,7 +135,6 @@ export default function ReservationSuccessPage() {
                 <div className="space-y-3 p-4">
                   <div className="bg-gradient-to-br from-muted/30 to-muted/50 p-4 rounded-xl border border-border/50 shadow-sm mb-3">
                     <div className="font-semibold text-foreground mb-1">{reservationData.ticketInfo.name}</div>
-                    <div className="text-xs text-muted-foreground">{reservationData.ticketInfo.englishName}</div>
                   </div>
 
                   {reservationData.routes.map((route, routeIndex) => (

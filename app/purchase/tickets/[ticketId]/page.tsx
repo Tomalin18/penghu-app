@@ -34,7 +34,6 @@ import { attractions } from "@/data/attractions"
 interface TicketDetail {
   id: string
   name: string
-  englishName: string
   price: number
   image: string
   description: string
@@ -423,7 +422,6 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       "magong-north-1": {
         id: "magong-north-1",
         name: "媽宮・北環線 一日券",
-        englishName: "Magong・North Ring Line 1-Day Pass",
         price: 150,
         image: "/images/ticket-north-ring.png",
         description:
@@ -449,7 +447,6 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       "magong-xihu-1": {
         id: "magong-xihu-1",
         name: "媽宮・湖西線 一日券",
-        englishName: "Magong・Xihu Line 1-Day Pass",
         price: 125,
         image: "/images/ticket-xihu.png",
         description:
@@ -475,7 +472,6 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       "magong-south-1": {
         id: "magong-south-1",
         name: "媽宮・澎南線 一日券",
-        englishName: "Magong・South Line 1-Day Pass",
         price: 100,
         image: "/images/ticket-south.png",
         description:
@@ -501,7 +497,6 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       "north-xihu-2": {
         id: "north-xihu-2",
         name: "台灣好行 二日券 北環・湖西線",
-        englishName: "Taiwan Tourist Shuttle North Ring・Xihu 2-Day Pass",
         price: 250,
         image: "/images/ticket-north-xihu-2day.png",
         description:
@@ -527,7 +522,6 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       "north-south-2": {
         id: "north-south-2",
         name: "台灣好行 二日券 北環・澎南線",
-        englishName: "Taiwan Tourist Shuttle North Ring・South 2-Day Pass",
         price: 225,
         image: "/images/ticket-north-south-2day.png",
         description:
@@ -553,7 +547,6 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       "xihu-south-2": {
         id: "xihu-south-2",
         name: "台灣好行 二日券 湖西・澎南線",
-        englishName: "Taiwan Tourist Shuttle Xihu・South 2-Day Pass",
         price: 200,
         image: "/images/ticket-xihu-south-2day.png",
         description: "深度探索澎湖東部與南部的自然風光，從奎壁山分海到風櫃洞，體驗澎湖最具特色的地質景觀與海岸風情。",
@@ -578,7 +571,6 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       "penghu-3-600": {
         id: "penghu-3-600",
         name: "台灣好行 三日券 北環・湖西・澎南線",
-        englishName: "Taiwan Tourist Shuttle 3-Day Pass All Routes",
         price: 600,
         image: "/images/ticket-3day-600.png",
         description:
@@ -604,7 +596,6 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       "penghu-3-300": {
         id: "penghu-3-300",
         name: "台灣好行 三日券 北環・湖西・澎南線",
-        englishName: "Taiwan Tourist Shuttle 3-Day Pass All Routes",
         price: 300,
         image: "/images/ticket-3day-300.png",
         description: "經濟實惠的澎湖三日遊券，涵蓋所有主要景點路線，適合預算有限但想完整體驗澎湖風情的旅客。",
@@ -629,7 +620,6 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       "north-airport-combo": {
         id: "north-airport-combo",
         name: "媽宮・暢遊北環線一日券+空港快線",
-        englishName: "North Ring + Airport Express",
         price: 300,
         image: "/images/ticket-magong-north-300.png",
         description: "結合機場接送與北環線觀光的便利套票，從機場直達市區後暢遊北環線所有景點，適合短期旅遊的完美選擇。",
@@ -654,7 +644,6 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       "xihu-airport-combo": {
         id: "xihu-airport-combo",
         name: "媽宮・湖西慢旅趣一日券+空港快線",
-        englishName: "Xihu Slow Travel + Airport Express",
         price: 250,
         image: "/images/ticket-magong-xihu-250.png",
         description: "機場接送搭配湖西線慢旅行，體驗澎湖東海岸的寧靜美景，從奎壁山分海到隘門沙灘，享受悠閒的島嶼時光。",
@@ -679,7 +668,6 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       "south-airport-combo": {
         id: "south-airport-combo",
         name: "媽宮・澎南輕旅行一日券+空港快線",
-        englishName: "South Light Travel + Airport Express",
         price: 200,
         image: "/images/ticket-magong-south-200.png",
         description: "最經濟的機場接送加觀光套票，暢遊澎湖南部的風櫃洞、山水沙灘等熱門景點，適合預算有限的輕旅行。",
@@ -804,7 +792,6 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
           {/* Title */}
           <div className="px-4 py-4">
             <h2 className="text-xl font-bold text-foreground mb-1">{ticket.name}</h2>
-            <p className="text-sm text-muted-foreground">{ticket.englishName}</p>
             <p className="text-lg font-semibold text-primary mt-2">
               NT$ {ticket.price}~{ticket.price * 2}
             </p>

@@ -16,7 +16,6 @@ import { attractions } from "@/data/attractions"
 interface TicketDetail {
   id: string
   name: string
-  englishName: string
   price: number
   image: string
   description: string
@@ -265,7 +264,6 @@ export default function TicketInfoPage({ params }: { params: { ticketId: string 
       "magong-north-1": {
         id: "magong-north-1",
         name: "媽宮・北環線 一日券",
-        englishName: "Magong・North Ring Line 1-Day Pass",
         price: 150,
         image: "/images/ticket-north-ring.png",
         description:
@@ -330,7 +328,6 @@ export default function TicketInfoPage({ params }: { params: { ticketId: string 
           {/* Title */}
           <div className="px-4 py-4">
             <h2 className="text-xl font-bold text-foreground mb-1">{ticket.name}</h2>
-            <p className="text-sm text-muted-foreground">{ticket.englishName}</p>
             <p className="text-lg font-semibold text-primary mt-2">NT$ {ticket.price}</p>
           </div>
 

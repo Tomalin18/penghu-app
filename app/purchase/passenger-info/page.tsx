@@ -81,77 +81,66 @@ const PassengerInfoPage = () => {
     const ticketData: Record<string, any> = {
       "magong-north-1": {
         name: "媽宮・北環線 一日券",
-        englishName: "Magong・North Ring Line One-Day Pass",
         price: "NT$ 150~300",
         type: "一日券",
         image: "/images/ticket-north-ring.png",
       },
       "magong-xihu-1": {
         name: "媽宮・湖西線 一日券",
-        englishName: "Magong・Xihu Line One-Day Pass",
         price: "NT$ 125~250",
         type: "一日券",
         image: "/images/ticket-xihu.png",
       },
       "magong-south-1": {
         name: "媽宮・澎南線 一日券",
-        englishName: "Magong・South Line One-Day Pass",
         price: "NT$ 100~200",
         type: "一日券",
         image: "/images/ticket-south.png",
       },
       "north-xihu-2": {
         name: "台灣好行 二日券 北環・湖西線",
-        englishName: "Taiwan Tourist Shuttle North Ring・Xihu 2-Day Pass",
         price: "NT$ 250~500",
         type: "二日券",
         image: "/images/ticket-north-xihu-2day.png",
       },
       "north-south-2": {
         name: "台灣好行 二日券 北環・澎南線",
-        englishName: "Taiwan Tourist Shuttle North Ring・South 2-Day Pass",
         price: "NT$ 225~450",
         type: "二日券",
         image: "/images/ticket-north-south-2day.png",
       },
       "xihu-south-2": {
         name: "台灣好行 二日券 湖西・澎南線",
-        englishName: "Taiwan Tourist Shuttle Xihu・South 2-Day Pass",
         price: "NT$ 200~400",
         type: "二日券",
         image: "/images/ticket-xihu-south-2day.png",
       },
       "penghu-3-600": {
         name: "台灣好行 三日券 北環・湖西・澎南線",
-        englishName: "Taiwan Tourist Shuttle 3-Day Pass All Routes",
         price: "NT$ 600~1200",
         type: "三日券",
         image: "/images/ticket-3day-600.png",
       },
       "penghu-3-300": {
         name: "台灣好行 三日券 北環・湖西・澎南線",
-        englishName: "Taiwan Tourist Shuttle 3-Day Pass All Routes",
         price: "NT$ 300~600",
         type: "三日券",
         image: "/images/ticket-3day-300.png",
       },
       "north-airport-combo": {
         name: "媽宮・暢遊北環線一日券+空港快線",
-        englishName: "North Ring + Airport Express",
         price: "NT$ 300~600",
         type: "其他票券",
         image: "/images/ticket-magong-north-300.png",
       },
       "xihu-airport-combo": {
         name: "媽宮・湖西慢旅趣一日券+空港快線",
-        englishName: "Xihu Slow Travel + Airport Express",
         price: "NT$ 250~500",
         type: "其他票券",
         image: "/images/ticket-magong-xihu-250.png",
       },
       "south-airport-combo": {
         name: "媽宮・澎南輕旅行一日券+空港快線",
-        englishName: "South Light Travel + Airport Express",
         price: "NT$ 200~400",
         type: "其他票券",
         image: "/images/ticket-magong-south-200.png",
@@ -161,7 +150,6 @@ const PassengerInfoPage = () => {
     return (
       ticketData[ticketId] || {
         name: "媽宮・北環線 一日券",
-        englishName: "Magong・North Ring Line One-Day Pass",
         price: "NT$ 150~300",
         type: "一日券",
         image: "/images/ticket-north-ring.png",
@@ -436,7 +424,6 @@ const PassengerInfoPage = () => {
           </div>
           <div>
             <h3 className="font-bold text-primary">{selectedTicket.name}</h3>
-            <p className="text-xs text-muted-foreground">{selectedTicket.englishName}</p>
             <p className="font-bold text-primary">{selectedTicket.price}</p>
           </div>
         </div>
@@ -714,7 +701,6 @@ const PassengerInfoPage = () => {
                     </div>
                     <div>
                       <h3 className="font-bold text-primary">{selectedTicket.name}</h3>
-                      <p className="text-xs text-muted-foreground">{selectedTicket.englishName}</p>
                       <p className="font-bold text-primary">{selectedTicket.price}</p>
                     </div>
                   </div>

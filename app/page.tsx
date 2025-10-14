@@ -28,7 +28,7 @@ const HomePage = () => {
     {
       id: "magong-north-1",
       title: "媽宮・北環線 一日券",
-      subtitle: "Magong・North Ring Line",
+      subtitle: "",
       description: "探索澎湖北部美景，跨海大橋、二崁古厝",
       route: "北環線",
       price: "NT$ 150",
@@ -38,7 +38,7 @@ const HomePage = () => {
     {
       id: "magong-xihu-1",
       title: "媽宮・湖西線 一日券",
-      subtitle: "Magong・Xihu Line",
+      subtitle: "",
       description: "暢遊湖西線美景，奎壁山摩西分海奇景",
       route: "湖西線",
       price: "NT$ 125",
@@ -48,7 +48,7 @@ const HomePage = () => {
     {
       id: "magong-south-1",
       title: "媽宮・澎南線 一日券",
-      subtitle: "Magong・South Line",
+      subtitle: "",
       description: "體驗澎南風情，風櫃洞、山水沙灘",
       route: "澎南線",
       price: "NT$ 100",
@@ -255,7 +255,7 @@ const HomePage = () => {
                       </div>
                       <div className="flex-1 min-w-0">
                         <h3 className="font-semibold text-foreground mb-1 text-sm">{ticket.title}</h3>
-                        <p className="text-xs text-muted-foreground mb-1">{ticket.subtitle}</p>
+                        {ticket.subtitle && <p className="text-xs text-muted-foreground mb-1">{ticket.subtitle}</p>}
                         <p className="text-xs text-muted-foreground mb-2">{ticket.description}</p>
                         <div className="flex items-center justify-between">
                           <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">{ticket.route}</span>
