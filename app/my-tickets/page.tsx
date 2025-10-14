@@ -459,24 +459,24 @@ export default function MyTicketsPage() {
   )
 
   const TicketInfoDisplay = ({ ticket, showQRCode = true }: { ticket: StoredTicket; showQRCode?: boolean }) => (
-    <div className="space-y-4">
+    <div className="space-y-2">
       {showQRCode && (
-        <div className="flex flex-col items-center pb-4 border-b border-border">
-          <div className="bg-white p-3 rounded-lg border-2 border-gray-200">
-            <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded">
+        <div className="flex flex-col items-center pb-2 border-b border-border">
+          <div className="bg-white p-2 rounded-lg border-2 border-gray-200">
+            <div className="w-32 h-32 bg-gray-100 flex items-center justify-center rounded">
               <div className="text-center">
-                <QrCode className="h-12 w-12 mx-auto mb-2 text-gray-400" />
+                <QrCode className="h-10 w-10 mx-auto mb-1 text-gray-400" />
                 <div className="text-xs text-gray-500">QR Code</div>
-                <div className="text-xs text-gray-400 mt-1 truncate max-w-[140px]">{ticket.id}</div>
+                <div className="text-xs text-gray-400 mt-1 truncate max-w-[120px]">{ticket.id}</div>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      <div className="bg-muted/50 p-4 rounded-lg">
-        <h3 className="font-semibold text-foreground mb-2">{ticket.name}</h3>
-        <div className="space-y-1 text-sm">
+      <div className="bg-muted/50 p-2 rounded-lg">
+        <h3 className="font-semibold text-foreground mb-1 text-sm">{ticket.name}</h3>
+        <div className="space-y-0.5 text-xs">
           <div className="flex justify-between">
             <span className="text-muted-foreground">路線</span>
             <span className="font-medium">{ticket.routeName}</span>
@@ -492,19 +492,19 @@ export default function MyTicketsPage() {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <h4 className="font-semibold text-sm text-foreground">票券明細</h4>
-        <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+      <div className="space-y-1">
+        <h4 className="font-semibold text-xs text-foreground">票券明細</h4>
+        <div className="bg-muted/50 p-2 rounded-lg space-y-1">
           {ticket.breakdown &&
             Object.entries(ticket.breakdown).map(([key, detail]) => (
-              <div key={key} className="flex justify-between text-sm">
+              <div key={key} className="flex justify-between text-xs">
                 <span className="text-muted-foreground">
                   {detail.label} x {detail.count}
                 </span>
                 <span className="font-medium">NT${detail.subtotal}</span>
               </div>
             ))}
-          <div className="pt-2 border-t border-border flex justify-between font-semibold">
+          <div className="pt-1 border-t border-border flex justify-between font-semibold text-xs">
             <span>總計</span>
             <span className="text-primary">NT${ticket.totalAmount}</span>
           </div>
@@ -512,15 +512,15 @@ export default function MyTicketsPage() {
       </div>
 
       {ticket.passengers && ticket.passengers.length > 0 && (
-        <div className="space-y-2">
-          <h4 className="font-semibold text-sm text-foreground">乘客資訊</h4>
-          <div className="bg-muted/50 p-4 rounded-lg space-y-3">
+        <div className="space-y-1">
+          <h4 className="font-semibold text-xs text-foreground">乘客資訊</h4>
+          <div className="bg-muted/50 p-2 rounded-lg space-y-1">
             {ticket.passengers.map((passenger, index) => (
-              <div key={index} className="pb-3 border-b border-border last:border-b-0 last:pb-0">
-                <div className="font-medium text-sm mb-2">
+              <div key={index} className="pb-1 border-b border-border last:border-b-0 last:pb-0">
+                <div className="font-medium text-xs mb-1">
                   {ticket.passengers && ticket.passengers.length > 1 ? `乘客 ${index + 1}` : "乘客資訊"}
                 </div>
-                <div className="space-y-1 text-sm">
+                <div className="space-y-0.5 text-xs">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">姓名</span>
                     <span className="font-medium">{passenger.name}</span>
@@ -546,9 +546,9 @@ export default function MyTicketsPage() {
         </div>
       )}
 
-      <div className="space-y-2">
-        <h4 className="font-semibold text-sm text-foreground">購票資訊</h4>
-        <div className="bg-muted/50 p-4 rounded-lg space-y-2 text-sm">
+      <div className="space-y-1">
+        <h4 className="font-semibold text-xs text-foreground">購票資訊</h4>
+        <div className="bg-muted/50 p-2 rounded-lg space-y-1 text-xs">
           <div className="flex justify-between">
             <span className="text-muted-foreground">票券編號</span>
             <span className="font-mono text-xs">{ticket.id}</span>

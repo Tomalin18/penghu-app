@@ -178,7 +178,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
   const nearbyTransportation: Record<
     string,
     {
-      buses: string[]
+      buses: {
+        government: string[]
+        scenic: string[]
+      }
       flights: string[]
       ships: string[]
       youbike: string[]
@@ -188,7 +191,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
     }
   > = {
     西衛東站: {
-      buses: ["1路公車", "2路公車", "7路公車"],
+      buses: {
+        government: ["1路公車", "2路公車", "7路公車"],
+        scenic: ["北環線觀光巴士", "市區環線"],
+      },
       flights: [],
       ships: ["馬公港渡輪"],
       youbike: ["西衛站"],
@@ -197,7 +203,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["西衛東站公廁"],
     },
     馬公港站: {
-      buses: ["1路公車", "2路公車", "3路公車", "4路公車", "5路公車"],
+      buses: {
+        government: ["1路公車", "2路公車", "3路公車", "4路公車", "5路公車"],
+        scenic: ["北環線觀光巴士", "南環線觀光巴士", "湖西線觀光巴士"],
+      },
       flights: ["澎湖機場接駁車"],
       ships: ["嘉義布袋港", "高雄港", "台南安平港", "七美島", "望安島"],
       youbike: ["馬公港站", "第一漁港站"],
@@ -206,7 +215,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["馬公港公廁", "遊客服務中心"],
     },
     公車總站: {
-      buses: ["1路公車", "2路公車", "3路公車", "4路公車", "5路公車", "6路公車", "7路公車", "8路公車"],
+      buses: {
+        government: ["1路公車", "2路公車", "3路公車", "4路公車", "5路公車", "6路公車", "7路公車", "8路公車"],
+        scenic: ["北環線觀光巴士", "南環線觀光巴士", "湖西線觀光巴士", "西嶼線觀光巴士"],
+      },
       flights: ["澎湖機場接駁車"],
       ships: [],
       youbike: ["公車總站", "縣政府站"],
@@ -215,7 +227,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["公車總站公廁"],
     },
     澎湖機場站: {
-      buses: ["機場接駁車", "3路公車"],
+      buses: {
+        government: ["機場接駁車", "3路公車"],
+        scenic: ["湖西線觀光巴士"],
+      },
       flights: ["台北松山", "台中清泉崗", "高雄小港", "嘉義", "台南"],
       ships: [],
       youbike: ["澎湖機場站"],
@@ -224,7 +239,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["機場航廈公廁"],
     },
     "跨海大橋(西嶼端)": {
-      buses: ["西嶼環島公車"],
+      buses: {
+        government: ["西嶼環島公車"],
+        scenic: ["北環線觀光巴士", "西嶼線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: [],
@@ -233,7 +251,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["跨海大橋公廁"],
     },
     風櫃洞: {
-      buses: ["澎南線公車", "5路公車"],
+      buses: {
+        government: ["澎南線公車", "5路公車"],
+        scenic: ["南環線觀光巴士"],
+      },
       flights: [],
       ships: ["觀光遊艇"],
       youbike: [],
@@ -242,7 +263,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["風櫃洞景點公廁"],
     },
     山水沙灘: {
-      buses: ["澎南線公車", "5路公車"],
+      buses: {
+        government: ["澎南線公車", "5路公車"],
+        scenic: ["南環線觀光巴士"],
+      },
       flights: [],
       ships: ["海上活動船隻"],
       youbike: [],
@@ -251,7 +275,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["山水沙灘公廁"],
     },
     北寮奎壁山: {
-      buses: ["湖西線公車", "3路公車"],
+      buses: {
+        government: ["湖西線公車", "3路公車"],
+        scenic: ["湖西線觀光巴士"],
+      },
       flights: [],
       ships: ["潮間帶導覽船"],
       youbike: [],
@@ -260,7 +287,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["奎壁山景點公廁"],
     },
     "自由塔(勝國)站": {
-      buses: ["1路公車", "2路公車"],
+      buses: {
+        government: ["1路公車", "2路公車"],
+        scenic: ["北環線觀光巴士", "南環線觀光巴士", "湖西線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: [],
@@ -269,7 +299,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: [],
     },
     "第三漁港(雅霖)站": {
-      buses: ["1路公車", "2路公車"],
+      buses: {
+        government: ["1路公車", "2路公車"],
+        scenic: ["北環線觀光巴士", "南環線觀光巴士", "湖西線觀光巴士"],
+      },
       flights: [],
       ships: ["觀光漁船"],
       youbike: [],
@@ -278,7 +311,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["第三漁港公廁"],
     },
     "文澳(元泰.百世多麗)站": {
-      buses: ["1路公車", "2路公車", "3路公車"],
+      buses: {
+        government: ["1路公車", "2路公車", "3路公車"],
+        scenic: ["北環線觀光巴士", "南環線觀光巴士", "湖西線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: [],
@@ -287,7 +323,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["飯店公共洗手間"],
     },
     東衛站: {
-      buses: ["1路公車"],
+      buses: {
+        government: ["1路公車"],
+        scenic: ["北環線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: [],
@@ -296,7 +335,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["東衛社區活動中心"],
     },
     三仙塔: {
-      buses: ["西嶼環島公車"],
+      buses: {
+        government: ["西嶼環島公車"],
+        scenic: ["北環線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: [],
@@ -305,7 +347,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["三仙塔景點公廁"],
     },
     二崁聚落: {
-      buses: ["西嶼環島公車"],
+      buses: {
+        government: ["西嶼環島公車"],
+        scenic: ["北環線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: [],
@@ -314,7 +359,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["二崁聚落公廁"],
     },
     通梁古榕: {
-      buses: ["西嶼環島公車"],
+      buses: {
+        government: ["西嶼環島公車"],
+        scenic: ["北環線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: [],
@@ -323,7 +371,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["通梁古榕景點公廁"],
     },
     大菓葉玄武岩柱: {
-      buses: ["西嶼環島公車"],
+      buses: {
+        government: ["西嶼環島公車"],
+        scenic: ["北環線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: [],
@@ -332,7 +383,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["大菓葉景點公廁"],
     },
     澎湖縣水產種苗繁殖場: {
-      buses: ["澎南線公車", "5路公車"],
+      buses: {
+        government: ["澎南線公車", "5路公車"],
+        scenic: ["南環線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: [],
@@ -341,7 +395,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["水產繁殖場公廁"],
     },
     鎖港子午塔: {
-      buses: ["澎南線公車", "5路公車"],
+      buses: {
+        government: ["澎南線公車", "5路公車"],
+        scenic: ["南環線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: [],
@@ -350,7 +407,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["鎖港公廁"],
     },
     南寮社區: {
-      buses: ["湖西線公車", "3路公車"],
+      buses: {
+        government: ["湖西線公車", "3路公車"],
+        scenic: ["湖西線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: [],
@@ -359,7 +419,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["南寮社區公廁"],
     },
     龍門閉鎖陣地: {
-      buses: ["湖西線公車", "3路公車"],
+      buses: {
+        government: ["湖西線公車", "3路公車"],
+        scenic: ["湖西線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: [],
@@ -368,7 +431,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
       restroom: ["龍門景點公廁"],
     },
     澎湖生活博物館: {
-      buses: ["湖西線公車", "3路公車"],
+      buses: {
+        government: ["湖西線公車", "3路公車"],
+        scenic: ["湖西線觀光巴士"],
+      },
       flights: [],
       ships: [],
       youbike: ["澎湖生活博物館站"],
@@ -381,7 +447,10 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
   const getNearbyTransport = (stationName: string) => {
     return (
       nearbyTransportation[stationName] || {
-        buses: ["當地接駁車"],
+        buses: {
+          government: ["當地接駁車"],
+          scenic: ["觀光巴士"],
+        },
         flights: [],
         ships: [],
         youbike: [],
@@ -709,14 +778,14 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
   }
 
   const updateQuantity = (type: keyof typeof ticketQuantities, delta: number) => {
-    setTicketQuantities((prev) => ({
+    setTicketQuantities((prev: typeof ticketQuantities) => ({
       ...prev,
       [type]: Math.max(0, prev[type] + delta),
     }))
   }
 
   const handleComplete = () => {
-    const totalTickets = Object.values(ticketQuantities).reduce((sum, qty) => sum + qty, 0)
+    const totalTickets = (Object.values(ticketQuantities) as number[]).reduce((sum: number, qty: number) => sum + qty, 0)
     if (totalTickets === 0) {
       return
     }
@@ -1003,23 +1072,47 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                                       </DialogHeader>
                                       
                                       <ScrollArea className="max-h-[60vh]">
-                                        <div className="space-y-4 pr-2">
+                                        <div className="space-y-1 pr-2">
                                           {/* 公車路線 */}
-                                          {nearbyTransport.buses.length > 0 && (
+                                          {(nearbyTransport.buses.government.length > 0 ||
+                                            nearbyTransport.buses.scenic.length > 0) && (
                                             <Card className="border-l-4 border-l-blue-500">
-                                              <CardContent className="p-4">
-                                                <div className="flex items-center mb-3">
-                                                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                                                    <Bus className="h-4 w-4 text-blue-600" />
+                                              <CardContent className="p-2">
+                                                <div className="flex items-center mb-1">
+                                                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-2">
+                                                    <Bus className="h-3 w-3 text-blue-600" />
                                                   </div>
-                                                  <h4 className="font-semibold text-foreground">公車路線</h4>
+                                                  <h4 className="font-semibold text-foreground text-sm">公車路線</h4>
                                                 </div>
-                                                <div className="grid grid-cols-2 gap-2">
-                                                  {nearbyTransport.buses.map((bus, idx) => (
-                                                    <div key={idx} className="bg-blue-50 text-blue-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
-                                                      {bus}
+                                                
+                                                <div className="space-y-1">
+                                                  {/* Government buses */}
+                                                  {nearbyTransport.buses.government.length > 0 && (
+                                                    <div>
+                                                      <p className="text-xs font-medium text-muted-foreground mb-0.5">澎湖縣政府公共車船管理處</p>
+                                                      <div className="grid grid-cols-2 gap-1">
+                                                        {nearbyTransport.buses.government.map((bus, idx) => (
+                                                          <div key={idx} className="bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs font-medium text-center">
+                                                            {bus}
+                                                          </div>
+                                                        ))}
+                                                      </div>
                                                     </div>
-                                                  ))}
+                                                  )}
+
+                                                  {/* Scenic area buses */}
+                                                  {nearbyTransport.buses.scenic.length > 0 && (
+                                                    <div>
+                                                      <p className="text-xs font-medium text-muted-foreground mb-0.5">澎湖國家風景區管理處</p>
+                                                      <div className="grid grid-cols-2 gap-1">
+                                                        {nearbyTransport.buses.scenic.map((bus, idx) => (
+                                                          <div key={idx} className="bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs font-medium text-center">
+                                                            {bus}
+                                                          </div>
+                                                        ))}
+                                                      </div>
+                                                    </div>
+                                                  )}
                                                 </div>
                                               </CardContent>
                                             </Card>
@@ -1028,16 +1121,16 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                                           {/* 航班資訊 */}
                                           {nearbyTransport.flights.length > 0 && (
                                             <Card className="border-l-4 border-l-green-500">
-                                              <CardContent className="p-4">
-                                                <div className="flex items-center mb-3">
-                                                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                                                    <Plane className="h-4 w-4 text-green-600" />
+                                              <CardContent className="p-2">
+                                                <div className="flex items-center mb-1">
+                                                  <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-2">
+                                                    <Plane className="h-3 w-3 text-green-600" />
                                                   </div>
-                                                  <h4 className="font-semibold text-foreground">航班資訊</h4>
+                                                  <h4 className="font-semibold text-foreground text-sm">航班資訊</h4>
                                                 </div>
-                                                <div className="grid grid-cols-2 gap-2">
+                                                <div className="grid grid-cols-2 gap-1">
                                                   {nearbyTransport.flights.map((flight, idx) => (
-                                                    <div key={idx} className="bg-green-50 text-green-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
+                                                    <div key={idx} className="bg-green-50 text-green-700 px-2 py-1 rounded text-xs font-medium text-center">
                                                       {flight}
                                                     </div>
                                                   ))}
@@ -1049,16 +1142,16 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                                           {/* 船班資訊 */}
                                           {nearbyTransport.ships.length > 0 && (
                                             <Card className="border-l-4 border-l-purple-500">
-                                              <CardContent className="p-4">
-                                                <div className="flex items-center mb-3">
-                                                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                                                    <Ship className="h-4 w-4 text-purple-600" />
+                                              <CardContent className="p-2">
+                                                <div className="flex items-center mb-1">
+                                                  <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mr-2">
+                                                    <Ship className="h-3 w-3 text-purple-600" />
                                                   </div>
-                                                  <h4 className="font-semibold text-foreground">船班資訊</h4>
+                                                  <h4 className="font-semibold text-foreground text-sm">船班資訊</h4>
                                                 </div>
-                                                <div className="grid grid-cols-2 gap-2">
+                                                <div className="grid grid-cols-2 gap-1">
                                                   {nearbyTransport.ships.map((ship, idx) => (
-                                                    <div key={idx} className="bg-purple-50 text-purple-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
+                                                    <div key={idx} className="bg-purple-50 text-purple-700 px-2 py-1 rounded text-xs font-medium text-center">
                                                       {ship}
                                                     </div>
                                                   ))}
@@ -1070,16 +1163,16 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                                           {/* YouBike站點 */}
                                           {nearbyTransport.youbike.length > 0 && (
                                             <Card className="border-l-4 border-l-orange-500">
-                                              <CardContent className="p-4">
-                                                <div className="flex items-center mb-3">
-                                                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-3">
-                                                    <Bike className="h-4 w-4 text-orange-600" />
+                                              <CardContent className="p-2">
+                                                <div className="flex items-center mb-1">
+                                                  <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-2">
+                                                    <Bike className="h-3 w-3 text-orange-600" />
                                                   </div>
-                                                  <h4 className="font-semibold text-foreground">YouBike站點</h4>
+                                                  <h4 className="font-semibold text-foreground text-sm">YouBike站點</h4>
                                                 </div>
-                                                <div className="grid grid-cols-2 gap-2">
+                                                <div className="grid grid-cols-2 gap-1">
                                                   {nearbyTransport.youbike.map((bike, idx) => (
-                                                    <div key={idx} className="bg-orange-50 text-orange-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
+                                                    <div key={idx} className="bg-orange-50 text-orange-700 px-2 py-1 rounded text-xs font-medium text-center">
                                                       {bike}
                                                     </div>
                                                   ))}
@@ -1089,20 +1182,20 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                                           )}
 
                                           {/* 設施服務 */}
-                                          <div className="grid grid-cols-2 gap-3">
+                                          <div className="flex flex-wrap gap-1">
                                             {/* WiFi熱點 */}
                                             {nearbyTransport.wifi.length > 0 && (
-                                              <Card className="border-l-4 border-l-cyan-500">
-                                                <CardContent className="p-3">
-                                                  <div className="flex items-center mb-2">
-                                                    <div className="w-6 h-6 bg-cyan-100 rounded-full flex items-center justify-center mr-2">
-                                                      <Wifi className="h-3 w-3 text-cyan-600" />
+                                              <Card className="border-l-4 border-l-cyan-500 flex-1 min-w-[45%]">
+                                                <CardContent className="p-2">
+                                                  <div className="flex items-center mb-1">
+                                                    <div className="w-5 h-5 bg-cyan-100 rounded-full flex items-center justify-center mr-1">
+                                                      <Wifi className="h-2.5 w-2.5 text-cyan-600" />
                                                     </div>
                                                     <h5 className="font-medium text-xs text-foreground">WiFi熱點</h5>
                                                   </div>
-                                                  <div className="space-y-1">
+                                                  <div className="space-y-0.5">
                                                     {nearbyTransport.wifi.map((wifi, idx) => (
-                                                      <div key={idx} className="bg-cyan-50 text-cyan-700 px-2 py-1 rounded text-xs text-center">
+                                                      <div key={idx} className="bg-cyan-50 text-cyan-700 px-1.5 py-0.5 rounded text-xs text-center">
                                                         {wifi}
                                                       </div>
                                                     ))}
@@ -1113,17 +1206,17 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
 
                                             {/* 充電站 */}
                                             {nearbyTransport.charging.length > 0 && (
-                                              <Card className="border-l-4 border-l-emerald-500">
-                                                <CardContent className="p-3">
-                                                  <div className="flex items-center mb-2">
-                                                    <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center mr-2">
-                                                      <BatteryCharging className="h-3 w-3 text-emerald-600" />
+                                              <Card className="border-l-4 border-l-emerald-500 flex-1 min-w-[45%]">
+                                                <CardContent className="p-2">
+                                                  <div className="flex items-center mb-1">
+                                                    <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center mr-1">
+                                                      <BatteryCharging className="h-2.5 w-2.5 text-emerald-600" />
                                                     </div>
                                                     <h5 className="font-medium text-xs text-foreground">充電站</h5>
                                                   </div>
-                                                  <div className="space-y-1">
+                                                  <div className="space-y-0.5">
                                                     {nearbyTransport.charging.map((charging, idx) => (
-                                                      <div key={idx} className="bg-emerald-50 text-emerald-700 px-2 py-1 rounded text-xs text-center">
+                                                      <div key={idx} className="bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded text-xs text-center">
                                                         {charging}
                                                       </div>
                                                     ))}
@@ -1134,17 +1227,17 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
 
                                             {/* 洗手間 */}
                                             {nearbyTransport.restroom.length > 0 && (
-                                              <Card className="border-l-4 border-l-pink-500">
-                                                <CardContent className="p-3">
-                                                  <div className="flex items-center mb-2">
-                                                    <div className="w-6 h-6 bg-pink-100 rounded-full flex items-center justify-center mr-2">
-                                                      <DoorOpen className="h-3 w-3 text-pink-600" />
+                                              <Card className="border-l-4 border-l-pink-500 flex-1 min-w-[45%]">
+                                                <CardContent className="p-2">
+                                                  <div className="flex items-center mb-1">
+                                                    <div className="w-5 h-5 bg-pink-100 rounded-full flex items-center justify-center mr-1">
+                                                      <DoorOpen className="h-2.5 w-2.5 text-pink-600" />
                                                     </div>
                                                     <h5 className="font-medium text-xs text-foreground">洗手間</h5>
                                                   </div>
-                                                  <div className="space-y-1">
+                                                  <div className="space-y-0.5">
                                                     {nearbyTransport.restroom.map((restroom, idx) => (
-                                                      <div key={idx} className="bg-pink-50 text-pink-700 px-2 py-1 rounded text-xs text-center">
+                                                      <div key={idx} className="bg-pink-50 text-pink-700 px-1.5 py-0.5 rounded text-xs text-center">
                                                         {restroom}
                                                       </div>
                                                     ))}
@@ -1155,7 +1248,8 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                                           </div>
 
                                           {/* 無交通資訊時顯示 */}
-                                          {nearbyTransport.buses.length === 0 &&
+                                          {nearbyTransport.buses.government.length === 0 &&
+                                            nearbyTransport.buses.scenic.length === 0 &&
                                             nearbyTransport.flights.length === 0 &&
                                             nearbyTransport.ships.length === 0 &&
                                             nearbyTransport.youbike.length === 0 &&
@@ -1365,23 +1459,47 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                                       </DialogHeader>
                                       
                                       <ScrollArea className="max-h-[60vh]">
-                                        <div className="space-y-4 pr-2">
+                                        <div className="space-y-1 pr-2">
                                           {/* 公車路線 */}
-                                          {nearbyTransport.buses.length > 0 && (
+                                          {(nearbyTransport.buses.government.length > 0 ||
+                                            nearbyTransport.buses.scenic.length > 0) && (
                                             <Card className="border-l-4 border-l-blue-500">
-                                              <CardContent className="p-4">
-                                                <div className="flex items-center mb-3">
-                                                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                                                    <Bus className="h-4 w-4 text-blue-600" />
+                                              <CardContent className="p-2">
+                                                <div className="flex items-center mb-1">
+                                                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-2">
+                                                    <Bus className="h-3 w-3 text-blue-600" />
                                                   </div>
-                                                  <h4 className="font-semibold text-foreground">公車路線</h4>
+                                                  <h4 className="font-semibold text-foreground text-sm">公車路線</h4>
                                                 </div>
-                                                <div className="grid grid-cols-2 gap-2">
-                                                  {nearbyTransport.buses.map((bus, idx) => (
-                                                    <div key={idx} className="bg-blue-50 text-blue-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
-                                                      {bus}
+                                                
+                                                <div className="space-y-1">
+                                                  {/* Government buses */}
+                                                  {nearbyTransport.buses.government.length > 0 && (
+                                                    <div>
+                                                      <p className="text-xs font-medium text-muted-foreground mb-0.5">澎湖縣政府公共車船管理處</p>
+                                                      <div className="grid grid-cols-2 gap-1">
+                                                        {nearbyTransport.buses.government.map((bus, idx) => (
+                                                          <div key={idx} className="bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs font-medium text-center">
+                                                            {bus}
+                                                          </div>
+                                                        ))}
+                                                      </div>
                                                     </div>
-                                                  ))}
+                                                  )}
+
+                                                  {/* Scenic area buses */}
+                                                  {nearbyTransport.buses.scenic.length > 0 && (
+                                                    <div>
+                                                      <p className="text-xs font-medium text-muted-foreground mb-0.5">澎湖國家風景區管理處</p>
+                                                      <div className="grid grid-cols-2 gap-1">
+                                                        {nearbyTransport.buses.scenic.map((bus, idx) => (
+                                                          <div key={idx} className="bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs font-medium text-center">
+                                                            {bus}
+                                                          </div>
+                                                        ))}
+                                                      </div>
+                                                    </div>
+                                                  )}
                                                 </div>
                                               </CardContent>
                                             </Card>
@@ -1390,16 +1508,16 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                                           {/* 航班資訊 */}
                                           {nearbyTransport.flights.length > 0 && (
                                             <Card className="border-l-4 border-l-green-500">
-                                              <CardContent className="p-4">
-                                                <div className="flex items-center mb-3">
-                                                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                                                    <Plane className="h-4 w-4 text-green-600" />
+                                              <CardContent className="p-2">
+                                                <div className="flex items-center mb-1">
+                                                  <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-2">
+                                                    <Plane className="h-3 w-3 text-green-600" />
                                                   </div>
-                                                  <h4 className="font-semibold text-foreground">航班資訊</h4>
+                                                  <h4 className="font-semibold text-foreground text-sm">航班資訊</h4>
                                                 </div>
-                                                <div className="grid grid-cols-2 gap-2">
+                                                <div className="grid grid-cols-2 gap-1">
                                                   {nearbyTransport.flights.map((flight, idx) => (
-                                                    <div key={idx} className="bg-green-50 text-green-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
+                                                    <div key={idx} className="bg-green-50 text-green-700 px-2 py-1 rounded text-xs font-medium text-center">
                                                       {flight}
                                                     </div>
                                                   ))}
@@ -1411,16 +1529,16 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                                           {/* 船班資訊 */}
                                           {nearbyTransport.ships.length > 0 && (
                                             <Card className="border-l-4 border-l-purple-500">
-                                              <CardContent className="p-4">
-                                                <div className="flex items-center mb-3">
-                                                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                                                    <Ship className="h-4 w-4 text-purple-600" />
+                                              <CardContent className="p-2">
+                                                <div className="flex items-center mb-1">
+                                                  <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mr-2">
+                                                    <Ship className="h-3 w-3 text-purple-600" />
                                                   </div>
-                                                  <h4 className="font-semibold text-foreground">船班資訊</h4>
+                                                  <h4 className="font-semibold text-foreground text-sm">船班資訊</h4>
                                                 </div>
-                                                <div className="grid grid-cols-2 gap-2">
+                                                <div className="grid grid-cols-2 gap-1">
                                                   {nearbyTransport.ships.map((ship, idx) => (
-                                                    <div key={idx} className="bg-purple-50 text-purple-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
+                                                    <div key={idx} className="bg-purple-50 text-purple-700 px-2 py-1 rounded text-xs font-medium text-center">
                                                       {ship}
                                                     </div>
                                                   ))}
@@ -1432,16 +1550,16 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                                           {/* YouBike站點 */}
                                           {nearbyTransport.youbike.length > 0 && (
                                             <Card className="border-l-4 border-l-orange-500">
-                                              <CardContent className="p-4">
-                                                <div className="flex items-center mb-3">
-                                                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-3">
-                                                    <Bike className="h-4 w-4 text-orange-600" />
+                                              <CardContent className="p-2">
+                                                <div className="flex items-center mb-1">
+                                                  <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-2">
+                                                    <Bike className="h-3 w-3 text-orange-600" />
                                                   </div>
-                                                  <h4 className="font-semibold text-foreground">YouBike站點</h4>
+                                                  <h4 className="font-semibold text-foreground text-sm">YouBike站點</h4>
                                                 </div>
-                                                <div className="grid grid-cols-2 gap-2">
+                                                <div className="grid grid-cols-2 gap-1">
                                                   {nearbyTransport.youbike.map((bike, idx) => (
-                                                    <div key={idx} className="bg-orange-50 text-orange-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
+                                                    <div key={idx} className="bg-orange-50 text-orange-700 px-2 py-1 rounded text-xs font-medium text-center">
                                                       {bike}
                                                     </div>
                                                   ))}
@@ -1451,20 +1569,20 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                                           )}
 
                                           {/* 設施服務 */}
-                                          <div className="grid grid-cols-2 gap-3">
+                                          <div className="flex flex-wrap gap-1">
                                             {/* WiFi熱點 */}
                                             {nearbyTransport.wifi.length > 0 && (
-                                              <Card className="border-l-4 border-l-cyan-500">
-                                                <CardContent className="p-3">
-                                                  <div className="flex items-center mb-2">
-                                                    <div className="w-6 h-6 bg-cyan-100 rounded-full flex items-center justify-center mr-2">
-                                                      <Wifi className="h-3 w-3 text-cyan-600" />
+                                              <Card className="border-l-4 border-l-cyan-500 flex-1 min-w-[45%]">
+                                                <CardContent className="p-2">
+                                                  <div className="flex items-center mb-1">
+                                                    <div className="w-5 h-5 bg-cyan-100 rounded-full flex items-center justify-center mr-1">
+                                                      <Wifi className="h-2.5 w-2.5 text-cyan-600" />
                                                     </div>
                                                     <h5 className="font-medium text-xs text-foreground">WiFi熱點</h5>
                                                   </div>
-                                                  <div className="space-y-1">
+                                                  <div className="space-y-0.5">
                                                     {nearbyTransport.wifi.map((wifi, idx) => (
-                                                      <div key={idx} className="bg-cyan-50 text-cyan-700 px-2 py-1 rounded text-xs text-center">
+                                                      <div key={idx} className="bg-cyan-50 text-cyan-700 px-1.5 py-0.5 rounded text-xs text-center">
                                                         {wifi}
                                                       </div>
                                                     ))}
@@ -1475,17 +1593,17 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
 
                                             {/* 充電站 */}
                                             {nearbyTransport.charging.length > 0 && (
-                                              <Card className="border-l-4 border-l-emerald-500">
-                                                <CardContent className="p-3">
-                                                  <div className="flex items-center mb-2">
-                                                    <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center mr-2">
-                                                      <BatteryCharging className="h-3 w-3 text-emerald-600" />
+                                              <Card className="border-l-4 border-l-emerald-500 flex-1 min-w-[45%]">
+                                                <CardContent className="p-2">
+                                                  <div className="flex items-center mb-1">
+                                                    <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center mr-1">
+                                                      <BatteryCharging className="h-2.5 w-2.5 text-emerald-600" />
                                                     </div>
                                                     <h5 className="font-medium text-xs text-foreground">充電站</h5>
                                                   </div>
-                                                  <div className="space-y-1">
+                                                  <div className="space-y-0.5">
                                                     {nearbyTransport.charging.map((charging, idx) => (
-                                                      <div key={idx} className="bg-emerald-50 text-emerald-700 px-2 py-1 rounded text-xs text-center">
+                                                      <div key={idx} className="bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded text-xs text-center">
                                                         {charging}
                                                       </div>
                                                     ))}
@@ -1496,17 +1614,17 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
 
                                             {/* 洗手間 */}
                                             {nearbyTransport.restroom.length > 0 && (
-                                              <Card className="border-l-4 border-l-pink-500">
-                                                <CardContent className="p-3">
-                                                  <div className="flex items-center mb-2">
-                                                    <div className="w-6 h-6 bg-pink-100 rounded-full flex items-center justify-center mr-2">
-                                                      <DoorOpen className="h-3 w-3 text-pink-600" />
+                                              <Card className="border-l-4 border-l-pink-500 flex-1 min-w-[45%]">
+                                                <CardContent className="p-2">
+                                                  <div className="flex items-center mb-1">
+                                                    <div className="w-5 h-5 bg-pink-100 rounded-full flex items-center justify-center mr-1">
+                                                      <DoorOpen className="h-2.5 w-2.5 text-pink-600" />
                                                     </div>
                                                     <h5 className="font-medium text-xs text-foreground">洗手間</h5>
                                                   </div>
-                                                  <div className="space-y-1">
+                                                  <div className="space-y-0.5">
                                                     {nearbyTransport.restroom.map((restroom, idx) => (
-                                                      <div key={idx} className="bg-pink-50 text-pink-700 px-2 py-1 rounded text-xs text-center">
+                                                      <div key={idx} className="bg-pink-50 text-pink-700 px-1.5 py-0.5 rounded text-xs text-center">
                                                         {restroom}
                                                       </div>
                                                     ))}
@@ -1517,7 +1635,8 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                                           </div>
 
                                           {/* 無交通資訊時顯示 */}
-                                          {nearbyTransport.buses.length === 0 &&
+                                          {nearbyTransport.buses.government.length === 0 &&
+                                            nearbyTransport.buses.scenic.length === 0 &&
                                             nearbyTransport.flights.length === 0 &&
                                             nearbyTransport.ships.length === 0 &&
                                             nearbyTransport.youbike.length === 0 &&
@@ -1676,9 +1795,9 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="space-y-3">
-                    {ticket.usageInstructions.map((instruction, index) => (
+                    {ticket.usageInstructions.map((instruction: string, index: number) => (
                       <div key={index} className="text-sm text-muted-foreground">
-                        {instruction.split("\n").map((line, lineIndex) => {
+                        {instruction.split("\n").map((line: string, lineIndex: number) => {
                           if (line.startsWith("**") && line.endsWith("**")) {
                             return (
                               <h4 key={lineIndex} className="font-semibold text-foreground mb-2 mt-3 first:mt-0">
@@ -1741,9 +1860,9 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="space-y-3">
-                    {ticket.importantNotes.map((note, index) => (
+                    {ticket.importantNotes.map((note: string, index: number) => (
                       <div key={index} className="text-sm text-muted-foreground">
-                        {note.split("\n").map((line, lineIndex) => {
+                        {note.split("\n").map((line: string, lineIndex: number) => {
                           if (line.startsWith("**") && line.endsWith("**")) {
                             return (
                               <h4 key={lineIndex} className="font-semibold text-foreground mb-2 mt-3 first:mt-0">
@@ -1795,9 +1914,9 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="space-y-3">
-                    {ticket.usageRestrictions.map((restriction, index) => (
+                    {ticket.usageRestrictions.map((restriction: string, index: number) => (
                       <div key={index} className="text-sm text-muted-foreground">
-                        {restriction.split("\n").map((line, lineIndex) => {
+                        {restriction.split("\n").map((line: string, lineIndex: number) => {
                           if (line.startsWith("**") && line.endsWith("**")) {
                             return (
                               <h4 key={lineIndex} className="font-semibold text-foreground mb-2 mt-3 first:mt-0">
@@ -1913,7 +2032,7 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
             <Button
               onClick={handleComplete}
               className="w-full hover:bg-[rgba(43,138,160,0.9)] text-white py-6 rounded-lg font-medium text-base bg-primary"
-              disabled={Object.values(ticketQuantities).reduce((sum, qty) => sum + qty, 0) === 0}
+              disabled={(Object.values(ticketQuantities) as number[]).reduce((sum: number, qty: number) => sum + qty, 0) === 0}
             >
               前往購票
             </Button>
