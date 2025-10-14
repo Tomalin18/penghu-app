@@ -9,26 +9,16 @@ import { HeaderWithMenu } from "@/components/header-with-menu"
 import { attractions } from "@/data/attractions"
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
-import { useRef, useState } from "react"
-import { Send } from "lucide-react"
-import { Input } from "@/components/ui/input"
+import { useRef } from "react"
 
 const HomePage = () => {
   const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }))
-  const [searchQuery, setSearchQuery] = useState("")
-
-  const handleSearch = () => {
-    if (searchQuery.trim()) {
-      console.log("[v0] Search query:", searchQuery)
-      // TODO: Implement search functionality
-    }
-  }
 
   const popularTickets = [
     {
       id: "magong-north-1",
       title: "媽宮・北環線 一日券",
-      subtitle: "Magong・North Ring Line",
+      subtitle: "",
       description: "探索澎湖北部美景，跨海大橋、二崁古厝",
       route: "北環線",
       price: "NT$ 150",
@@ -38,7 +28,7 @@ const HomePage = () => {
     {
       id: "magong-xihu-1",
       title: "媽宮・湖西線 一日券",
-      subtitle: "Magong・Xihu Line",
+      subtitle: "",
       description: "暢遊湖西線美景，奎壁山摩西分海奇景",
       route: "湖西線",
       price: "NT$ 125",
@@ -48,7 +38,7 @@ const HomePage = () => {
     {
       id: "magong-south-1",
       title: "媽宮・澎南線 一日券",
-      subtitle: "Magong・South Line",
+      subtitle: "",
       description: "體驗澎南風情，風櫃洞、山水沙灘",
       route: "澎南線",
       price: "NT$ 100",
@@ -161,41 +151,84 @@ const HomePage = () => {
             <CarouselNext className="right-4 bg-white/80 hover:bg-white" />
           </Carousel>
 
-          <div className="absolute bottom-0 left-0 right-0 transform translate-y-1/2 px-4 z-10">
-            <div className="relative flex items-center bg-white rounded-full shadow-lg border-2 border-primary/20 overflow-hidden">
-              {/* Mascot/Icon on the left */}
-              <div className="flex-shrink-0 pl-2"></div>
-
-              {/* Search Input */}
-              <Input
-                type="text"
-                placeholder="請輸入文字！"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSearch()
-                  }
-                }}
-                className="flex-1 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-base placeholder:text-muted-foreground/60 px-2"
-              />
-
-              {/* Send Button */}
-              <Button
-                onClick={handleSearch}
-                size="icon"
-                className="flex-shrink-0 mr-0.5 rounded-full bg-primary hover:bg-primary/90 h-10 w-10"
-              >
-                <Send className="h-5 w-5 text-white" />
-              </Button>
-            </div>
-          </div>
         </div>
 
         <div className="mt-8"></div>
 
+        {/* Popular Tickets */}
+        <div className="px-3 space-y-3">
+          <div className="flex items-center justify-between">
+            <h2 className="font-semibold text-foreground text-2xl">熱門票券</h2>
+            <Link href="/purchase/tickets">
+              <Button variant="outline" size="sm" className="rounded-full px-3 py-1 h-7 bg-transparent text-base">
+                MORE &gt;
+              </Button>
+            </Link>
+          </div>
+          <div className="space-y-2">
+            {popularTickets.map((ticket) => (
+              <Link key={ticket.id} href={`/purchase/tickets/${ticket.id}`}>
+                <Card className="overflow-hidden hover:shadow-lg transition-shadow py-px">
+                  <CardContent className="p-3 px-1.5 py-1.5">
+                    <div className="flex items-center space-x-3 mx-3 my-1">
+                      <div className="bg-muted rounded-lg flex items-center justify-center flex-shrink-0 h-20 w-20">
+                        <img
+                          src={ticket.image || "/placeholder.svg"}
+                          alt={ticket.title}
+                          className="object-cover rounded h-20 w-20"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-foreground mb-1 text-sm">{ticket.title}</h3>
+                        {ticket.subtitle && <p className="text-xs text-muted-foreground mb-1">{ticket.subtitle}</p>}
+                        <p className="text-xs text-muted-foreground mb-2">{ticket.description}</p>
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">{ticket.route}</span>
+                          <div className="text-right">
+                            <span className="text-base font-bold text-[#2D5CF3]">{ticket.price}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Popular Attractions */}
+        <div className="px-3 space-y-3 mt-6">
+          <div className="flex items-center justify-between">
+            <h2 className="font-semibold text-foreground text-2xl">熱門景點</h2>
+            <Link href="/attractions">
+              <Button variant="outline" size="sm" className="rounded-full px-3 py-1 h-7 bg-transparent text-base">
+                MORE &gt;
+              </Button>
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {popularAttractions.map((attraction) => (
+              <Link key={attraction.id} href={`/attractions/${attraction.id}`}>
+                <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="aspect-[4/3] bg-muted">
+                    <img
+                      src={attraction.image || "/placeholder.svg"}
+                      alt={attraction.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <CardContent className="p-3">
+                    <p className="text-sm font-medium text-foreground text-center">{attraction.title}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* Latest News */}
-        <div className="px-3 py-4 space-y-3">
+        <div className="px-3 py-4 space-y-3 mt-6">
           <div className="flex items-center justify-between">
             <h2 className="font-semibold text-foreground text-2xl">最新消息</h2>
             <Link href="/news">
@@ -226,78 +259,6 @@ const HomePage = () => {
                   </p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Popular Tickets */}
-        <div className="px-3 space-y-3">
-          <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-foreground text-2xl">熱門票券</h2>
-            <Link href="/purchase/tickets">
-              <Button variant="outline" size="sm" className="rounded-full px-3 py-1 h-7 bg-transparent text-base">
-                MORE &gt;
-              </Button>
-            </Link>
-          </div>
-          <div className="space-y-2">
-            {popularTickets.map((ticket) => (
-              <Link key={ticket.id} href={`/purchase/tickets/${ticket.id}`}>
-                <Card className="overflow-hidden hover:shadow-lg transition-shadow py-px">
-                  <CardContent className="p-3 px-1.5 py-1.5">
-                    <div className="flex items-center space-x-3 mx-3 my-1">
-                      <div className="bg-muted rounded-lg flex items-center justify-center flex-shrink-0 h-20 w-20">
-                        <img
-                          src={ticket.image || "/placeholder.svg"}
-                          alt={ticket.title}
-                          className="object-cover rounded h-20 w-20"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-foreground mb-1 text-sm">{ticket.title}</h3>
-                        <p className="text-xs text-muted-foreground mb-1">{ticket.subtitle}</p>
-                        <p className="text-xs text-muted-foreground mb-2">{ticket.description}</p>
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">{ticket.route}</span>
-                          <div className="text-right">
-                            <span className="text-base font-bold text-[#2D5CF3]">{ticket.price}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Popular Attractions */}
-        <div className="px-3 pb-4 space-y-3 mt-6">
-          <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-foreground text-2xl">熱門景點</h2>
-            <Link href="/attractions">
-              <Button variant="outline" size="sm" className="rounded-full px-3 py-1 h-7 bg-transparent text-base">
-                MORE &gt;
-              </Button>
-            </Link>
-          </div>
-          <div className="flex space-x-3 overflow-x-auto pb-2">
-            {popularAttractions.map((attraction) => (
-              <Link key={attraction.id} href={`/attractions/${attraction.id}`}>
-                <Card className="flex-shrink-0 w-36 overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="aspect-[4/3] bg-muted">
-                    <img
-                      src={attraction.image || "/placeholder.svg"}
-                      alt={attraction.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <CardContent className="p-2 py-0">
-                    <p className="text-xs font-medium text-foreground text-center">{attraction.title}</p>
-                  </CardContent>
-                </Card>
-              </Link>
             ))}
           </div>
         </div>

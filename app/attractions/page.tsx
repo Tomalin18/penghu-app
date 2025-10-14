@@ -59,21 +59,21 @@ export default function AttractionsPage() {
     {
       id: "north-ring",
       title: "北環線電子指南",
-      subtitle: "North Ring Line Travel Guide",
+      subtitle: "",
       color: "bg-emerald-500",
       route: "北環線",
     },
     {
       id: "xihu",
       title: "湖西線電子指南",
-      subtitle: "Xihu Line Travel Guide",
+      subtitle: "",
       color: "bg-blue-500",
       route: "湖西線",
     },
     {
       id: "south",
       title: "澎南線電子指南",
-      subtitle: "South Penghu Line Travel Guide",
+      subtitle: "",
       color: "bg-orange-500",
       route: "澎南線",
     },
@@ -366,9 +366,6 @@ export default function AttractionsPage() {
                           <div className="flex items-start justify-between mb-3">
                             <div className="flex-1">
                               <h3 className="font-bold text-foreground mb-1">{facility.name}</h3>
-                              <Badge variant="secondary" className="text-xs">
-                                {facility.type}
-                              </Badge>
                             </div>
                             <Button
                               size="sm"
@@ -439,7 +436,7 @@ export default function AttractionsPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-foreground">{guide.title}</h3>
-                    <p className="text-sm text-muted-foreground">{guide.subtitle}</p>
+                    {guide.subtitle && <p className="text-sm text-muted-foreground">{guide.subtitle}</p>}
                   </div>
                 </div>
                 <button className="px-4 py-2 bg-foreground text-background rounded-lg text-sm font-medium hover:bg-foreground/90 transition-colors">

@@ -1,10 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { CheckCircle, Download, MapPin, Calendar } from "lucide-react"
+import { CheckCircle, Download, MapPin, Calendar, QrCode } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Badge } from "@/components/ui/badge"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { useSearchParams, useRouter } from "next/navigation"
 import { saveTicket } from "@/lib/ticket-storage"
 import MobileNavigation from "@/components/mobile-navigation"
@@ -14,6 +16,8 @@ export default function PurchaseSuccessPage() {
   const [orderData, setOrderData] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [ticketSaved, setTicketSaved] = useState(false)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [selectedTicket, setSelectedTicket] = useState<any>(null)
   const searchParams = useSearchParams()
 
   const orderDataParam = searchParams.get("orderData")
@@ -130,6 +134,116 @@ export default function PurchaseSuccessPage() {
     return labels[ticketType] || ticketType
   }
 
+  const handleViewTicketDetails = (ticketData: any) => {
+    setSelectedTicket(ticketData)
+    setIsDialogOpen(true)
+  }
+
+  const TicketInfoDisplay = ({ ticketData }: { ticketData: any }) => (
+    <div className="space-y-4">
+      <div className="flex flex-col items-center pb-4 border-b border-border">
+        <div className="bg-white p-3 rounded-lg border-2 border-gray-200">
+          <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded">
+            <div className="text-center">
+              <QrCode className="h-12 w-12 mx-auto mb-2 text-gray-400" />
+              <div className="text-xs text-gray-500">QR Code</div>
+              <div className="text-xs text-gray-400 mt-1 truncate max-w-[140px]">
+                {ticketData.orderId || "ORDER-" + Date.now()}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-muted/50 p-4 rounded-lg">
+        <h3 className="font-semibold text-foreground mb-2">{ticketData.ticketInfo?.name || "澎湖好行票券"}</h3>
+        <div className="space-y-1 text-sm">
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">路線</span>
+            <span className="font-medium">{ticketData.selectedDates?.[0]?.routeName || "未指定"}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">日期</span>
+            <span className="font-medium">{ticketData.selectedDates?.[0]?.date || "未指定"}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">票券類型</span>
+            <span className="font-medium">一日券</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <h4 className="font-semibold text-sm text-foreground">票券明細</h4>
+        <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+          {ticketData.ticketBreakdown && Object.entries(ticketData.ticketBreakdown).map(([key, detail]: [string, any]) => (
+            <div key={key} className="flex justify-between text-sm">
+              <span className="text-muted-foreground">
+                {getTicketTypeLabel(key)} x {detail.count || 1}
+              </span>
+              <span className="font-medium">NT${detail.price * (detail.count || 1)}</span>
+            </div>
+          ))}
+          <div className="pt-2 border-t border-border flex justify-between font-semibold">
+            <span>總計</span>
+            <span className="text-primary">NT${ticketData.totalAmount || 0}</span>
+          </div>
+        </div>
+      </div>
+
+      {ticketData.passengers && ticketData.passengers.length > 0 && (
+        <div className="space-y-2">
+          <h4 className="font-semibold text-sm text-foreground">乘客資訊</h4>
+          <div className="bg-muted/50 p-4 rounded-lg space-y-3">
+            {ticketData.passengers.map((passenger: any, index: number) => (
+              <div key={index} className="pb-3 border-b border-border last:border-b-0 last:pb-0">
+                <div className="font-medium text-sm mb-2">
+                  {ticketData.passengers.length > 1 ? `乘客 ${index + 1}` : "乘客資訊"}
+                </div>
+                <div className="space-y-1 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">姓名</span>
+                    <span className="font-medium">{passenger.name}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">電話</span>
+                    <span className="font-medium">{passenger.phone}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Email</span>
+                    <span className="font-medium text-xs">{passenger.email}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-2">
+        <h4 className="font-semibold text-sm text-foreground">購票資訊</h4>
+        <div className="bg-muted/50 p-4 rounded-lg space-y-2 text-sm">
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">訂單編號</span>
+            <span className="font-mono text-xs">{ticketData.orderId || "ORDER-" + Date.now()}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">購買日期</span>
+            <span className="font-medium">{new Date().toLocaleDateString('zh-TW')}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">有效期限</span>
+            <span className="font-medium">{new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('zh-TW')}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">數量</span>
+            <span className="font-medium">{ticketData.passengers?.length || 0} 張</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
   if (isLoading || !orderData) {
     return (
       <div className="h-screen bg-background flex items-center justify-center">
@@ -164,8 +278,7 @@ export default function PurchaseSuccessPage() {
             </div>
             <div className="flex flex-col gap-2 flex-shrink-0">
               <Button
-                variant="outline"
-                className="h-16 px-4 flex flex-col items-center justify-center gap-0.5 bg-white"
+                className="h-16 px-4 flex flex-col items-center justify-center gap-0.5 bg-primary hover:bg-primary/90 text-primary-foreground"
                 onClick={() => router.push("/survey")}
               >
                 <span className="text-sm leading-tight">填寫</span>
@@ -185,81 +298,81 @@ export default function PurchaseSuccessPage() {
             </div>
           </div>
 
-          {/* Order Summary */}
-          <Card className="shadow-lg border-2 border-primary/20 relative overflow-hidden mb-8 p-0">
-            <div className="bg-gradient-to-r from-primary/10 to-primary/5 px-4 border-b border-primary/20 py-3">
-              <h3 className="font-bold text-lg text-foreground">訂單摘要</h3>
-            </div>
-
-            <CardContent className="p-0">
-              <ScrollArea className="h-[300px] w-full">
-                <div className="space-y-3 p-4">
-                  {orderData.selectedDates.map((dateInfo: any, index: number) => (
-                    <div
-                      key={index}
-                      className="bg-gradient-to-br from-muted/30 to-muted/50 p-4 rounded-xl border border-border/50 shadow-sm"
-                    >
-                      {/* Route and Date Header with icons */}
-                      <div className="flex justify-between items-start mb-3 pb-3 border-b border-border/50">
-                        <div className="space-y-1.5">
-                          <div className="flex items-center gap-2">
-                            <MapPin className="h-4 w-4 text-primary" />
-                            <span className="text-xs text-muted-foreground">路線</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4 text-primary" />
-                            <span className="text-xs text-muted-foreground">日期</span>
+          {/* Ticket Cards */}
+          <div className="space-y-4 mb-8">
+            {orderData.selectedDates.map((dateInfo: any, index: number) => (
+              <Dialog key={index} open={isDialogOpen && selectedTicket === orderData} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <Card className="shadow-sm border-l-4 border-l-primary cursor-pointer hover:shadow-md transition-shadow">
+                    <CardContent className="p-4">
+                      <div className="flex justify-between items-start mb-3">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-foreground text-sm mb-1">
+                            {orderData.ticketInfo?.name || "澎湖好行票券"}
+                          </h3>
+                          <div className="flex items-center text-xs text-muted-foreground mb-2">
+                            <MapPin className="h-3 w-3 mr-1" />
+                            {dateInfo.routeName} • {dateInfo.date}
                           </div>
                         </div>
-                        <div className="text-right space-y-1.5">
-                          <div className="font-semibold text-foreground">{dateInfo.routeName || "未指定"}</div>
-                          <div className="font-medium text-foreground text-sm">{dateInfo.date}</div>
+                        <div className="flex flex-col items-end">
+                          <Badge variant="default" className="text-xs">
+                            已購買
+                          </Badge>
                         </div>
                       </div>
 
-                      {/* Passenger List Header */}
-                      <div className="flex justify-between text-xs font-medium text-muted-foreground mb-2 px-1">
-                        <span>乘客資訊</span>
-                        <span>票種·價格</span>
+                      <div className="flex justify-between items-center mb-3">
+                        <div className="text-xs text-muted-foreground">
+                          <div>數量: {orderData.passengers?.length || 0} 張</div>
+                          <div>金額: NT${orderData.totalAmount || 0}</div>
+                        </div>
+                        <div className="text-xs text-muted-foreground text-right">
+                          <div>購買: {new Date().toLocaleDateString('zh-TW')}</div>
+                          <div>有效至: {new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('zh-TW')}</div>
+                        </div>
                       </div>
 
-                      {/* Passenger Details */}
-                      <div className="space-y-2">
-                        {orderData.passengers?.map((passenger: any, pIndex: number) => {
-                          const stationId = passenger.pickupLocations?.[dateInfo.routeId]
-                          if (!stationId) return null
-
-                          const { time, location } = getStationInfo(dateInfo.routeId, stationId)
-                          const ticketTypeLabel = getTicketTypeLabel(passenger.ticketType)
-                          const ticketPrice = orderData.ticketBreakdown?.[passenger.ticketType]?.price || 0
-
-                          return (
-                            <div key={pIndex} className="bg-background/60 rounded-lg p-3 border border-border/30">
-                              <div className="flex justify-between items-start gap-3">
-                                <div className="flex-1 min-w-0">
-                                  <div className="font-semibold text-foreground mb-1">{passenger.name}</div>
-                                  <div className="text-xs text-muted-foreground flex items-start gap-1">
-                                    <MapPin className="h-3 w-3 mt-0.5 flex-shrink-0 text-primary/70" />
-                                    <span className="break-words">
-                                      {time} {location}
-                                    </span>
-                                  </div>
-                                </div>
-                                <div className="text-right flex-shrink-0">
-                                  <div className="text-xs text-muted-foreground mb-0.5">{ticketTypeLabel}</div>
-                                  <div className="font-bold text-primary">NT${ticketPrice}</div>
-                                </div>
-                              </div>
-                            </div>
-                          )
-                        })}
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="flex-1 h-8 text-xs bg-transparent"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handleViewTicketDetails(orderData)
+                          }}
+                        >
+                          <MapPin className="h-3 w-3 mr-1" />
+                          查看詳情
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="flex-1 h-8 text-xs bg-transparent"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            router.push("/my-tickets")
+                          }}
+                        >
+                          <Calendar className="h-3 w-3 mr-1" />
+                          我的車票
+                        </Button>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </ScrollArea>
-            </CardContent>
-          </Card>
+                    </CardContent>
+                  </Card>
+                </DialogTrigger>
+                <DialogContent className="max-w-sm mx-auto max-h-[85vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle className="text-lg">票券詳情</DialogTitle>
+                  </DialogHeader>
+                  <ScrollArea className="max-h-[70vh]">
+                    <TicketInfoDisplay ticketData={selectedTicket} />
+                  </ScrollArea>
+                </DialogContent>
+              </Dialog>
+            ))}
+          </div>
         </div>
       </div>
 

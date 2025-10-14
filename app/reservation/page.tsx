@@ -29,21 +29,18 @@ export default function ReservationSourcePage() {
       {
         id: "magong-north-1",
         name: "媽宮・北環線 一日券",
-        englishName: "Magong・North Ring Line",
         price: 150,
         image: "/images/ticket-north-ring.png",
       },
       {
         id: "magong-xihu-1",
         name: "媽宮・湖西線 一日券",
-        englishName: "Magong・Xihu Line",
         price: 125,
         image: "/images/ticket-xihu.png",
       },
       {
         id: "magong-south-1",
         name: "媽宮・澎南線 一日券",
-        englishName: "Magong・South Line",
         price: 100,
         image: "/images/ticket-south.png",
       },
@@ -52,21 +49,18 @@ export default function ReservationSourcePage() {
       {
         id: "north-xihu-2",
         name: "台灣好行 二日券 北環・湖西線",
-        englishName: "Taiwan Tourist Shuttle North Ring・Xihu 2-Day Pass",
         price: 250,
         image: "/images/ticket-north-xihu-2day.png",
       },
       {
         id: "north-south-2",
         name: "台灣好行 二日券 北環・澎南線",
-        englishName: "Taiwan Tourist Shuttle North Ring・South 2-Day Pass",
         price: 225,
         image: "/images/ticket-north-south-2day.png",
       },
       {
         id: "xihu-south-2",
         name: "台灣好行 二日券 湖西・澎南線",
-        englishName: "Taiwan Tourist Shuttle Xihu・South 2-Day Pass",
         price: 200,
         image: "/images/ticket-xihu-south-2day.png",
       },
@@ -75,7 +69,6 @@ export default function ReservationSourcePage() {
       {
         id: "penghu-3-300",
         name: "台灣好行 三日券 北環・湖西・澎南線",
-        englishName: "Taiwan Tourist Shuttle 3-Day Pass All Routes",
         price: 300,
         image: "/images/ticket-3day-300.png",
       },
@@ -203,7 +196,6 @@ export default function ReservationSourcePage() {
                         <div className="w-24 h-24 bg-muted/50 rounded"></div>
                         <div>
                           <h3 className="font-semibold text-sm text-muted-foreground">票券名稱</h3>
-                          <p className="text-xs text-muted-foreground">English Name</p>
                           <p className="text-sm font-medium mt-1 text-muted-foreground">NT$ 價格</p>
                         </div>
                       </div>
@@ -236,7 +228,6 @@ export default function ReservationSourcePage() {
                               >
                                 {ticket.name}
                               </h3>
-                              <p className="text-xs text-muted-foreground">{ticket.englishName}</p>
                               <p
                                 className={`text-sm font-medium mt-1 ${selectedRoute === ticket.id ? "text-primary" : "text-primary/70"}`}
                               >

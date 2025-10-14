@@ -116,56 +116,48 @@ export default function TicketInfoPage() {
     const ticketData: Record<string, any> = {
       "magong-north-1": {
         name: "媽宮・北環線 一日券",
-        englishName: "Magong・North Ring Line One-Day Pass",
         price: "NT$ 150起",
         type: "一日券",
         image: "/images/ticket-north-ring.png",
       },
       "magong-xihu-1": {
         name: "媽宮・湖西線 一日券",
-        englishName: "Magong・Xihu Line One-Day Pass",
         price: "NT$ 125起",
         type: "一日券",
         image: "/images/ticket-xihu.png",
       },
       "magong-south-1": {
         name: "媽宮・澎南線 一日券",
-        englishName: "Magong・South Line One-Day Pass",
         price: "NT$ 100起",
         type: "一日券",
         image: "/images/ticket-south.png",
       },
       "north-xihu-2": {
         name: "台灣好行 二日券 北環・湖西線",
-        englishName: "Taiwan Tourist Shuttle North Ring・Xihu 2-Day Pass",
         price: "NT$ 250起",
         type: "二日券",
         image: "/images/ticket-north-xihu-2day.png",
       },
       "north-south-2": {
         name: "台灣好行 二日券 北環・澎南線",
-        englishName: "Taiwan Tourist Shuttle North Ring・South 2-Day Pass",
         price: "NT$ 225起",
         type: "二日券",
         image: "/images/ticket-north-south-2day.png",
       },
       "xihu-south-2": {
         name: "台灣好行 二日券 湖西・澎南線",
-        englishName: "Taiwan Tourist Shuttle Xihu・South 2-Day Pass",
         price: "NT$ 200起",
         type: "二日券",
         image: "/images/ticket-xihu-south-2day.png",
       },
       "penghu-3-600": {
         name: "台灣好行 三日券 北環・湖西・澎南線",
-        englishName: "Taiwan Tourist Shuttle 3-Day Pass All Routes",
         price: "NT$ 600起",
         type: "三日券",
         image: "/images/ticket-3day-600.png",
       },
       "penghu-3-300": {
         name: "台灣好行 三日券 北環・湖西・澎南線",
-        englishName: "Taiwan Tourist Shuttle 3-Day Pass All Routes",
         price: "NT$ 300起",
         type: "三日券",
         image: "/images/ticket-3day-300.png",
@@ -175,7 +167,6 @@ export default function TicketInfoPage() {
     return (
       ticketData[ticketId] || {
         name: "媽宮・北環線 一日券",
-        englishName: "Magong・North Ring Line One-Day Pass",
         price: "NT$ 150起",
         type: "一日券",
         image: "/images/ticket-north-ring.png",
@@ -624,7 +615,6 @@ export default function TicketInfoPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-primary">{selectedTicket.name}</h3>
-                      <p className="text-xs text-muted-foreground">{selectedTicket.englishName}</p>
                     </div>
                   </div>
                   <div className="text-right">
