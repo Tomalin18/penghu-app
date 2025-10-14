@@ -523,145 +523,184 @@ export default function TicketInfoPage({ params }: { params: { ticketId: string 
                                       附近交通
                                     </Badge>
                                   </DialogTrigger>
-                                  <DialogContent className="max-w-sm mx-auto">
+                                  <DialogContent className="max-w-sm mx-auto max-h-[80vh] overflow-y-auto">
                                     <DialogHeader>
-                                      <DialogTitle className="flex items-center">
+                                      <DialogTitle className="flex items-center text-lg">
                                         <MapIcon className="h-5 w-5 mr-2 text-primary" />
-                                        {schedule.station} - 附近交通
+                                        {schedule.station}
                                       </DialogTitle>
+                                      <p className="text-sm text-muted-foreground">附近交通與設施</p>
                                     </DialogHeader>
-                                    <div className="space-y-4">
-                                      {/* Bus Information */}
-                                      {nearbyTransport.buses.length > 0 && (
-                                        <div>
-                                          <h4 className="font-medium text-sm flex items-center mb-2">
-                                            <Bus className="h-4 w-4 mr-2 text-blue-600" />
-                                            公車路線
-                                          </h4>
-                                          <div className="flex flex-wrap gap-1">
-                                            {nearbyTransport.buses.map((bus, idx) => (
-                                              <Badge key={idx} variant="outline" className="text-xs">
-                                                {bus}
-                                              </Badge>
-                                            ))}
-                                          </div>
-                                        </div>
-                                      )}
-
-                                      {/* Flight Information */}
-                                      {nearbyTransport.flights.length > 0 && (
-                                        <div>
-                                          <h4 className="font-medium text-sm flex items-center mb-2">
-                                            <Plane className="h-4 w-4 mr-2 text-green-600" />
-                                            航班資訊
-                                          </h4>
-                                          <div className="flex flex-wrap gap-1">
-                                            {nearbyTransport.flights.map((flight, idx) => (
-                                              <Badge key={idx} variant="outline" className="text-xs">
-                                                {flight}
-                                              </Badge>
-                                            ))}
-                                          </div>
-                                        </div>
-                                      )}
-
-                                      {/* Ship Information */}
-                                      {nearbyTransport.ships.length > 0 && (
-                                        <div>
-                                          <h4 className="font-medium text-sm flex items-center mb-2">
-                                            <Ship className="h-4 w-4 mr-2 text-purple-600" />
-                                            船班資訊
-                                          </h4>
-                                          <div className="flex flex-wrap gap-1">
-                                            {nearbyTransport.ships.map((ship, idx) => (
-                                              <Badge key={idx} variant="outline" className="text-xs">
-                                                {ship}
-                                              </Badge>
-                                            ))}
-                                          </div>
-                                        </div>
-                                      )}
-
-                                      {/* YouBike Information */}
-                                      {nearbyTransport.youbike.length > 0 && (
-                                        <div>
-                                          <h4 className="font-medium text-sm flex items-center mb-2">
-                                            <Bike className="h-4 w-4 mr-2 text-orange-600" />
-                                            YouBike站點
-                                          </h4>
-                                          <div className="flex flex-wrap gap-1">
-                                            {nearbyTransport.youbike.map((bike, idx) => (
-                                              <Badge key={idx} variant="outline" className="text-xs">
-                                                {bike}
-                                              </Badge>
-                                            ))}
-                                          </div>
-                                        </div>
-                                      )}
-
-                                      {/* WiFi Information */}
-                                      {nearbyTransport.wifi.length > 0 && (
-                                        <div>
-                                          <h4 className="font-medium text-sm flex items-center mb-2">
-                                            <Wifi className="h-4 w-4 mr-2 text-cyan-600" />
-                                            WiFi熱點
-                                          </h4>
-                                          <div className="flex flex-wrap gap-1">
-                                            {nearbyTransport.wifi.map((wifi, idx) => (
-                                              <Badge key={idx} variant="outline" className="text-xs">
-                                                {wifi}
-                                              </Badge>
-                                            ))}
-                                          </div>
-                                        </div>
-                                      )}
-
-                                      {/* Charging Station Information */}
-                                      {nearbyTransport.charging.length > 0 && (
-                                        <div>
-                                          <h4 className="font-medium text-sm flex items-center mb-2">
-                                            <BatteryCharging className="h-4 w-4 mr-2 text-emerald-600" />
-                                            充電站
-                                          </h4>
-                                          <div className="flex flex-wrap gap-1">
-                                            {nearbyTransport.charging.map((charging, idx) => (
-                                              <Badge key={idx} variant="outline" className="text-xs">
-                                                {charging}
-                                              </Badge>
-                                            ))}
-                                          </div>
-                                        </div>
-                                      )}
-
-                                      {/* Restroom Information */}
-                                      {nearbyTransport.restroom.length > 0 && (
-                                        <div>
-                                          <h4 className="font-medium text-sm flex items-center mb-2">
-                                            <DoorOpen className="h-4 w-4 mr-2 text-pink-600" />
-                                            洗手間
-                                          </h4>
-                                          <div className="flex flex-wrap gap-1">
-                                            {nearbyTransport.restroom.map((restroom, idx) => (
-                                              <Badge key={idx} variant="outline" className="text-xs">
-                                                {restroom}
-                                              </Badge>
-                                            ))}
-                                          </div>
-                                        </div>
-                                      )}
-
-                                      {nearbyTransport.buses.length === 0 &&
-                                        nearbyTransport.flights.length === 0 &&
-                                        nearbyTransport.ships.length === 0 &&
-                                        nearbyTransport.youbike.length === 0 &&
-                                        nearbyTransport.wifi.length === 0 &&
-                                        nearbyTransport.charging.length === 0 &&
-                                        nearbyTransport.restroom.length === 0 && (
-                                          <p className="text-sm text-muted-foreground text-center py-4">
-                                            此站點暫無其他交通資訊
-                                          </p>
+                                    
+                                    <ScrollArea className="max-h-[60vh]">
+                                      <div className="space-y-4 pr-2">
+                                        {/* 公車路線 */}
+                                        {nearbyTransport.buses.length > 0 && (
+                                          <Card className="border-l-4 border-l-blue-500">
+                                            <CardContent className="p-4">
+                                              <div className="flex items-center mb-3">
+                                                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                                  <Bus className="h-4 w-4 text-blue-600" />
+                                                </div>
+                                                <h4 className="font-semibold text-foreground">公車路線</h4>
+                                              </div>
+                                              <div className="grid grid-cols-2 gap-2">
+                                                {nearbyTransport.buses.map((bus, idx) => (
+                                                  <div key={idx} className="bg-blue-50 text-blue-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
+                                                    {bus}
+                                                  </div>
+                                                ))}
+                                              </div>
+                                            </CardContent>
+                                          </Card>
                                         )}
-                                    </div>
+
+                                        {/* 航班資訊 */}
+                                        {nearbyTransport.flights.length > 0 && (
+                                          <Card className="border-l-4 border-l-green-500">
+                                            <CardContent className="p-4">
+                                              <div className="flex items-center mb-3">
+                                                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                                  <Plane className="h-4 w-4 text-green-600" />
+                                                </div>
+                                                <h4 className="font-semibold text-foreground">航班資訊</h4>
+                                              </div>
+                                              <div className="grid grid-cols-2 gap-2">
+                                                {nearbyTransport.flights.map((flight, idx) => (
+                                                  <div key={idx} className="bg-green-50 text-green-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
+                                                    {flight}
+                                                  </div>
+                                                ))}
+                                              </div>
+                                            </CardContent>
+                                          </Card>
+                                        )}
+
+                                        {/* 船班資訊 */}
+                                        {nearbyTransport.ships.length > 0 && (
+                                          <Card className="border-l-4 border-l-purple-500">
+                                            <CardContent className="p-4">
+                                              <div className="flex items-center mb-3">
+                                                <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                                                  <Ship className="h-4 w-4 text-purple-600" />
+                                                </div>
+                                                <h4 className="font-semibold text-foreground">船班資訊</h4>
+                                              </div>
+                                              <div className="grid grid-cols-2 gap-2">
+                                                {nearbyTransport.ships.map((ship, idx) => (
+                                                  <div key={idx} className="bg-purple-50 text-purple-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
+                                                    {ship}
+                                                  </div>
+                                                ))}
+                                              </div>
+                                            </CardContent>
+                                          </Card>
+                                        )}
+
+                                        {/* YouBike站點 */}
+                                        {nearbyTransport.youbike.length > 0 && (
+                                          <Card className="border-l-4 border-l-orange-500">
+                                            <CardContent className="p-4">
+                                              <div className="flex items-center mb-3">
+                                                <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                                                  <Bike className="h-4 w-4 text-orange-600" />
+                                                </div>
+                                                <h4 className="font-semibold text-foreground">YouBike站點</h4>
+                                              </div>
+                                              <div className="grid grid-cols-2 gap-2">
+                                                {nearbyTransport.youbike.map((bike, idx) => (
+                                                  <div key={idx} className="bg-orange-50 text-orange-700 px-3 py-2 rounded-lg text-xs font-medium text-center">
+                                                    {bike}
+                                                  </div>
+                                                ))}
+                                              </div>
+                                            </CardContent>
+                                          </Card>
+                                        )}
+
+                                        {/* 設施服務 */}
+                                        <div className="grid grid-cols-2 gap-3">
+                                          {/* WiFi熱點 */}
+                                          {nearbyTransport.wifi.length > 0 && (
+                                            <Card className="border-l-4 border-l-cyan-500">
+                                              <CardContent className="p-3">
+                                                <div className="flex items-center mb-2">
+                                                  <div className="w-6 h-6 bg-cyan-100 rounded-full flex items-center justify-center mr-2">
+                                                    <Wifi className="h-3 w-3 text-cyan-600" />
+                                                  </div>
+                                                  <h5 className="font-medium text-xs text-foreground">WiFi熱點</h5>
+                                                </div>
+                                                <div className="space-y-1">
+                                                  {nearbyTransport.wifi.map((wifi, idx) => (
+                                                    <div key={idx} className="bg-cyan-50 text-cyan-700 px-2 py-1 rounded text-xs text-center">
+                                                      {wifi}
+                                                    </div>
+                                                  ))}
+                                                </div>
+                                              </CardContent>
+                                            </Card>
+                                          )}
+
+                                          {/* 充電站 */}
+                                          {nearbyTransport.charging.length > 0 && (
+                                            <Card className="border-l-4 border-l-emerald-500">
+                                              <CardContent className="p-3">
+                                                <div className="flex items-center mb-2">
+                                                  <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center mr-2">
+                                                    <BatteryCharging className="h-3 w-3 text-emerald-600" />
+                                                  </div>
+                                                  <h5 className="font-medium text-xs text-foreground">充電站</h5>
+                                                </div>
+                                                <div className="space-y-1">
+                                                  {nearbyTransport.charging.map((charging, idx) => (
+                                                    <div key={idx} className="bg-emerald-50 text-emerald-700 px-2 py-1 rounded text-xs text-center">
+                                                      {charging}
+                                                    </div>
+                                                  ))}
+                                                </div>
+                                              </CardContent>
+                                            </Card>
+                                          )}
+
+                                          {/* 洗手間 */}
+                                          {nearbyTransport.restroom.length > 0 && (
+                                            <Card className="border-l-4 border-l-pink-500">
+                                              <CardContent className="p-3">
+                                                <div className="flex items-center mb-2">
+                                                  <div className="w-6 h-6 bg-pink-100 rounded-full flex items-center justify-center mr-2">
+                                                    <DoorOpen className="h-3 w-3 text-pink-600" />
+                                                  </div>
+                                                  <h5 className="font-medium text-xs text-foreground">洗手間</h5>
+                                                </div>
+                                                <div className="space-y-1">
+                                                  {nearbyTransport.restroom.map((restroom, idx) => (
+                                                    <div key={idx} className="bg-pink-50 text-pink-700 px-2 py-1 rounded text-xs text-center">
+                                                      {restroom}
+                                                    </div>
+                                                  ))}
+                                                </div>
+                                              </CardContent>
+                                            </Card>
+                                          )}
+                                        </div>
+
+                                        {/* 無交通資訊時顯示 */}
+                                        {nearbyTransport.buses.length === 0 &&
+                                          nearbyTransport.flights.length === 0 &&
+                                          nearbyTransport.ships.length === 0 &&
+                                          nearbyTransport.youbike.length === 0 &&
+                                          nearbyTransport.wifi.length === 0 &&
+                                          nearbyTransport.charging.length === 0 &&
+                                          nearbyTransport.restroom.length === 0 && (
+                                            <Card>
+                                              <CardContent className="p-6 text-center">
+                                                <MapIcon className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
+                                                <p className="text-sm text-muted-foreground">此站點暫無其他交通資訊</p>
+                                              </CardContent>
+                                            </Card>
+                                          )}
+                                      </div>
+                                    </ScrollArea>
                                   </DialogContent>
                                 </Dialog>
                                 <Button

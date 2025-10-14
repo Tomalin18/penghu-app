@@ -366,9 +366,6 @@ export default function AttractionsPage() {
                           <div className="flex items-start justify-between mb-3">
                             <div className="flex-1">
                               <h3 className="font-bold text-foreground mb-1">{facility.name}</h3>
-                              <Badge variant="secondary" className="text-xs">
-                                {facility.type}
-                              </Badge>
                             </div>
                             <Button
                               size="sm"

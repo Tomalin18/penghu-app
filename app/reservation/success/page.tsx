@@ -5,6 +5,7 @@ import { CheckCircle, Download, MapPin, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Badge } from "@/components/ui/badge"
 import MobileNavigation from "@/components/mobile-navigation"
 import { useRouter } from "next/navigation"
 
@@ -125,81 +126,66 @@ export default function ReservationSuccessPage() {
             </div>
           </div>
 
-          <Card className="shadow-lg border-2 border-primary/20 relative overflow-hidden mb-8 p-0">
-            <div className="bg-gradient-to-r from-primary/10 to-primary/5 px-4 border-b border-primary/20 py-3">
-              <h3 className="font-bold text-lg text-foreground">劃位資訊</h3>
-            </div>
-
-            <CardContent className="p-0">
-              <ScrollArea className="h-[450px] w-full">
-                <div className="space-y-3 p-4">
-                  <div className="bg-gradient-to-br from-muted/30 to-muted/50 p-4 rounded-xl border border-border/50 shadow-sm mb-3">
-                    <div className="font-semibold text-foreground mb-1">{reservationData.ticketInfo.name}</div>
-                  </div>
-
-                  {reservationData.routes.map((route, routeIndex) => (
-                    <div
-                      key={routeIndex}
-                      className="bg-gradient-to-br from-muted/30 to-muted/50 p-4 rounded-xl border border-border/50 shadow-sm"
-                    >
-                      <div className="flex justify-between items-start mb-3 pb-3 border-b border-border/50">
-                        <div className="space-y-1.5">
-                          <div className="flex items-center gap-2">
-                            <MapPin className="h-4 w-4 text-primary" />
-                            <span className="text-xs text-muted-foreground">路線</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4 text-primary" />
-                            <span className="text-xs text-muted-foreground">日期</span>
-                          </div>
-                        </div>
-                        <div className="text-right space-y-1.5">
-                          <div className="font-semibold text-foreground">{route.name}</div>
-                          <div className="font-medium text-foreground text-sm">
-                            {route.date.getFullYear()}/{String(route.date.getMonth() + 1).padStart(2, "0")}/
-                            {String(route.date.getDate()).padStart(2, "0")}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        {reservationData.passengers.map((passenger, passengerIndex) => {
-                          const pickupLocation = passenger.pickupLocations[route.id]
-                          if (!pickupLocation) return null
-
-                          return (
-                            <div
-                              key={passengerIndex}
-                              className="bg-background/60 rounded-lg p-3 border border-border/30"
-                            >
-                              <div className="flex justify-between items-center mb-2">
-                                <span className="text-xs text-muted-foreground">乘客 {passengerIndex + 1}</span>
-                                <span className="font-medium text-foreground">{passenger.name}</span>
-                              </div>
-                              <div className="flex justify-between items-center mb-2">
-                                <span className="text-xs text-muted-foreground">票種</span>
-                                <span className="font-medium text-foreground">
-                                  {getTicketTypeLabel(passenger.ticketType)}
-                                </span>
-                              </div>
-                              <div className="flex justify-between items-center mb-2">
-                                <span className="text-xs text-muted-foreground">上車地點</span>
-                                <span className="font-medium text-foreground">{getStationName(pickupLocation)}</span>
-                              </div>
-                              <div className="flex justify-between items-center">
-                                <span className="text-xs text-muted-foreground">聯絡電話</span>
-                                <span className="font-medium text-foreground">{passenger.phone}</span>
-                              </div>
-                            </div>
-                          )
-                        })}
+          {/* Ticket Cards */}
+          <div className="space-y-4 mb-8">
+            {reservationData.routes.map((route, routeIndex) => (
+              <Card key={routeIndex} className="shadow-sm border-l-4 border-l-primary">
+                <CardContent className="p-4">
+                  <div className="flex justify-between items-start mb-3">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-foreground text-sm mb-1">
+                        {reservationData.ticketInfo.name}
+                      </h3>
+                      <div className="flex items-center text-xs text-muted-foreground mb-2">
+                        <MapPin className="h-3 w-3 mr-1" />
+                        {route.name} • {route.date.getFullYear()}/{String(route.date.getMonth() + 1).padStart(2, "0")}/{String(route.date.getDate()).padStart(2, "0")}
                       </div>
                     </div>
-                  ))}
-                </div>
-              </ScrollArea>
-            </CardContent>
-          </Card>
+                    <div className="flex flex-col items-end">
+                      <Badge variant="default" className="text-xs">
+                        已劃位
+                      </Badge>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center mb-3">
+                    <div className="text-xs text-muted-foreground">
+                      <div>數量: {reservationData.passengers.length} 張</div>
+                      <div>票券類型: {reservationData.ticketInfo.type}</div>
+                    </div>
+                    <div className="text-xs text-muted-foreground text-right">
+                      <div>劃位: {new Date().toLocaleDateString('zh-TW')}</div>
+                      <div>路線: {route.name}</div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="flex-1 h-8 text-xs bg-transparent"
+                      onClick={() => {
+                        // TODO: Show detailed ticket info
+                        console.log("Show detailed ticket info")
+                      }}
+                    >
+                      <MapPin className="h-3 w-3 mr-1" />
+                      查看詳情
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="flex-1 h-8 text-xs bg-transparent"
+                      onClick={() => router.push("/my-tickets")}
+                    >
+                      <Calendar className="h-3 w-3 mr-1" />
+                      我的車票
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
 
