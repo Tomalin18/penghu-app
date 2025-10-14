@@ -131,42 +131,81 @@ export default function PurchaseSuccessPage() {
     return labels[ticketType] || ticketType
   }
 
+  const getStationLabel = (stationId: string) => {
+    if (!stationId) return "未指定"
+    
+    // 從 stationId 中提取車站名稱（格式：stationname-time）
+    const parts = stationId.split('-')
+    if (parts.length >= 2) {
+      const time = parts[parts.length - 1]
+      const stationName = parts.slice(0, -1).join('-')
+      
+      // 車站名稱對應表
+      const stationNames: Record<string, string> = {
+        'xiweidong': '西衛東站',
+        'magonggang': '馬公港站',
+        'gongchezong': '公車總站',
+        'ziyouta': '自由塔（勝國）站',
+        'disanyu': '第三漁港（雅霖）站',
+        'wenao': '文澳（元泰.百世多麗）站',
+        'dongwei': '東衛站',
+        'kuahaidaqiao': '跨海大橋（西嶼端）',
+        'sanxianta': '三仙塔',
+        'dacaiye': '大菓葉玄武岩柱',
+        'erkanjuluo': '二崁聚落',
+        'tongliangguta': '通梁古榕',
+        'airport': '澎湖機場站',
+        'beiliao': '北寮奎壁山',
+        'nanliao': '南寮社區',
+        'longmen': '龍門閉鎖陣地',
+        'museum': '澎湖生活博物館',
+        'fengkui': '風櫃洞',
+        'fishery': '澎湖縣水產種苗繁殖場',
+        'shanshui': '山水沙灘',
+        'suogang': '鎖港子午塔',
+      }
+      
+      const displayName = stationNames[stationName] || stationName
+      return `${time.slice(0, 2)}:${time.slice(2, 4)} ${displayName}`
+    }
+    
+    return stationId
+  }
+
   // 簡化的票券詳情組件
   const TicketDetails = ({ ticketData }: { ticketData: any }) => {
     return (
       <div className="space-y-4">
         {/* 乘客資訊 */}
         {ticketData.passengers && ticketData.passengers.length > 0 && (
-          <div className="space-y-2">
-            <h4 className="font-semibold text-sm text-foreground">乘客資訊</h4>
-            <div className="bg-muted/50 p-4 rounded-lg space-y-3">
+          <div className="space-y-3">
+            <h4 className="font-semibold text-xs text-foreground">乘客資訊</h4>
+            <div className="bg-muted/50 p-4 rounded-lg space-y-4">
               {ticketData.passengers.map((passenger: any, index: number) => (
-                <div key={index} className="pb-3 border-b border-border last:border-b-0 last:pb-0">
-                  <div className="space-y-2 text-sm">
-                    {/* 第一行：乘客編號、姓名、電話 */}
-                    <div className="grid grid-cols-3 gap-2 items-center">
-                      <div className="flex items-center gap-1">
-                        <span className="text-muted-foreground">乘客編號：</span>
-                        <span className="font-medium">{index + 1}</span>
+                <div key={index} className="pb-4 border-b border-border last:border-b-0 last:pb-0">
+                  <div className="space-y-3 text-xs">
+                    {/* 第一行：姓名、票種 */}
+                    <div className="grid grid-cols-2 gap-3 items-center">
+                      <div className="flex items-center gap-2">
+                        <span className="text-muted-foreground text-xs whitespace-nowrap">姓名：</span>
+                        <span className="font-medium text-xs whitespace-nowrap">{passenger.name}</span>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <span className="text-muted-foreground">姓名：</span>
-                        <span className="font-medium">{passenger.name}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="text-muted-foreground">電話：</span>
-                        <span className="font-medium">{passenger.phone}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-muted-foreground text-xs whitespace-nowrap">票種：</span>
+                        <span className="font-medium text-xs whitespace-nowrap">{getTicketTypeLabel(passenger.ticketType)}</span>
                       </div>
                     </div>
-                    {/* 第二行：Email、上車地點 */}
-                    <div className="grid grid-cols-2 gap-2 items-center">
-                      <div className="flex items-center gap-1">
-                        <span className="text-muted-foreground">Email：</span>
-                        <span className="font-medium text-xs">{passenger.email}</span>
+                    {/* 第二行：Email、電話 */}
+                    <div className="grid grid-cols-2 gap-3 items-center">
+                      <div className="flex items-center gap-2">
+                        <span className="text-muted-foreground text-xs whitespace-nowrap">Email：</span>
+                        <span className="font-medium text-xs whitespace-nowrap">{passenger.email}</span>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <span className="text-muted-foreground">上車地點：</span>
-                        <span className="font-medium">{passenger.boardingLocation || "未指定"}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-muted-foreground text-xs whitespace-nowrap">電話：</span>
+                        <span className="font-medium text-xs whitespace-nowrap">
+                          {passenger.countryCode ? `${passenger.countryCode} ${passenger.phone}` : passenger.phone}
+                        </span>
                       </div>
                     </div>
                   </div>
