@@ -65,7 +65,7 @@ export function HeaderWithMenu({ title, showBackButton = true, onBack }: HeaderW
   const notifications = [
     {
       id: 1,
-      category: "訂票通知",
+      category: "個人通知",
       message: "您的訂票已確認，車票編號：TW20250102001",
       time: "5分鐘前",
       unread: true,
@@ -79,7 +79,7 @@ export function HeaderWithMenu({ title, showBackButton = true, onBack }: HeaderW
     },
     {
       id: 3,
-      category: "優惠活動",
+      category: "活動通知",
       message: "早鳥優惠：提前30天訂票享8折優惠",
       time: "2天前",
       unread: false,

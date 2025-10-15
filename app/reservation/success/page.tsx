@@ -89,7 +89,7 @@ export default function ReservationSuccessPage() {
             <div className="bg-muted/50 p-4 rounded-lg space-y-4">
               {ticketData.passengers.map((passenger: any, index: number) => (
                 <div key={index} className="pb-4 border-b border-border last:border-b-0 last:pb-0">
-                  <div className="space-y-3 text-xs">
+                  <div className="space-y-1 text-xs">
                     {/* 第一行：姓名、票種 */}
                     <div className="grid grid-cols-2 gap-3 items-center">
                       <div className="flex items-center gap-2">
@@ -101,18 +101,17 @@ export default function ReservationSuccessPage() {
                         <span className="font-medium text-xs whitespace-nowrap">{getTicketTypeLabel(passenger.ticketType)}</span>
                       </div>
                     </div>
-                    {/* 第二行：Email、電話 */}
-                    <div className="grid grid-cols-2 gap-3 items-center">
-                      <div className="flex items-center gap-2">
-                        <span className="text-muted-foreground text-xs whitespace-nowrap">Email：</span>
-                        <span className="font-medium text-xs whitespace-nowrap">{passenger.email}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-muted-foreground text-xs whitespace-nowrap">電話：</span>
-                        <span className="font-medium text-xs whitespace-nowrap">
-                          {passenger.countryCode ? `${passenger.countryCode} ${passenger.phone}` : passenger.phone}
-                        </span>
-                      </div>
+                    {/* 第二行：Email */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-muted-foreground text-xs whitespace-nowrap">Email：</span>
+                      <span className="font-medium text-xs whitespace-nowrap">{passenger.email}</span>
+                    </div>
+                    {/* 第三行：電話 */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-muted-foreground text-xs whitespace-nowrap">電話：</span>
+                      <span className="font-medium text-xs whitespace-nowrap">
+                        {passenger.countryCode ? `${passenger.countryCode} ${passenger.phone}` : passenger.phone}
+                      </span>
                     </div>
                   </div>
                 </div>

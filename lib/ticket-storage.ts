@@ -17,7 +17,7 @@ export interface StoredTicket {
   date: string
   quantity: number
   totalAmount: number
-  status: "purchased" | "reserved"
+  status: "purchased" | "reserved" | "cancelled"
   seatAssigned: boolean
   seatNumber?: string
   purchaseDate: string

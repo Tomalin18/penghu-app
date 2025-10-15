@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Bell } from "lucide-react"
 
-type NotificationCategory = "訂票通知" | "系統通知" | "優惠活動" | "行程提醒"
+type NotificationCategory = "個人通知" | "系統通知" | "活動通知" | "行程提醒"
 type FilterType = "all" | "unread" | "read"
 
 interface Notification {
@@ -25,7 +25,7 @@ export default function NotificationsPage() {
   const [notifications, setNotifications] = useState<Notification[]>([
     {
       id: 1,
-      category: "訂票通知",
+      category: "個人通知",
       message: "您的訂票已確認，車票編號：TW20250102001",
       time: "5分鐘前",
       date: "2025/01/02",
@@ -41,7 +41,7 @@ export default function NotificationsPage() {
     },
     {
       id: 3,
-      category: "優惠活動",
+      category: "活動通知",
       message: "早鳥優惠：提前30天訂票享8折優惠",
       time: "2天前",
       date: "2024/12/31",
@@ -49,7 +49,7 @@ export default function NotificationsPage() {
     },
     {
       id: 4,
-      category: "行程提醒",
+      category: "個人通知",
       message: "您預訂的北環線行程將於明天出發，請提前30分鐘到達",
       time: "3天前",
       date: "2024/12/30",
@@ -57,7 +57,7 @@ export default function NotificationsPage() {
     },
     {
       id: 5,
-      category: "訂票通知",
+      category: "個人通知",
       message: "您的退票申請已處理完成，退款將於3-5個工作天內到帳",
       time: "5天前",
       date: "2024/12/28",
@@ -73,7 +73,7 @@ export default function NotificationsPage() {
     },
     {
       id: 7,
-      category: "優惠活動",
+      category: "活動通知",
       message: "會員專屬：湖西線套票限時優惠中",
       time: "1週前",
       date: "2024/12/25",
@@ -81,7 +81,7 @@ export default function NotificationsPage() {
     },
     {
       id: 8,
-      category: "行程提醒",
+      category: "個人通知",
       message: "您的澎南線行程已完成，歡迎給予評價",
       time: "2週前",
       date: "2024/12/20",
@@ -91,11 +91,11 @@ export default function NotificationsPage() {
 
   const getCategoryColor = (category: NotificationCategory) => {
     switch (category) {
-      case "訂票通知":
+      case "個人通知":
         return "bg-[rgba(43,138,160,1)]"
       case "系統通知":
         return "bg-[#5C8DD3]"
-      case "優惠活動":
+      case "活動通知":
         return "bg-[#67AF9B]"
       case "行程提醒":
         return "bg-[#F59E0B]"

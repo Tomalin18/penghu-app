@@ -89,12 +89,12 @@ export default function MyTicketsPage() {
           },
         ],
       },
-      // 已搭乘 (Completed) - past date
+      // 已劃位 (Seat Assigned) - future date
       {
         id: "TK250915",
         name: "媽宮・北環線 一日券",
         routeName: "北環線",
-        date: "2025/9/15",
+        date: "2026/10/10",
         quantity: 2,
         totalAmount: 600,
         status: "purchased",
@@ -115,7 +115,7 @@ export default function MyTicketsPage() {
           {
             routeId: "north",
             routeName: "北環線",
-            date: "2025/9/15",
+            date: "2026/10/10",
           },
         ],
         passengers: [
@@ -281,7 +281,7 @@ export default function MyTicketsPage() {
 
     // Also update in localStorage if it exists there
     const updatedTicket = { ...ticketToCancel, status: "cancelled" as const }
-    updateTicket(updatedTicket)
+    updateTicket(ticketToCancel.id, { status: "cancelled" })
 
     setIsCancelDialogOpen(false)
     setTicketToCancel(null)
