@@ -6,7 +6,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MobileNavigation } from "@/components/mobile-navigation"
 import { HeaderWithMenu } from "@/components/header-with-menu"
-import { attractions } from "@/data/attractions"
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 import { Headphones } from "lucide-react"
 import Autoplay from "embla-carousel-autoplay"
@@ -24,7 +23,7 @@ const HomePage = () => {
       route: "北環線",
       price: "NT$ 150",
       duration: "1日",
-      image: "/images/ticket-north-ring.png",
+      image: "/images/ticket-north-ring-premium.png",
     },
     {
       id: "magong-xihu-1",
@@ -44,7 +43,7 @@ const HomePage = () => {
       route: "澎南線",
       price: "NT$ 100",
       duration: "1日",
-      image: "/images/ticket-south.png",
+      image: "/images/ticket-south-premium.png",
     },
   ]
 
@@ -97,12 +96,42 @@ const HomePage = () => {
   }
 
   const popularAttractions = [
-    attractions.find((a) => a.id === "kuibishan-moses-sea"),
-    attractions.find((a) => a.id === "penghu-tianhou-temple"),
-    attractions.find((a) => a.id === "tongliang-ancient-banyan"),
-    attractions.find((a) => a.id === "shanshui-beach"),
-    attractions.find((a) => a.id === "fengguei-cave"),
-  ].filter((attraction): attraction is NonNullable<typeof attraction> => attraction !== undefined)
+    {
+      id: "kuibishan-moses-sea",
+      title: "奎壁山摩西分海",
+      description: "澎湖著名的自然奇觀，退潮時會出現海中步道",
+      image: "/images/kuibishan-1.png",
+      category: ["自然景觀", "地質奇觀"]
+    },
+    {
+      id: "penghu-tianhou-temple",
+      title: "澎湖天后宮",
+      description: "台灣最古老的媽祖廟，具有豐富的歷史文化",
+      image: "/images/tianhou-2.png",
+      category: ["歷史古蹟", "宗教文化"]
+    },
+    {
+      id: "tongliang-ancient-banyan",
+      title: "通梁古榕",
+      description: "澎湖著名的古榕樹，樹齡超過300年",
+      image: "/images/tongliang-banyan-1.png",
+      category: ["自然景觀", "歷史古蹟"]
+    },
+    {
+      id: "shanshui-beach",
+      title: "山水沙灘",
+      description: "澎湖最美麗的沙灘之一，適合戲水玩沙",
+      image: "/images/shanshui-beach-2.png",
+      category: ["海灘", "自然景觀"]
+    },
+    {
+      id: "fengguei-cave",
+      title: "風櫃洞",
+      description: "澎湖著名的海蝕洞，可欣賞海浪拍打奇觀",
+      image: "/images/fengguei-cave-3.png",
+      category: ["自然景觀", "地質奇觀"]
+    }
+  ]
 
   return (
     <div className="min-h-screen bg-background pb-20">

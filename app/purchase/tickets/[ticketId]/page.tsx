@@ -492,7 +492,7 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
         id: "magong-north-1",
         name: "媽宮・北環線 一日券",
         price: 150,
-        image: "/images/ticket-north-ring.png",
+        image: "/images/ticket-north-ring-premium.png",
         description:
           "探索澎湖北環線的美麗景點，包含跨海大橋、通樑古榕、二崁古厝等知名景點。一日券讓您輕鬆暢遊北環線所有站點，體驗澎湖的自然美景與人文風情。",
         packageContents: [
@@ -542,7 +542,7 @@ export default function TicketDetailPage({ params }: { params: { ticketId: strin
         id: "magong-south-1",
         name: "媽宮・澎南線 一日券",
         price: 100,
-        image: "/images/ticket-south.png",
+        image: "/images/ticket-south-premium.png",
         description:
           "探索澎湖南部的人文風情與自然美景，包含風櫃洞、山水沙灘、嵵裡沙灘等知名景點，體驗澎湖南環線的獨特魅力。",
         packageContents: [

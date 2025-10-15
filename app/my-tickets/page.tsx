@@ -236,6 +236,441 @@ export default function MyTicketsPage() {
           },
         ],
       },
+      // 二日券 - 已購買狀態
+      {
+        id: "TK2D001",
+        name: "台灣好行 二日券 北環・湖西線",
+        routeName: "北環・湖西線",
+        date: "2025/11/20",
+        quantity: 2,
+        totalAmount: 500,
+        status: "purchased",
+        seatAssigned: false,
+        purchaseDate: "2025/10/15",
+        validUntil: "2025/12/15",
+        type: "二日券",
+        breakdown: {
+          adult: {
+            label: "全票",
+            count: 1,
+            price: 250,
+            subtotal: 250,
+          },
+          senior: {
+            label: "長者",
+            count: 1,
+            price: 250,
+            subtotal: 250,
+          },
+        },
+        selectedDates: [
+          {
+            routeId: "north",
+            routeName: "北環線",
+            date: "2025/11/20",
+          },
+          {
+            routeId: "xihu",
+            routeName: "湖西線",
+            date: "2025/11/21",
+          },
+        ],
+        passengers: [
+          {
+            ticketType: "adult",
+            name: "張小明",
+            email: "zhang.adult@example.com",
+            phone: "0911111111",
+            id: "A111111111",
+            needsAccessibility: "no",
+            pickupLocations: { 
+              north: "gongchezong-0840",
+              xihu: "magonggang-0830"
+            },
+            ticketSerial: "2D001A"
+          },
+          {
+            ticketType: "senior",
+            name: "李阿嬤",
+            email: "li.senior@example.com",
+            phone: "0922222222",
+            id: "B222222222",
+            needsAccessibility: "yes",
+            pickupLocations: { 
+              north: "gongchezong-0840",
+              xihu: "magonggang-0830"
+            },
+            ticketSerial: "2D001S"
+          },
+        ],
+      },
+      // 二日券 - 已劃位狀態
+      {
+        id: "TK2D002",
+        name: "台灣好行 二日券 北環・澎南線",
+        routeName: "北環・澎南線",
+        date: "2025/12/15",
+        quantity: 3,
+        totalAmount: 675,
+        status: "purchased",
+        seatAssigned: true,
+        seatNumber: "A05, A06, A07",
+        purchaseDate: "2025/11/1",
+        validUntil: "2026/1/1",
+        type: "二日券",
+        breakdown: {
+          adult: {
+            label: "全票",
+            count: 2,
+            price: 225,
+            subtotal: 450,
+          },
+          child: {
+            label: "兒童",
+            count: 1,
+            price: 225,
+            subtotal: 225,
+          },
+        },
+        selectedDates: [
+          {
+            routeId: "north",
+            routeName: "北環線",
+            date: "2025/12/15",
+          },
+          {
+            routeId: "south",
+            routeName: "澎南線",
+            date: "2025/12/16",
+          },
+        ],
+        passengers: [
+          {
+            ticketType: "adult",
+            name: "王大華",
+            email: "wang.adult@example.com",
+            phone: "0933333333",
+            id: "C333333333",
+            needsAccessibility: "no",
+            pickupLocations: { 
+              north: "ziyouta-0845",
+              south: "magonggang-0828"
+            },
+            ticketSerial: "2D002A"
+          },
+          {
+            ticketType: "adult",
+            name: "陳小美",
+            email: "chen.adult@example.com",
+            phone: "0944444444",
+            id: "D444444444",
+            needsAccessibility: "no",
+            pickupLocations: { 
+              north: "ziyouta-0845",
+              south: "magonggang-0828"
+            },
+            ticketSerial: "2D002B"
+          },
+          {
+            ticketType: "child",
+            name: "王小寶",
+            email: "wang.child@example.com",
+            phone: "0955555555",
+            id: "E555555555",
+            needsAccessibility: "no",
+            pickupLocations: { 
+              north: "ziyouta-0845",
+              south: "magonggang-0828"
+            },
+            ticketSerial: "2D002C"
+          },
+        ],
+      },
+      // 二日券 - 已搭乘狀態
+      {
+        id: "TK2D003",
+        name: "台灣好行 二日券 湖西・澎南線",
+        routeName: "湖西・澎南線",
+        date: "2025/10/5",
+        quantity: 1,
+        totalAmount: 200,
+        status: "purchased",
+        seatAssigned: true,
+        seatNumber: "B10",
+        purchaseDate: "2025/9/20",
+        validUntil: "2025/11/20",
+        type: "二日券",
+        breakdown: {
+          discount: {
+            label: "澎湖籍",
+            count: 1,
+            price: 200,
+            subtotal: 200,
+          },
+        },
+        selectedDates: [
+          {
+            routeId: "xihu",
+            routeName: "湖西線",
+            date: "2025/10/5",
+          },
+          {
+            routeId: "south",
+            routeName: "澎南線",
+            date: "2025/10/6",
+          },
+        ],
+        passengers: [
+          {
+            ticketType: "discount",
+            name: "澎湖小民",
+            email: "penghu.local@example.com",
+            phone: "0966666666",
+            id: "F666666666",
+            needsAccessibility: "no",
+            pickupLocations: { 
+              xihu: "beiliao-0910",
+              south: "fengkui-0905"
+            },
+            ticketSerial: "2D003L"
+          },
+        ],
+      },
+      // 三日券 - 已購買狀態
+      {
+        id: "TK3D001",
+        name: "台灣好行 三日券 北環・湖西・澎南線",
+        routeName: "北環・湖西・澎南線",
+        date: "2025/12/25",
+        quantity: 4,
+        totalAmount: 1200,
+        status: "purchased",
+        seatAssigned: false,
+        purchaseDate: "2025/11/10",
+        validUntil: "2026/1/10",
+        type: "三日券",
+        breakdown: {
+          adult: {
+            label: "全票",
+            count: 2,
+            price: 300,
+            subtotal: 600,
+          },
+          senior: {
+            label: "長者",
+            count: 1,
+            price: 300,
+            subtotal: 300,
+          },
+          child: {
+            label: "兒童",
+            count: 1,
+            price: 300,
+            subtotal: 300,
+          },
+        },
+        selectedDates: [
+          {
+            routeId: "north",
+            routeName: "北環線",
+            date: "2025/12/25",
+          },
+          {
+            routeId: "xihu",
+            routeName: "湖西線",
+            date: "2025/12/26",
+          },
+          {
+            routeId: "south",
+            routeName: "澎南線",
+            date: "2025/12/27",
+          },
+        ],
+        passengers: [
+          {
+            ticketType: "adult",
+            name: "全家旅遊爸",
+            email: "family.dad@example.com",
+            phone: "0977777777",
+            id: "G777777777",
+            needsAccessibility: "no",
+            pickupLocations: { 
+              north: "dongwei-0907",
+              xihu: "airport-0900",
+              south: "shanshui-0930"
+            },
+            ticketSerial: "3D001A"
+          },
+          {
+            ticketType: "adult",
+            name: "全家旅遊媽",
+            email: "family.mom@example.com",
+            phone: "0988888888",
+            id: "H888888888",
+            needsAccessibility: "no",
+            pickupLocations: { 
+              north: "dongwei-0907",
+              xihu: "airport-0900",
+              south: "shanshui-0930"
+            },
+            ticketSerial: "3D001B"
+          },
+          {
+            ticketType: "senior",
+            name: "全家旅遊爺",
+            email: "family.grandpa@example.com",
+            phone: "0999999999",
+            id: "I999999999",
+            needsAccessibility: "yes",
+            pickupLocations: { 
+              north: "dongwei-0907",
+              xihu: "airport-0900",
+              south: "shanshui-0930"
+            },
+            ticketSerial: "3D001S"
+          },
+          {
+            ticketType: "child",
+            name: "全家旅遊孩",
+            email: "family.kid@example.com",
+            phone: "0900000000",
+            id: "J000000000",
+            needsAccessibility: "no",
+            pickupLocations: { 
+              north: "dongwei-0907",
+              xihu: "airport-0900",
+              south: "shanshui-0930"
+            },
+            ticketSerial: "3D001C"
+          },
+        ],
+      },
+      // 三日券 - 已劃位狀態
+      {
+        id: "TK3D002",
+        name: "台灣好行 三日券 北環・湖西・澎南線",
+        routeName: "北環・湖西・澎南線",
+        date: "2026/1/20",
+        quantity: 2,
+        totalAmount: 600,
+        status: "purchased",
+        seatAssigned: true,
+        seatNumber: "C15, C16",
+        purchaseDate: "2025/12/1",
+        validUntil: "2026/2/1",
+        type: "三日券",
+        breakdown: {
+          adult: {
+            label: "全票",
+            count: 2,
+            price: 300,
+            subtotal: 600,
+          },
+        },
+        selectedDates: [
+          {
+            routeId: "north",
+            routeName: "北環線",
+            date: "2026/1/20",
+          },
+          {
+            routeId: "xihu",
+            routeName: "湖西線",
+            date: "2026/1/21",
+          },
+          {
+            routeId: "south",
+            routeName: "澎南線",
+            date: "2026/1/22",
+          },
+        ],
+        passengers: [
+          {
+            ticketType: "adult",
+            name: "情侶男",
+            email: "couple.boy@example.com",
+            phone: "0912345678",
+            id: "K111111111",
+            needsAccessibility: "no",
+            pickupLocations: { 
+              north: "kuahaidaqiao-0930",
+              xihu: "nanliao-0950",
+              south: "suogang-1000"
+            },
+            ticketSerial: "3D002A"
+          },
+          {
+            ticketType: "adult",
+            name: "情侶女",
+            email: "couple.girl@example.com",
+            phone: "0923456789",
+            id: "L222222222",
+            needsAccessibility: "no",
+            pickupLocations: { 
+              north: "kuahaidaqiao-0930",
+              xihu: "nanliao-0950",
+              south: "suogang-1000"
+            },
+            ticketSerial: "3D002B"
+          },
+        ],
+      },
+      // 三日券 - 已搭乘狀態
+      {
+        id: "TK3D003",
+        name: "台灣好行 三日券 北環・湖西・澎南線",
+        routeName: "北環・湖西・澎南線",
+        date: "2025/9/10",
+        quantity: 1,
+        totalAmount: 300,
+        status: "purchased",
+        seatAssigned: true,
+        seatNumber: "D20",
+        purchaseDate: "2025/8/15",
+        validUntil: "2025/10/15",
+        type: "三日券",
+        breakdown: {
+          love: {
+            label: "愛心",
+            count: 1,
+            price: 300,
+            subtotal: 300,
+          },
+        },
+        selectedDates: [
+          {
+            routeId: "north",
+            routeName: "北環線",
+            date: "2025/9/10",
+          },
+          {
+            routeId: "xihu",
+            routeName: "湖西線",
+            date: "2025/9/11",
+          },
+          {
+            routeId: "south",
+            routeName: "澎南線",
+            date: "2025/9/12",
+          },
+        ],
+        passengers: [
+          {
+            ticketType: "love",
+            name: "愛心乘客",
+            email: "love.passenger@example.com",
+            phone: "0934567890",
+            id: "M333333333",
+            needsAccessibility: "yes",
+            pickupLocations: { 
+              north: "erkanjuluo-1100",
+              xihu: "longmen-1035",
+              south: "fengkui-0905"
+            },
+            ticketSerial: "3D003L"
+          },
+        ],
+      },
     ]
 
     const existingSampleIds = sampleTickets.map((t) => t.id)
@@ -458,45 +893,106 @@ export default function MyTicketsPage() {
     </div>
   )
 
+  const getTicketTypeLabel = (ticketType: string) => {
+    const labels: Record<string, string> = {
+      adult: "全票",
+      discount: "澎湖籍",
+      senior: "長者",
+      love: "愛心",
+      child: "兒童",
+    }
+    return labels[ticketType] || ticketType
+  }
+
+  const getStationLabel = (routeId: string, stationId: string) => {
+    const stationsByRoute: Record<string, Array<{ value: string; label: string }>> = {
+      north: [
+        { value: "xiweidong-0828", label: "08:28 西衛東站" },
+        { value: "magonggang-0836", label: "08:36 馬公港站" },
+        { value: "gongchezong-0840", label: "08:40 公車總站" },
+        { value: "ziyouta-0845", label: "08:45 自由塔（勝國）站" },
+        { value: "disanyu-0849", label: "08:49 第三漁港（雅霖）站" },
+        { value: "wenao-0855", label: "08:55 文澳（元泰.百世多麗）站" },
+        { value: "dongwei-0907", label: "09:07 東衛站" },
+        { value: "kuahaidaqiao-0930", label: "09:30 跨海大橋（西嶼端）" },
+        { value: "sanxianta-1005", label: "10:05 三仙塔" },
+        { value: "dacaiye-1035", label: "10:35 大菓葉玄武岩柱" },
+        { value: "erkanjuluo-1100", label: "11:00 二崁聚落" },
+        { value: "tongliangguta-1150", label: "11:50 通梁古榕" },
+      ],
+      xihu: [
+        { value: "magonggang-0830", label: "08:30 馬公港站" },
+        { value: "gongchezong-0834", label: "08:34 公車總站" },
+        { value: "ziyouta-0839", label: "08:39 自由塔（勝國）站" },
+        { value: "disanyu-0843", label: "08:43 第三漁港（雅霖）站" },
+        { value: "wenao-0847", label: "08:47 文澳（元泰.百世多麗）站" },
+        { value: "airport-0900", label: "09:00 澎湖機場站" },
+        { value: "beiliao-0910", label: "09:10 北寮奎壁山" },
+        { value: "nanliao-0950", label: "09:50 南寮社區" },
+        { value: "longmen-1035", label: "10:35 龍門閉鎖陣地" },
+        { value: "museum-1135", label: "11:35 澎湖生活博物館" },
+      ],
+      south: [
+        { value: "magonggang-0828", label: "08:28 馬公港站" },
+        { value: "gongchezong-0832", label: "08:32 公車總站" },
+        { value: "ziyouta-0836", label: "08:36 自由塔（勝國）站" },
+        { value: "disanyu-0840", label: "08:40 第三漁港（雅霖）站" },
+        { value: "wenao-0844", label: "08:44 文澳（元泰.百世多麗）站" },
+        { value: "fengkui-0905", label: "09:05 風櫃洞" },
+        { value: "fishery-0945", label: "09:45 澎湖縣水產種苗繁殖場" },
+        { value: "shanshui-1050", label: "10:50 山水沙灘" },
+        { value: "suogang-1130", label: "11:30 鎖港子午塔" },
+      ],
+    }
+
+    const routeStations = stationsByRoute[routeId] || []
+    const station = routeStations.find(s => s.value === stationId)
+    return station ? station.label : stationId
+  }
+
   const TicketInfoDisplay = ({ ticket, showQRCode = true }: { ticket: StoredTicket; showQRCode?: boolean }) => (
-    <div className="space-y-2">
+    <div className="space-y-4">
+      {/* QR Code */}
       {showQRCode && (
-        <div className="flex flex-col items-center pb-2 border-b border-border">
-          <div className="bg-white p-2 rounded-lg border-2 border-gray-200">
-            <div className="w-32 h-32 bg-gray-100 flex items-center justify-center rounded">
+        <div className="flex flex-col items-center pb-4 border-b border-border">
+          <div className="bg-white p-4 rounded-lg border-2 border-gray-200">
+            <div className="w-48 h-48 bg-gray-100 flex items-center justify-center rounded">
               <div className="text-center">
-                <QrCode className="h-10 w-10 mx-auto mb-1 text-gray-400" />
+                <QrCode className="h-16 w-16 mx-auto mb-2 text-gray-400" />
                 <div className="text-xs text-gray-500">QR Code</div>
-                <div className="text-xs text-gray-400 mt-1 truncate max-w-[120px]">{ticket.id}</div>
+                <div className="text-xs text-gray-400 mt-1">{ticket.id}</div>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      <div className="bg-muted/50 p-2 rounded-lg">
-        <h3 className="font-semibold text-foreground mb-1 text-sm">{ticket.name}</h3>
-        <div className="space-y-0.5 text-xs">
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">路線</span>
-            <span className="font-medium">{ticket.routeName}</span>
+      {/* 票券基本資訊 */}
+      <div className="flex justify-between items-start mb-4">
+        <div className="flex-1">
+          <h3 className="font-semibold text-foreground text-sm mb-2">
+            {ticket.name}
+          </h3>
+          <div className="text-xs text-muted-foreground">
+            <div>數量: {ticket.quantity} 張</div>
           </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">日期</span>
-            <span className="font-medium">{ticket.date}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">票券類型</span>
-            <span className="font-medium">{ticket.type}</span>
+        </div>
+        <div className="flex flex-col items-end">
+          <Badge variant="default" className="text-xs">
+            {ticket.status === "purchased" ? "已購買" : ticket.status === "reserved" ? "已劃位" : "已取消"}
+          </Badge>
+          <div className="text-xs text-muted-foreground text-right mt-1">
+            <div>購買: {ticket.purchaseDate}</div>
           </div>
         </div>
       </div>
 
-      <div className="space-y-1">
-        <h4 className="font-semibold text-xs text-foreground">票券明細</h4>
-        <div className="bg-muted/50 p-2 rounded-lg space-y-1">
-          {ticket.breakdown &&
-            Object.entries(ticket.breakdown).map(([key, detail]) => (
+      {/* 票券明細 */}
+      {ticket.breakdown && (
+        <div className="mb-4">
+          <h4 className="font-semibold text-xs text-foreground mb-2">票券明細</h4>
+          <div className="bg-muted/50 p-3 rounded-lg space-y-1">
+            {Object.entries(ticket.breakdown).map(([key, detail]: [string, any]) => (
               <div key={key} className="flex justify-between text-xs">
                 <span className="text-muted-foreground">
                   {detail.label} x {detail.count}
@@ -504,47 +1000,108 @@ export default function MyTicketsPage() {
                 <span className="font-medium">NT${detail.subtotal}</span>
               </div>
             ))}
-          <div className="pt-1 border-t border-border flex justify-between font-semibold text-xs">
-            <span>總計</span>
-            <span className="text-primary">NT${ticket.totalAmount}</span>
-          </div>
-        </div>
-      </div>
-
-      {ticket.passengers && ticket.passengers.length > 0 && (
-        <div className="space-y-1">
-          <h4 className="font-semibold text-xs text-foreground">乘客資訊</h4>
-          <div className="bg-muted/50 p-2 rounded-lg space-y-1">
-            {ticket.passengers.map((passenger, index) => (
-              <div key={index} className="pb-1 border-b border-border last:border-b-0 last:pb-0">
-                <div className="font-medium text-xs mb-1">
-                  {ticket.passengers && ticket.passengers.length > 1 ? `乘客 ${index + 1}` : "乘客資訊"}
-                </div>
-                <div className="space-y-0.5 text-xs">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">姓名</span>
-                    <span className="font-medium">{passenger.name}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">電話</span>
-                    <span className="font-medium">{passenger.phone}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Email</span>
-                    <span className="font-medium text-xs">{passenger.email}</span>
-                  </div>
-                  {passenger.id && (
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">證件號碼</span>
-                      <span className="font-medium">{passenger.id}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+            <div className="pt-2 border-t border-border flex justify-between font-semibold text-xs">
+              <span>總計</span>
+              <span className="text-primary">NT${ticket.totalAmount}</span>
+            </div>
           </div>
         </div>
       )}
+
+      {/* 每條路線的完整資訊 */}
+      {ticket.selectedDates?.map((dateInfo: any, routeIndex: number) => (
+        <div key={routeIndex} className="mb-4 last:mb-0">
+          {/* 路線分隔線 */}
+          {routeIndex > 0 && (
+            <div className="border-t border-border my-4"></div>
+          )}
+          
+          {/* 路線標題 */}
+          <div className="flex items-center mb-3">
+            <MapPin className="h-4 w-4 mr-2 text-primary" />
+            <h4 className="font-semibold text-sm text-foreground">
+              路線{routeIndex + 1}：{dateInfo.routeName}
+            </h4>
+            <span className="ml-2 text-xs text-muted-foreground">
+              {dateInfo.date}
+            </span>
+          </div>
+
+          {/* 該路線的乘客資訊 */}
+          <div className="bg-muted/30 p-3 rounded-lg">
+            <h5 className="font-medium text-xs text-foreground mb-2">乘客資訊</h5>
+            <div className="space-y-2">
+              {ticket.passengers?.map((passenger: any, passengerIndex: number) => {
+                // 取得該乘客在當前路線的上車地點
+                const getPickupLocation = (passenger: any, currentRoute: any) => {
+                  if (passenger.pickupLocations && passenger.pickupLocations[currentRoute.routeId]) {
+                    const stationId = passenger.pickupLocations[currentRoute.routeId]
+                    return getStationLabel(currentRoute.routeId, stationId)
+                  }
+                  return "未指定"
+                }
+
+                return (
+                  <div key={passengerIndex} className="text-xs">
+                    <div className="flex items-center gap-1 mb-1">
+                      <span className="text-muted-foreground">姓名：</span>
+                      <span className="font-medium">{passenger.name}</span>
+                    </div>
+                    <div className="flex items-center gap-1 mb-1">
+                      <span className="text-muted-foreground">上車地點：</span>
+                      <span className="font-medium">{getPickupLocation(passenger, dateInfo)}</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 items-center mb-1">
+                      <div className="flex items-center gap-1">
+                        <span className="text-muted-foreground">票種：</span>
+                        <span className="font-medium">{getTicketTypeLabel(passenger.ticketType)}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-muted-foreground">票券序號：</span>
+                        <span className="font-medium">{passenger.ticketSerial || "未填寫"}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1 mb-1">
+                      <span className="text-muted-foreground">Email：</span>
+                      <span className="font-medium">{passenger.email}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span className="text-muted-foreground">電話：</span>
+                      <span className="font-medium">
+                        {passenger.countryCode ? `${passenger.countryCode} ${passenger.phone}` : passenger.phone}
+                      </span>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* 該路線的我要取消按鈕 */}
+          {(() => {
+            const isPastTicket = new Date(ticket.date) < new Date()
+            const canCancel = !isPastTicket && ticket.status !== "cancelled" && new Date(ticket.validUntil) >= new Date()
+            
+            if (!canCancel) return null
+            
+            return (
+              <div className="mt-3 pt-3 border-t border-border">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="w-full h-8 text-xs bg-transparent text-destructive hover:text-destructive"
+                  onClick={() => {
+                    setTicketToCancel(ticket)
+                    setIsCancelDialogOpen(true)
+                  }}
+                >
+                  我要取消
+                </Button>
+              </div>
+            )
+          })()}
+        </div>
+      ))}
 
       <div className="space-y-1">
         <h4 className="font-semibold text-xs text-foreground">購票資訊</h4>
@@ -567,6 +1124,7 @@ export default function MyTicketsPage() {
           </div>
         </div>
       </div>
+
     </div>
   )
 
@@ -631,7 +1189,6 @@ export default function MyTicketsPage() {
             </div>
             <div className="text-xs text-muted-foreground text-right">
               <div>購買: {ticket.purchaseDate}</div>
-              <div>有效至: {ticket.validUntil}</div>
             </div>
           </div>
 
@@ -695,7 +1252,7 @@ export default function MyTicketsPage() {
                     setIsCancelDialogOpen(true)
                   }}
                 >
-                  取消
+                  我要取消
                 </Button>
               </>
             ) : status.label === "已搭乘" ? (

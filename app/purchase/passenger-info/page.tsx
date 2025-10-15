@@ -83,7 +83,7 @@ const PassengerInfoPage = () => {
         name: "媽宮・北環線 一日券",
         price: "NT$ 150~300",
         type: "一日券",
-        image: "/images/ticket-north-ring.png",
+        image: "/images/ticket-north-ring-premium.png",
       },
       "magong-xihu-1": {
         name: "媽宮・湖西線 一日券",
@@ -95,7 +95,7 @@ const PassengerInfoPage = () => {
         name: "媽宮・澎南線 一日券",
         price: "NT$ 100~200",
         type: "一日券",
-        image: "/images/ticket-south.png",
+        image: "/images/ticket-south-premium.png",
       },
       "north-xihu-2": {
         name: "台灣好行 二日券 北環・湖西線",
@@ -152,7 +152,7 @@ const PassengerInfoPage = () => {
         name: "媽宮・北環線 一日券",
         price: "NT$ 150~300",
         type: "一日券",
-        image: "/images/ticket-north-ring.png",
+        image: "/images/ticket-north-ring-premium.png",
       }
     )
   }

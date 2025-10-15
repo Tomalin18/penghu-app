@@ -18,9 +18,7 @@ export const attractions: Attraction[] = [
     images: [
       "/images/kuibishan-1.png",
       "/images/kuibishan-2.png",
-      "/images/kuibishan-3.png",
       "/images/kuibishan-4.png",
-      "/images/kuibishan-5.png",
     ],
     category: ["自然景觀", "地質奇觀", "潮汐景觀"],
     location: {
@@ -83,8 +81,6 @@ export const attractions: Attraction[] = [
       "/images/nanliao-1.png",
       "/images/nanliao-2.png",
       "/images/nanliao-3.png",
-      "/images/nanliao-4.png",
-      "/images/nanliao-5.png",
     ],
     category: ["文化景點", "社區體驗", "傳統建築", "農村文化"],
     location: {
@@ -159,7 +155,6 @@ export const attractions: Attraction[] = [
       "/images/duxing-2.png",
       "/images/duxing-3.png",
       "/images/duxing-4.png",
-      "/images/duxing-5.png",
     ],
     category: ["文化景點", "歷史古蹟", "眷村文化"],
     location: {
@@ -201,8 +196,8 @@ export const attractions: Attraction[] = [
 天后宮建築於清代時官方多次斥資重修，而現存格局大致為大正12年（1923年）由大木匠師藍木主持重修後之樣貌，當時內部的木雕及彩繪匠師皆為一時之選，1983年、2014年、2024年都有再次整修。
 
 目前天后宮內主祀金面媽祖，另有千里眼、順風耳、註生娘娘、送子觀音、孔子、虎爺將軍、積慶公夫婦等神明為陪祀。被視為藝術寶庫的澎湖天后宮，無論是建築本身或是藝術水準高超的擂金畫、石雕、木雕、鑿花與彩繪，均出自名家之手，並充分展現我國民間藝術的高度成就。`,
-    image: "/images/tianhou-1.png",
-    images: ["/images/tianhou-1.png", "/images/tianhou-2.png", "/images/tianhou-3.png", "/images/tianhou-4.png"],
+    image: "/images/tianhou-2.png",
+    images: ["/images/tianhou-2.png", "/images/tianhou-4.png"],
     category: ["宗教景點", "歷史古蹟", "文化景點", "國寶級文物"],
     location: {
       address: "澎湖縣馬公市正義街1號",
@@ -240,8 +235,8 @@ export const attractions: Attraction[] = [
 「澎湖生活博物館」亦是一座鄰居、社區、生態、生活情境的博物館，兼具親和力、親切感、人情味十足的生活場域，為本縣共享的生活資源。一座特屬澎湖風味與人文內容的博物館。
 
 2010年正式開館營運，是臺灣第一座城市博物館，全館展示標本文物、文獻、圖片、生態造景、縮景模型及身歷其境的聲光多媒體介紹，使展示內容更加生活化。澎湖生活博物館位於馬公市，藉由博物館的立體展示，讓遊客們可更進一步了解有關於澎湖在地。是一處結具教育意義及值回票價的觀光休閒場所。`,
-    image: "/images/living-museum-1.png",
-    images: ["/images/living-museum-1.png", "/images/living-museum-2.png", "/images/living-museum-3.png"],
+    image: "/images/living-museum-2.png",
+    images: ["/images/living-museum-2.png"],
     category: ["博物館", "文化景點", "教育景點"],
     location: {
       address: "澎湖縣馬公市新生路327號",
@@ -278,8 +273,8 @@ export const attractions: Attraction[] = [
 爾後，因橋樑腐蝕嚴重與橋梁坍蹋，於1984年拓寬陸堤，1996年雙車道新橋完工通車。遠望如海上長虹不但具觀光價值，也讓西嶼和白沙兩地交通暢流無阻。
 
 至今大橋西嶼端北側海域仍留有早期的水泥橋墩，靠西嶼一側留有班駁的高壓電塔基座，分別說明早期西嶼電力是由高壓電線架跨海輸送，與舊橋功成身退的一段滄桑史。`,
-    image: "/images/cross-sea-bridge-1.png",
-    images: ["/images/cross-sea-bridge-1.png", "/images/cross-sea-bridge-2.png"],
+    image: "/images/north-route.png",
+    images: ["/images/north-route.png"],
     category: ["地標建築", "交通建設", "觀景點"],
     location: {
       address: "澎湖縣白沙鄉與西嶼鄉交界",
@@ -402,8 +397,8 @@ export const attractions: Attraction[] = [
 這片大菓葉玄武岩因為整片山壁都是這種柱狀節理，而且高度夠高，形成非常特殊的景觀，而且每逢大雨過後，玄武岩前方的凹地正好盛接了雨水，整塊高聳的岩壁倒映在水面上，形成非常獨特又令人驚奇的畫面，常常吸引許多人前來拍照，是西嶼鄉特殊的自然景觀之一。
 
 而大菓葉柱狀玄武岩的發現，是日治時期為了西嶼跟馬公間的海上交通，決定在大菓葉海邊闢建碼頭，設交通船往返西嶼和馬公之間，當時就在柱狀玄武岩所在的位置開挖石塊泥土去填海造港，才意外地讓這片沈睡千年的柱狀玄武岩露臉。`,
-    image: "/images/daguoye-basalt-1.png",
-    images: ["/images/daguoye-basalt-1.png", "/images/daguoye-basalt-2.png"],
+    image: "/images/north-route.png",
+    images: ["/images/north-route.png"],
     category: ["自然景觀", "地質奇觀", "教育景點"],
     location: {
       address: "澎湖縣西嶼鄉池西村",
@@ -465,10 +460,8 @@ export const attractions: Attraction[] = [
     title: "風櫃洞",
     description: "風櫃聽濤的海蝕奇觀",
     detailedDescription: `位在澎湖風櫃半島南端，過去被稱為「風櫃尾」，這裡因為澎湖特有的玄武岩柱狀節理十分發達，而且長年受到海浪的侵蝕，而形成了狹長的海蝕溝。海蝕溝的底部又被侵蝕成為海蝕洞，海蝕洞頂端有一道順著節理縫隙通到海蝕洞內的小孔。\n\n每當海水漲潮時，海浪順著海蝕溝灌入海蝕洞，洞內的空氣受到大力的擠壓，常常會發出「呼…呼..」的聲音，這個聲音就好像以前人們生火使用的鼓風爐聲，所以風櫃洞最有名的稱呼就叫做「風櫃聽濤」，是澎湖縣聽海濤聲最棒的地點！\n\n配合玄武岩的特殊地貌，在清晨或夕陽西下時候遠眺，相當壯麗，也有一種詩人之美。風櫃洞旁邊有兩層樓像貝殼般造型的可愛涼亭，可走上去欣賞整個海面的景色以及觀��地面上壯觀的玄武岩侵蝕地貌。`,
-    image: "/images/fengguei-cave-1.png",
+    image: "/images/fengguei-cave-3.png",
     images: [
-      "/images/fengguei-cave-1.png",
-      "/images/fengguei-cave-2.png",
       "/images/fengguei-cave-3.png",
       "/images/fengguei-cave-4.png",
     ],
@@ -502,13 +495,8 @@ export const attractions: Attraction[] = [
     title: "澎湖縣水產種苗繁殖場",
     description: "海洋生態教育與種苗培育基地",
     detailedDescription: `本場前身為設立於民國58年之「澎湖縣藻類種苗培育中心」，當時以推廣澎湖縣紫菜養殖為目標，直至民國77年始正式成立「澎湖縣水產種苗繁殖場」，並於民國100年進行場區改建，興建『種苗生產暨海洋生態教育大樓』及周邊工程，大樓一樓為種苗生產區，二樓為參觀區，三樓為辦公室及景觀平台區，以進行各類海水魚、蝦、蟹、紫菜及九孔等貝類之繁養殖放流業務，期增進本縣水產資源並促進澎湖縣養殖漁業之發展。\n\n澎湖縣水產種苗繁殖場2樓為長度108公尺之參觀走道，包含珊瑚栽種區及水族箱展示區，可供一般民眾及學生參訪，經由導覽人員解說並搭配參觀走道之簡介，以了解種苗培育生產情形及海洋生態保育觀念。因種苗場西臨澎南嵵裡社區海灣，在3樓辦公區外，設有觀景平台，作為參訪遊客休憩與暸望觀景之用。\n\n澎湖縣水產種苗繁殖場綜理各項水產種苗孵化、培育及放流工作，目前進行中之種苗培育包括：魚苗培育（黃錫鯛、嘉鱲、黑鯛、石斑、青嘴龍占、海鱺、石鱸等）、貝類培育（九孔、銀塔鐘螺、鳳螺等）、蝦類培育（斑節蝦等）、蟹苗培育（遠海梭子蟹等）、大型經濟藻類（紫菜、菩提藻、鋸齒麒麟菜）、其他（馬蹄鐘螺、珊瑚）。`,
-    image: "/images/aquaculture-1.png",
-    images: [
-      "/images/aquaculture-1.png",
-      "/images/aquaculture-2.png",
-      "/images/aquaculture-3.png",
-      "/images/aquaculture-4.png",
-    ],
+    image: "/images/aquaculture-4.png",
+    images: ["/images/aquaculture-4.png"],
     category: ["教育景點", "海洋生態", "科學研究", "水產養殖"],
     location: {
       address: "澎湖縣馬公市嵵裡里",
@@ -540,8 +528,8 @@ export const attractions: Attraction[] = [
     title: "山水沙灘",
     description: "金黃沙灘與3D彩繪的海濱勝地",
     detailedDescription: `山水沙灘為澎湖必訪的沙灘之一，綿延200多公尺，由於澎湖海濱天然資源豐富，較少遭受到人工的污染，沙子呈現美麗的金黃色，周邊生長大片翠綠馬鞍藤，在陽光的照耀下，蔚藍海面，翠綠植被及黃金沙灘，組成鮮豔的色調，成為遊客必訪的旅遊勝地。\n\n山水沙灘古時候有個有趣的地名叫做「豬母落水」，傳說有一隻母豬跑到沙灘上，海中出現一隻大章魚，經過一番纏鬥，母豬被大章魚拖下海去，所以才稱為「豬母落水」，到了日治時代改稱為「豬母水」，直到臺灣光復才改為「山水」地名。\n\n而在沙灘入口處的海堤圍牆上，繪製著大面積的3D彩繪，彩繪內容融入「豬母落水」故事，更在海堤圍牆上嵌入一塊實體的衝浪板，將3D提升為4D，民眾可站上衝浪板，與3D彩繪合影，彷彿一起和母豬奮戰大章魚，非常值得拍照留念。`,
-    image: "/images/shanshui-beach-1.png",
-    images: ["/images/shanshui-beach-1.png", "/images/shanshui-beach-2.png", "/images/shanshui-beach-3.png"],
+    image: "/images/shanshui-beach-2.png",
+    images: ["/images/shanshui-beach-2.png"],
     category: ["自然景觀", "海灘", "拍照景點", "文化景點"],
     location: {
       address: "澎湖縣馬公市山水里",
@@ -572,12 +560,10 @@ export const attractions: Attraction[] = [
     title: "鎖港里南北石塔",
     description: "澎湖最高的鎮風石塔",
     detailedDescription: `澎湖群島冬天季風強勁，鎖港先民鎖港築塔有鎮風止煞之意，又鎖港四周無高山屏障，先民建雙塔於出海要衝，也作為居民海上捕魚時辨識方位的指標。鎖港里為馬公市的漁港，盛產小管，漁業相當發達，這個村裡則因小管的閩南語發音被稱為「鎖管港」。\n\n鎖港石塔由南塔（午塔）及北塔（子塔）二者所組成，位於舊聚落北方，石塔所在處北側原有一高起的小丘，為社里的靠山，因強勁的東北季風而逐漸消失，於是當地有了一句諺語「鎖管港了一個山，豬母水了一個灣」，說明社里的沙丘被吹到豬母水（山水）的港灣去了，所以在原址上建築兩座大石塔以彌補靠山的消失，對風水所造成的破壞。\n\n鎖港石塔為九層階梯狀的黑石疊砌而成的圓錐形塔，為澎湖石塔中，形式最為古拙者之一。原為黑石建造，民國52年重新修建為黑石水泥材料（由玄武岩、水泥、堆砌而成）。其建積─第一層約66平方公尺。原為七層疊形石敢當，於民國52年重建後加頂層石碑共九層，為全澎湖最高之石塔，北塔高10.96公尺，南塔高10.94公尺。`,
-    image: "/images/suogang-towers-1.png",
+    image: "/images/suogang-towers-2.png",
     images: [
-      "/images/suogang-towers-1.png",
       "/images/suogang-towers-2.png",
       "/images/suogang-towers-3.png",
-      "/images/suogang-towers-4.png",
     ],
     category: ["文化景點", "歷史古蹟", "民俗信仰", "地標建築"],
     location: {
