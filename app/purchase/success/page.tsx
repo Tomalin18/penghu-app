@@ -172,50 +172,6 @@ export default function PurchaseSuccessPage() {
     return stationId
   }
 
-  // 簡化的票券詳情組件
-  const TicketDetails = ({ ticketData }: { ticketData: any }) => {
-    return (
-      <div className="space-y-4">
-        {/* 乘客資訊 */}
-        {ticketData.passengers && ticketData.passengers.length > 0 && (
-          <div className="space-y-3">
-            <h4 className="font-semibold text-xs text-foreground">乘客資訊</h4>
-            <div className="bg-muted/50 p-4 rounded-lg space-y-4">
-              {ticketData.passengers.map((passenger: any, index: number) => (
-                <div key={index} className="pb-4 border-b border-border last:border-b-0 last:pb-0">
-                  <div className="space-y-1 text-xs">
-                    {/* 第一行：姓名、票種 */}
-                    <div className="grid grid-cols-2 gap-3 items-center">
-                      <div className="flex items-center gap-2">
-                        <span className="text-muted-foreground text-xs whitespace-nowrap">姓名：</span>
-                        <span className="font-medium text-xs whitespace-nowrap">{passenger.name}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-muted-foreground text-xs whitespace-nowrap">票種：</span>
-                        <span className="font-medium text-xs whitespace-nowrap">{getTicketTypeLabel(passenger.ticketType)}</span>
-                      </div>
-                    </div>
-                    {/* 第二行：Email */}
-                    <div className="flex items-center gap-2">
-                      <span className="text-muted-foreground text-xs whitespace-nowrap">Email：</span>
-                      <span className="font-medium text-xs whitespace-nowrap">{passenger.email}</span>
-                    </div>
-                    {/* 第三行：電話 */}
-                    <div className="flex items-center gap-2">
-                      <span className="text-muted-foreground text-xs whitespace-nowrap">電話：</span>
-                      <span className="font-medium text-xs whitespace-nowrap">
-                        {passenger.countryCode ? `${passenger.countryCode} ${passenger.phone}` : passenger.phone}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    )
-  }
 
 
   if (isLoading || !orderData) {
@@ -273,42 +229,153 @@ export default function PurchaseSuccessPage() {
 
           {/* Ticket Cards */}
           <div className="space-y-4 mb-8">
-            {orderData.selectedDates.map((dateInfo: any, index: number) => (
-              <Card key={index} className="shadow-sm border-l-4 border-l-primary">
-                <CardContent className="p-4">
-                  <div className="flex justify-between items-start mb-3">
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-foreground text-sm mb-1">
-                        {orderData.ticketInfo?.name || "澎湖好行票券"}
-                      </h3>
-                      <div className="flex items-center text-xs text-muted-foreground mb-2">
-                        <MapPin className="h-3 w-3 mr-1" />
-                        {dateInfo.routeName} • {dateInfo.date}
+            <Card className="shadow-sm border-l-4 border-l-primary">
+              <CardContent className="p-4">
+                <div className="flex justify-between items-start mb-3">
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-foreground text-sm mb-1">
+                      {orderData.ticketName || orderData.ticketInfo?.name || "澎湖好行票券"}
+                    </h3>
+                    {/* 顯示所有路線資訊 */}
+                    <div className="space-y-1">
+                      {orderData.selectedDates?.map((dateInfo: any, routeIndex: number) => (
+                        <div key={routeIndex} className="flex items-center text-xs text-muted-foreground">
+                          <MapPin className="h-3 w-3 mr-1 flex-shrink-0" />
+                          <span>路線{routeIndex + 1}：{dateInfo.routeName} {dateInfo.date}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <Badge variant="default" className="text-xs">
+                      已購買
+                    </Badge>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center mb-3">
+                  <div className="text-xs text-muted-foreground">
+                    <div>數量: {orderData.passengers?.length || 0} 張</div>
+                    <div>金額: NT${orderData.totalAmount || 0}</div>
+                  </div>
+                  <div className="text-xs text-muted-foreground text-right">
+                    <div>購買: {new Date().toLocaleDateString('zh-TW')}</div>
+                  </div>
+                </div>
+
+                {/* 票券明細 */}
+                {orderData.ticketBreakdown && (
+                  <div className="mb-4">
+                    <h4 className="font-semibold text-xs text-foreground mb-2">票券明細</h4>
+                    <div className="bg-muted/50 p-3 rounded-lg space-y-1">
+                      {Object.entries(orderData.ticketBreakdown).map(([key, detail]: [string, any]) => (
+                        <div key={key} className="flex justify-between text-xs">
+                          <span className="text-muted-foreground">
+                            {detail.label} x {detail.count}
+                          </span>
+                          <span className="font-medium">NT${detail.subtotal}</span>
+                        </div>
+                      ))}
+                      <div className="pt-2 border-t border-border flex justify-between font-semibold text-xs">
+                        <span>總計</span>
+                        <span className="text-primary">NT${orderData.totalAmount}</span>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end">
-                      <Badge variant="default" className="text-xs">
-                        已購買
-                      </Badge>
+                  </div>
+                )}
+
+                {/* 每條路線的完整資訊 */}
+                {orderData.selectedDates?.map((dateInfo: any, routeIndex: number) => (
+                  <div key={routeIndex} className="mb-4 last:mb-0">
+                    {/* 路線分隔線 */}
+                    {routeIndex > 0 && (
+                      <div className="border-t border-border my-4"></div>
+                    )}
+                    
+                    {/* 路線標題 */}
+                    <div className="flex items-center mb-3">
+                      <MapPin className="h-4 w-4 mr-2 text-primary" />
+                      <h4 className="font-semibold text-sm text-foreground">
+                        路線{routeIndex + 1}：{dateInfo.routeName}
+                      </h4>
+                      <span className="ml-2 text-xs text-muted-foreground">
+                        {dateInfo.date}
+                      </span>
+                    </div>
+
+                    {/* 該路線的票券明細 */}
+                    {orderData.ticketBreakdown && (
+                      <div className="mb-3">
+                        <h5 className="font-medium text-xs text-foreground mb-2">票券明細</h5>
+                        <div className="bg-muted/50 p-3 rounded-lg space-y-1">
+                          {Object.entries(orderData.ticketBreakdown).map(([key, detail]: [string, any]) => (
+                            <div key={key} className="flex justify-between text-xs">
+                              <span className="text-muted-foreground">
+                                {detail.label} x {detail.count}
+                              </span>
+                              <span className="font-medium">NT${detail.subtotal}</span>
+                            </div>
+                          ))}
+                          <div className="pt-2 border-t border-border flex justify-between font-semibold text-xs">
+                            <span>總計</span>
+                            <span className="text-primary">NT${orderData.totalAmount}</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 該路線的乘客資訊 */}
+                    <div className="bg-muted/30 p-3 rounded-lg">
+                      <h5 className="font-medium text-xs text-foreground mb-2">乘客資訊</h5>
+                      <div className="space-y-2">
+                        {orderData.passengers?.map((passenger: any, passengerIndex: number) => {
+                          // 取得該乘客的上車地點
+                          const getPickupLocation = (passenger: any) => {
+                            if (passenger.pickupLocations) {
+                              // 找到第一個有值的地點
+                              const firstLocation = Object.values(passenger.pickupLocations).find(location => location) as string
+                              if (firstLocation) {
+                                return getStationLabel(firstLocation)
+                              }
+                            }
+                            return "未指定"
+                          }
+
+                          return (
+                            <div key={passengerIndex} className="text-xs">
+                              <div className="grid grid-cols-2 gap-2 items-center mb-1">
+                                <div className="flex items-center gap-1">
+                                  <span className="text-muted-foreground">姓名：</span>
+                                  <span className="font-medium">{passenger.name}</span>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <span className="text-muted-foreground">票種：</span>
+                                  <span className="font-medium">{getTicketTypeLabel(passenger.ticketType)}</span>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-1 mb-1">
+                                <span className="text-muted-foreground">上車地點：</span>
+                                <span className="font-medium">{getPickupLocation(passenger)}</span>
+                              </div>
+                              <div className="flex items-center gap-1 mb-1">
+                                <span className="text-muted-foreground">Email：</span>
+                                <span className="font-medium">{passenger.email}</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <span className="text-muted-foreground">電話：</span>
+                                <span className="font-medium">
+                                  {passenger.countryCode ? `${passenger.countryCode} ${passenger.phone}` : passenger.phone}
+                                </span>
+                              </div>
+                            </div>
+                          )
+                        })}
+                      </div>
                     </div>
                   </div>
-
-                  <div className="flex justify-between items-center mb-3">
-                    <div className="text-xs text-muted-foreground">
-                      <div>數量: {orderData.passengers?.length || 0} 張</div>
-                      <div>金額: NT${orderData.totalAmount || 0}</div>
-                    </div>
-                    <div className="text-xs text-muted-foreground text-right">
-                      <div>購買: {new Date().toLocaleDateString('zh-TW')}</div>
-                      <div>有效至: {new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('zh-TW')}</div>
-                    </div>
-                  </div>
-
-                  {/* 使用簡化的票券詳情組件 */}
-                  <TicketDetails ticketData={orderData} />
-                </CardContent>
-              </Card>
-            ))}
+                ))}
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

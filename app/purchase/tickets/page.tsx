@@ -38,7 +38,7 @@ export default function TicketPurchasePage() {
         name: "媽宮・北環線 一日券",
         minPrice: 150, // Non-adult ticket price
         maxPrice: 300, // Adult ticket price
-        image: "/images/ticket-north-ring.png",
+        image: "/images/ticket-north-ring-premium.png",
       },
       {
         id: "magong-xihu-1",
@@ -52,7 +52,7 @@ export default function TicketPurchasePage() {
         name: "媽宮・澎南線 一日券",
         minPrice: 100, // Non-adult ticket price
         maxPrice: 200, // Adult ticket price
-        image: "/images/ticket-south.png",
+        image: "/images/ticket-south-premium.png",
       },
     ],
     二日券: [

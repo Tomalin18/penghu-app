@@ -30,7 +30,7 @@ export default function ReservationSourcePage() {
         id: "magong-north-1",
         name: "媽宮・北環線 一日券",
         price: 150,
-        image: "/images/ticket-north-ring.png",
+        image: "/images/ticket-north-ring-premium.png",
       },
       {
         id: "magong-xihu-1",
@@ -42,7 +42,7 @@ export default function ReservationSourcePage() {
         id: "magong-south-1",
         name: "媽宮・澎南線 一日券",
         price: 100,
-        image: "/images/ticket-south.png",
+        image: "/images/ticket-south-premium.png",
       },
     ],
     二日券: [
