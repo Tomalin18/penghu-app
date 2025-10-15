@@ -89,7 +89,7 @@ export default function ReservationSuccessPage() {
             <div className="bg-muted/50 p-4 rounded-lg space-y-4">
               {ticketData.passengers.map((passenger: any, index: number) => (
                 <div key={index} className="pb-4 border-b border-border last:border-b-0 last:pb-0">
-                  <div className="space-y-3 text-xs">
+                  <div className="space-y-1 text-xs">
                     {/* 第一行：姓名、票種 */}
                     <div className="grid grid-cols-2 gap-3 items-center">
                       <div className="flex items-center gap-2">
