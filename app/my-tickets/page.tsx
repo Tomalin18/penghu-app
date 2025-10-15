@@ -1164,7 +1164,10 @@ export default function MyTicketsPage() {
               <h3 className="font-semibold text-foreground text-sm mb-1">{ticket.name}</h3>
               <div className="flex items-center text-xs text-muted-foreground mb-2">
                 <MapPin className="h-3 w-3 mr-1" />
-                {ticket.routeName} • {ticket.date}
+                {ticket.routeName}
+                {ticket.type === "一日券" && (
+                  <span className="ml-1">搭乘日期：{ticket.date}</span>
+                )}
               </div>
               {needsLowFloorBus && (
                 <div className="flex items-center gap-1 mt-1">
