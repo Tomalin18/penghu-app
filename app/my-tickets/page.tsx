@@ -1089,7 +1089,7 @@ export default function MyTicketsPage() {
                 <Button
                   size="sm"
                   variant="outline"
-                  className="w-full h-8 text-xs bg-transparent text-destructive hover:text-destructive"
+                  className="w-full h-8 text-xs bg-white text-red-600 font-bold hover:bg-red-50 hover:text-red-700"
                   onClick={() => {
                     setTicketToCancel(ticket)
                     setIsCancelDialogOpen(true)

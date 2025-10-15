@@ -8,6 +8,7 @@ export interface PassengerInfo {
   id?: string
   needsAccessibility: string
   pickupLocations: Record<string, string> // routeId -> stationId
+  ticketSerial?: string
 }
 
 export interface StoredTicket {
