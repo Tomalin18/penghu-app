@@ -195,18 +195,17 @@ export default function PurchaseSuccessPage() {
                         <span className="font-medium text-xs whitespace-nowrap">{getTicketTypeLabel(passenger.ticketType)}</span>
                       </div>
                     </div>
-                    {/* 第二行：Email、電話 */}
-                    <div className="grid grid-cols-2 gap-3 items-center">
-                      <div className="flex items-center gap-2">
-                        <span className="text-muted-foreground text-xs whitespace-nowrap">Email：</span>
-                        <span className="font-medium text-xs whitespace-nowrap">{passenger.email}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-muted-foreground text-xs whitespace-nowrap">電話：</span>
-                        <span className="font-medium text-xs whitespace-nowrap">
-                          {passenger.countryCode ? `${passenger.countryCode} ${passenger.phone}` : passenger.phone}
-                        </span>
-                      </div>
+                    {/* 第二行：Email */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-muted-foreground text-xs whitespace-nowrap">Email：</span>
+                      <span className="font-medium text-xs whitespace-nowrap">{passenger.email}</span>
+                    </div>
+                    {/* 第三行：電話 */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-muted-foreground text-xs whitespace-nowrap">電話：</span>
+                      <span className="font-medium text-xs whitespace-nowrap">
+                        {passenger.countryCode ? `${passenger.countryCode} ${passenger.phone}` : passenger.phone}
+                      </span>
                     </div>
                   </div>
                 </div>
