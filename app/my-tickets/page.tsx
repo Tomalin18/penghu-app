@@ -386,56 +386,6 @@ export default function MyTicketsPage() {
           },
         ],
       },
-      // 二日券 - 已搭乘狀態
-      {
-        id: "TK2D003",
-        name: "台灣好行 二日券 湖西・澎南線",
-        routeName: "湖西・澎南線",
-        date: "2025/10/5",
-        quantity: 1,
-        totalAmount: 200,
-        status: "purchased",
-        seatAssigned: true,
-        seatNumber: "B10",
-        purchaseDate: "2025/9/20",
-        validUntil: "2025/11/20",
-        type: "二日券",
-        breakdown: {
-          discount: {
-            label: "澎湖籍",
-            count: 1,
-            price: 200,
-            subtotal: 200,
-          },
-        },
-        selectedDates: [
-          {
-            routeId: "xihu",
-            routeName: "湖西線",
-            date: "2025/10/5",
-          },
-          {
-            routeId: "south",
-            routeName: "澎南線",
-            date: "2025/10/6",
-          },
-        ],
-        passengers: [
-          {
-            ticketType: "discount",
-            name: "澎湖小民",
-            email: "penghu.local@example.com",
-            phone: "0966666666",
-            id: "F666666666",
-            needsAccessibility: "no",
-            pickupLocations: { 
-              xihu: "beiliao-0910",
-              south: "fengkui-0905"
-            },
-            ticketSerial: "2D003L"
-          },
-        ],
-      },
       // 三日券 - 已購買狀態
       {
         id: "TK3D001",
@@ -616,61 +566,6 @@ export default function MyTicketsPage() {
         ],
       },
       // 三日券 - 已搭乘狀態
-      {
-        id: "TK3D003",
-        name: "台灣好行 三日券 北環・湖西・澎南線",
-        routeName: "北環・湖西・澎南線",
-        date: "2025/9/10",
-        quantity: 1,
-        totalAmount: 300,
-        status: "purchased",
-        seatAssigned: true,
-        seatNumber: "D20",
-        purchaseDate: "2025/8/15",
-        validUntil: "2025/10/15",
-        type: "三日券",
-        breakdown: {
-          love: {
-            label: "愛心",
-            count: 1,
-            price: 300,
-            subtotal: 300,
-          },
-        },
-        selectedDates: [
-          {
-            routeId: "north",
-            routeName: "北環線",
-            date: "2025/9/10",
-          },
-          {
-            routeId: "xihu",
-            routeName: "湖西線",
-            date: "2025/9/11",
-          },
-          {
-            routeId: "south",
-            routeName: "澎南線",
-            date: "2025/9/12",
-          },
-        ],
-        passengers: [
-          {
-            ticketType: "love",
-            name: "愛心乘客",
-            email: "love.passenger@example.com",
-            phone: "0934567890",
-            id: "M333333333",
-            needsAccessibility: "yes",
-            pickupLocations: { 
-              north: "erkanjuluo-1100",
-              xihu: "longmen-1035",
-              south: "fengkui-0905"
-            },
-            ticketSerial: "3D003L"
-          },
-        ],
-      },
     ]
 
     const existingSampleIds = sampleTickets.map((t) => t.id)
@@ -973,6 +868,15 @@ export default function MyTicketsPage() {
           <h3 className="font-semibold text-foreground text-sm mb-2">
             {ticket.name}
           </h3>
+          {/* 顯示所有路線資訊 */}
+          <div className="space-y-1 mb-2">
+            {ticket.selectedDates?.map((dateInfo: any, routeIndex: number) => (
+              <div key={routeIndex} className="flex items-center text-xs text-muted-foreground">
+                <MapPin className="h-3 w-3 mr-1 flex-shrink-0" />
+                <span>路線{routeIndex + 1}：{dateInfo.routeName} 搭乘日期：{dateInfo.date}</span>
+              </div>
+            ))}
+          </div>
           <div className="text-xs text-muted-foreground">
             <div>數量: {ticket.quantity} 張</div>
           </div>
@@ -1023,7 +927,7 @@ export default function MyTicketsPage() {
               路線{routeIndex + 1}：{dateInfo.routeName}
             </h4>
             <span className="ml-2 text-xs text-muted-foreground">
-              {dateInfo.date}
+              搭乘日期：{dateInfo.date}
             </span>
           </div>
 
@@ -1206,12 +1110,12 @@ export default function MyTicketsPage() {
                     className="w-full h-8 text-xs bg-transparent"
                     onClick={() => handleViewTicketInfo(ticket)}
                   >
-                    車票詳情
+                    查看詳情
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-sm max-h-[80vh] overflow-y-auto">
                   <DialogHeader>
-                    <DialogTitle className="text-center">車票詳情</DialogTitle>
+                    <DialogTitle className="text-center">票券資訊</DialogTitle>
                   </DialogHeader>
                   {selectedTicket && <TicketInfoDisplay ticket={selectedTicket} showQRCode={false} />}
                 </DialogContent>
@@ -1269,12 +1173,12 @@ export default function MyTicketsPage() {
                       className="flex-1 h-8 text-xs bg-transparent"
                       onClick={() => handleViewTicketInfo(ticket)}
                     >
-                      車票詳情
+                      查看詳情
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="max-w-sm max-h-[80vh] overflow-y-auto">
                     <DialogHeader>
-                      <DialogTitle className="text-center">車票詳情</DialogTitle>
+                      <DialogTitle className="text-center">票券資訊</DialogTitle>
                     </DialogHeader>
                     {selectedTicket && <TicketInfoDisplay ticket={selectedTicket} showQRCode={false} />}
                   </DialogContent>
@@ -1299,12 +1203,12 @@ export default function MyTicketsPage() {
                     className="w-full h-8 text-xs bg-transparent"
                     onClick={() => handleViewTicketInfo(ticket)}
                   >
-                    車票詳情
+                    查看詳情
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-sm max-h-[80vh] overflow-y-auto">
                   <DialogHeader>
-                    <DialogTitle className="text-center">車票詳情</DialogTitle>
+                    <DialogTitle className="text-center">票券資訊</DialogTitle>
                   </DialogHeader>
                   {selectedTicket && <TicketInfoDisplay ticket={selectedTicket} showQRCode={false} />}
                 </DialogContent>
@@ -1372,9 +1276,9 @@ export default function MyTicketsPage() {
       <AlertDialog open={isCancelDialogOpen} onOpenChange={setIsCancelDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>確認取消劃位</AlertDialogTitle>
+            <AlertDialogTitle>確認取消票券</AlertDialogTitle>
             <AlertDialogDescription>
-              您確定要取消此票券的劃位嗎？取消後將無法恢復，但票券仍可在有效期限內重新劃位。
+              您確定要取消此票券？
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

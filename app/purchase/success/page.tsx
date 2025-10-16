@@ -241,7 +241,7 @@ export default function PurchaseSuccessPage() {
                       {orderData.selectedDates?.map((dateInfo: any, routeIndex: number) => (
                         <div key={routeIndex} className="flex items-center text-xs text-muted-foreground">
                           <MapPin className="h-3 w-3 mr-1 flex-shrink-0" />
-                          <span>路線{routeIndex + 1}：{dateInfo.routeName} {dateInfo.date}</span>
+                          <span>路線{routeIndex + 1}：{dateInfo.routeName} 搭乘日期：{dateInfo.date}</span>
                         </div>
                       ))}
                     </div>
@@ -299,7 +299,7 @@ export default function PurchaseSuccessPage() {
                         路線{routeIndex + 1}：{dateInfo.routeName}
                       </h4>
                       <span className="ml-2 text-xs text-muted-foreground">
-                        {dateInfo.date}
+                        搭乘日期：{dateInfo.date}
                       </span>
                     </div>
 
