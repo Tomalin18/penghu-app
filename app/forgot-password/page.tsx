@@ -5,6 +5,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { AccountInput } from "@/components/ui/account-input"
 import { HeaderWithMenu } from "@/components/header-with-menu"
 import { MobileNavigation } from "@/components/mobile-navigation"
 import Link from "next/link"
@@ -36,7 +37,7 @@ export default function ForgotPasswordPage() {
               <Label htmlFor="email" className="text-base">
                 會員帳號 (email)
               </Label>
-              <Input
+              <AccountInput
                 id="email"
                 type="email"
                 value={email}
@@ -50,7 +51,7 @@ export default function ForgotPasswordPage() {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full h-14 bg-[#2B8A9F] hover:bg-[#247A8C] text-white text-lg font-medium"
+              className="w-full h-14 bg-[#2B8A9F] hover:bg-[#247A8C] text-white text-lg font-medium bg-primary"
             >
               發送重設連結
             </Button>

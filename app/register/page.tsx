@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
+import { PasswordInput } from "@/components/ui/password-input"
+import { AccountInput } from "@/components/ui/account-input"
 import { HeaderWithMenu } from "@/components/header-with-menu"
 import { MobileNavigation } from "@/components/mobile-navigation"
 import Link from "next/link"
@@ -87,9 +89,8 @@ export default function RegisterPage() {
                 <option value="+1">🇺🇸 +1</option>
                 <option value="+44">🇬🇧 +44</option>
               </select>
-              <Input
+              <AccountInput
                 id="email"
-                type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="請輸入手機號碼"
@@ -104,9 +105,8 @@ export default function RegisterPage() {
             <Label htmlFor="password" className="text-base">
               會員密碼
             </Label>
-            <Input
+            <PasswordInput
               id="password"
-              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="請輸入密碼"
@@ -120,9 +120,8 @@ export default function RegisterPage() {
             <Label htmlFor="confirmPassword" className="text-base">
               確認密碼
             </Label>
-            <Input
+            <PasswordInput
               id="confirmPassword"
-              type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="請再次輸入密碼"

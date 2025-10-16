@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
+import { PasswordInput } from "@/components/ui/password-input"
+import { AccountInput } from "@/components/ui/account-input"
 import { HeaderWithMenu } from "@/components/header-with-menu"
 import { MobileNavigation } from "@/components/mobile-navigation"
 import Link from "next/link"
@@ -60,9 +62,8 @@ export default function LoginPage() {
             <Label htmlFor="email" className="text-base">
               會員帳號 (email/手機號碼)
             </Label>
-            <Input
+            <AccountInput
               id="email"
-              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="請輸入電子郵件或手機號碼"
@@ -76,9 +77,8 @@ export default function LoginPage() {
             <Label htmlFor="password" className="text-base">
               會員密碼
             </Label>
-            <Input
+            <PasswordInput
               id="password"
-              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="請輸入密碼"

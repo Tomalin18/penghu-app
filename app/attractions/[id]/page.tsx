@@ -19,6 +19,8 @@ interface Attraction {
   category: string[]
   highlights?: string[]
   warnings?: string[]
+  image?: string
+  images?: string[]
   visitInfo: {
     openingHours: string
     recommendedDuration?: string
@@ -70,7 +72,7 @@ export default function AttractionDetailPage({ params }: { params: { id: string 
           {attraction.images && attraction.images.length > 1 ? (
             <Carousel className="w-full">
               <CarouselContent>
-                {attraction.images.map((image, index) => (
+                {attraction.images.map((image, index: number) => (
                   <CarouselItem key={index}>
                     <img
                       src={image || "/placeholder.svg"}
