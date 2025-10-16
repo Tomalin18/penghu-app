@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Menu, Home, Ticket, Calendar, MessageCircle, MapPin, Globe, ChevronLeft, Bell } from "lucide-react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -183,18 +184,19 @@ export function HeaderWithMenu({ title, showBackButton = true, onBack }: HeaderW
               </div>
               <div className="max-h-[400px] overflow-y-auto">
                 {notifications.map((notification) => (
-                  <div
-                    key={notification.id}
-                    className={`px-4 py-3 border-b border-border last:border-0 hover:bg-accent/50 cursor-pointer transition-colors ${
-                      notification.unread ? "bg-accent/20" : ""
-                    }`}
-                  >
-                    <div className="flex items-start justify-between gap-2 mb-1">
-                      <span className="text-xs font-medium text-primary">{notification.category}</span>
-                      <span className="text-xs text-muted-foreground whitespace-nowrap">{notification.time}</span>
+                  <Link key={notification.id} href={`/notifications/${notification.id}`}>
+                    <div
+                      className={`px-4 py-3 border-b border-border last:border-0 hover:bg-accent/50 cursor-pointer transition-colors ${
+                        notification.unread ? "bg-accent/20" : ""
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <span className="text-xs font-medium text-primary">{notification.category}</span>
+                        <span className="text-xs text-muted-foreground whitespace-nowrap">{notification.time}</span>
+                      </div>
+                      <p className="text-sm text-foreground">{notification.message}</p>
                     </div>
-                    <p className="text-sm text-foreground">{notification.message}</p>
-                  </div>
+                  </Link>
                 ))}
               </div>
               <div className="px-4 py-3 border-t border-border">

@@ -5,6 +5,7 @@ import { MobileNavigation } from "@/components/mobile-navigation"
 import { HeaderWithMenu } from "@/components/header-with-menu"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function NewsPage() {
   const [selectedCategory, setSelectedCategory] = useState("all")
@@ -121,26 +122,28 @@ export default function NewsPage() {
 
         <div className="px-3 space-y-4">
           {filteredNews.map((news, index) => (
-            <div key={news.id} className="flex items-start gap-4 py-2">
-              {/* Date column */}
-              <div className="text-sm text-muted-foreground font-medium min-w-[80px]">{news.date}</div>
+            <Link key={news.id} href={`/news/${news.id}`}>
+              <div className="flex items-start gap-4 py-2 hover:bg-muted/50 rounded-lg p-2 transition-colors cursor-pointer">
+                {/* Date column */}
+                <div className="text-sm text-muted-foreground font-medium min-w-[80px]">{news.date}</div>
 
-              {/* Category badge */}
-              <Badge
-                className={`${getBadgeColor(index)} px-3 py-1 text-sm font-medium min-w-fit`}
-                style={getBadgeStyle(index)}
-              >
-                {getCategoryName(news.category)}
-              </Badge>
+                {/* Category badge */}
+                <Badge
+                  className={`${getBadgeColor(index)} px-3 py-1 text-sm font-medium min-w-fit`}
+                  style={getBadgeStyle(index)}
+                >
+                  {getCategoryName(news.category)}
+                </Badge>
 
-              {/* News title */}
-              <div className="flex-1">
-                <p className="text-sm text-foreground leading-relaxed">
-                  <span className="font-medium">【{getCategoryName(news.category)}】</span>
-                  {news.title}
-                </p>
+                {/* News title */}
+                <div className="flex-1">
+                  <p className="text-sm text-foreground leading-relaxed">
+                    <span className="font-medium">【{getCategoryName(news.category)}】</span>
+                    {news.title}
+                  </p>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </main>

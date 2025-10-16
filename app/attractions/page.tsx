@@ -236,15 +236,9 @@ export default function AttractionsPage() {
                         <MapPin className="w-4 h-4" />
                         <span className="font-medium">{attraction.location.address.split("澎湖縣")[1]}</span>
                       </div>
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                          <Clock className="w-4 h-4" />
-                          <span>{attraction.visitInfo.recommendedDuration}</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                          <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                          <span className="font-medium">4.{Math.floor(Math.random() * 4) + 5}</span>
-                        </div>
+                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <span className="font-medium">4.{Math.floor(Math.random() * 4) + 5}</span>
                       </div>
                     </div>
                   </div>

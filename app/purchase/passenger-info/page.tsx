@@ -415,17 +415,9 @@ const PassengerInfoPage = () => {
     return (
       <div className="w-full">
         <div className="flex items-center space-x-2 mb-3">
-          <div className="w-3 h-3 rounded-full overflow-hidden flex-shrink-0">
-            <img
-              src={selectedTicket.image || "/placeholder.svg"}
-              alt={selectedTicket.name}
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div>
-            <h3 className="font-bold text-primary">{selectedTicket.name}</h3>
-            <p className="font-bold text-primary">{selectedTicket.price}</p>
-          </div>
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: routeInfo?.primaryColor }} />
+          <h4 className="font-medium text-foreground">{routeInfo?.name}</h4>
+          <span className="text-xs text-muted-foreground">選擇使用日期</span>
         </div>
 
         <div className="flex items-center justify-between mb-4">
@@ -1037,7 +1029,7 @@ const PassengerInfoPage = () => {
                       console.log("[v0] Terms link clicked")
                     }}
                   >
-                    劃位條款
+                    購票&劃位條款
                   </button>
                   *
                 </label>

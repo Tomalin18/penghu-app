@@ -5,19 +5,29 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { MobileNavigation } from "@/components/mobile-navigation"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 
-export default function PaymentPage() {
+export default function PaymentFailedPage() {
   const [selectedPayment, setSelectedPayment] = useState("credit")
   const [orderData, setOrderData] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [showFailureDialog, setShowFailureDialog] = useState(true)
   const router = useRouter()
   const searchParams = useSearchParams()
 
   useEffect(() => {
     const orderDataParam = searchParams.get("orderData")
-    console.log("[v0] Payment page orderDataParam:", orderDataParam)
+    console.log("[v0] Payment failed page orderDataParam:", orderDataParam)
 
     if (orderDataParam) {
       try {
@@ -53,7 +63,7 @@ export default function PaymentPage() {
     }
 
     setIsLoading(false)
-  }, []) // Removed searchParams from dependency array to prevent infinite loop
+  }, [])
 
   const paymentMethods = [
     { id: "credit", name: "信用卡", color: "#438EA7" },
@@ -62,13 +72,14 @@ export default function PaymentPage() {
 
   const handlePayment = () => {
     const orderDataString = encodeURIComponent(JSON.stringify(orderData))
-    
-    // 只有選擇LINE Pay時跳轉到失敗頁面，信用卡正常跳轉到成功頁面
-    if (selectedPayment === "linepay") {
-      router.push(`/purchase/payment-failed?orderData=${orderDataString}`)
-    } else {
-      router.push(`/purchase/success?orderData=${orderDataString}`)
-    }
+    router.push(`/purchase/success?orderData=${orderDataString}`)
+  }
+
+
+  const handleBackToPayment = () => {
+    setShowFailureDialog(false)
+    const orderDataString = encodeURIComponent(JSON.stringify(orderData))
+    router.push(`/purchase/payment?orderData=${orderDataString}`)
   }
 
   if (isLoading || !orderData) {
@@ -196,6 +207,28 @@ export default function PaymentPage() {
       <div className="fixed bottom-0 left-0 right-0 z-50">
         <MobileNavigation activeTab="passes" />
       </div>
+
+      {/* Payment Failure Dialog */}
+      <AlertDialog open={showFailureDialog} onOpenChange={setShowFailureDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-center text-xl text-red-600">付款失敗</AlertDialogTitle>
+            <AlertDialogDescription className="text-center text-base pt-2">
+              很抱歉，您的付款未能成功處理。
+              <br />
+              請檢查您的付款資訊或選擇其他付款方式重試。
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction 
+              onClick={handleBackToPayment}
+              className="w-full bg-primary hover:bg-primary/90"
+            >
+              重新選擇付款方式
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

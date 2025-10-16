@@ -75,6 +75,7 @@ export default function MyTicketsPage() {
             routeId: "xihu",
             routeName: "西湖線",
             date: "2025/10/15",
+            cancelled: true, // 標記此路線為已取消
           },
         ],
         passengers: [
@@ -342,6 +343,7 @@ export default function MyTicketsPage() {
             routeId: "south",
             routeName: "澎南線",
             date: "2025/12/16",
+            cancelled: true, // 標記澎南線為已取消
           },
         ],
         passengers: [
@@ -921,14 +923,21 @@ export default function MyTicketsPage() {
           )}
           
           {/* 路線標題 */}
-          <div className="flex items-center mb-3">
-            <MapPin className="h-4 w-4 mr-2 text-primary" />
-            <h4 className="font-semibold text-sm text-foreground">
-              路線{routeIndex + 1}：{dateInfo.routeName}
-            </h4>
-            <span className="ml-2 text-xs text-muted-foreground">
-              搭乘日期：{dateInfo.date}
-            </span>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center">
+              <MapPin className="h-4 w-4 mr-2 text-primary" />
+              <h4 className="font-semibold text-sm text-foreground">
+                路線{routeIndex + 1}：{dateInfo.routeName}
+              </h4>
+              <span className="ml-2 text-xs text-muted-foreground">
+                搭乘日期：{dateInfo.date}
+              </span>
+            </div>
+            {dateInfo.cancelled && (
+              <Badge variant="destructive" className="text-xs bg-red-600 text-white">
+                已取消
+              </Badge>
+            )}
           </div>
 
           {/* 該路線的乘客資訊 */}
@@ -984,7 +993,7 @@ export default function MyTicketsPage() {
           {/* 該路線的我要取消按鈕 */}
           {(() => {
             const isPastTicket = new Date(ticket.date) < new Date()
-            const canCancel = !isPastTicket && ticket.status !== "cancelled" && new Date(ticket.validUntil) >= new Date()
+            const canCancel = !isPastTicket && ticket.status !== "cancelled" && new Date(ticket.validUntil) >= new Date() && !dateInfo.cancelled
             
             if (!canCancel) return null
             

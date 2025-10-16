@@ -53,8 +53,8 @@ export default function ChangePasswordPage() {
 
     if (!formData.newPassword) {
       newErrors.newPassword = "請輸入新密碼"
-    } else if (formData.newPassword.length < 8) {
-      newErrors.newPassword = "密碼長度至少需要 8 個字元"
+    } else if (formData.newPassword.length < 12) {
+      newErrors.newPassword = "密碼長度至少需要 12 個字元"
     }
 
     if (!formData.confirmPassword) {
@@ -137,7 +137,7 @@ export default function ChangePasswordPage() {
                       setErrors({ ...errors, newPassword: "" })
                     }}
                     className="h-11 pr-10"
-                    placeholder="請輸入新密碼（至少 8 個字元）"
+                    placeholder="請輸入新密碼（至少 12 個字元）"
                   />
                   <button
                     type="button"
@@ -182,8 +182,8 @@ export default function ChangePasswordPage() {
               <div className="bg-muted/50 rounded-lg p-4">
                 <p className="text-xs text-muted-foreground font-medium mb-2">密碼要求：</p>
                 <ul className="text-xs text-muted-foreground space-y-1">
-                  <li>• 至少 8 個字元</li>
-                  <li>• 建議包含大小寫字母、數字和特殊符號</li>
+                  <li>1. 至少 12 個字元</li>
+                  <li>2. 需包含有大寫、小寫字母、數字</li>
                 </ul>
               </div>
 

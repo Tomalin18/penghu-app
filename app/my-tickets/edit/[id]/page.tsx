@@ -52,6 +52,7 @@ export default function EditReservationPage() {
     name: ticketDataFromUrl.name,
     email: ticketDataFromUrl.email,
     phone: ticketDataFromUrl.phone,
+    countryCode: "+886",
     id: ticketDataFromUrl.id,
     needsAccessibility: ticketDataFromUrl.needsAccessibility,
   })
@@ -520,13 +521,31 @@ export default function EditReservationPage() {
                   <Label htmlFor="phone" className="text-sm font-bold text-foreground">
                     <span className="text-red-500">*</span> 手機號碼
                   </Label>
-                  <Input
-                    id="phone"
-                    placeholder="請輸入手機號碼"
-                    className="mt-2 border-2 focus:ring-2 focus:ring-primary focus:border-primary placeholder:text-muted-foreground/40 transition-colors"
-                    value={formData.phone}
-                    onChange={(e) => handleInputChange("phone", e.target.value)}
-                  />
+                  <div className="flex gap-2 mt-2">
+                    <select
+                      value={formData.countryCode}
+                      onChange={(e) => handleInputChange("countryCode", e.target.value)}
+                      className="w-32 p-3 border-2 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors py-1"
+                    >
+                      <option value="+886">🇹🇼 +886</option>
+                      <option value="+86">🇨🇳 +86</option>
+                      <option value="+852">🇭🇰 +852</option>
+                      <option value="+853">🇲🇴 +853</option>
+                      <option value="+65">🇸🇬 +65</option>
+                      <option value="+60">🇲🇾 +60</option>
+                      <option value="+81">🇯🇵 +81</option>
+                      <option value="+82">🇰🇷 +82</option>
+                      <option value="+1">🇺🇸 +1</option>
+                      <option value="+44">🇬🇧 +44</option>
+                    </select>
+                    <Input
+                      id="phone"
+                      placeholder="請輸入手機號碼"
+                      className="flex-1 border-2 focus:ring-2 focus:ring-primary focus:border-primary placeholder:text-muted-foreground/40 transition-colors"
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                    />
+                  </div>
                 </div>
 
                 <div>

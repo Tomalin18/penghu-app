@@ -4,9 +4,9 @@ import { useState } from "react"
 import { HeaderWithMenu } from "@/components/header-with-menu"
 import { MobileNavigation } from "@/components/mobile-navigation"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Bell } from "lucide-react"
+import Link from "next/link"
 
 type NotificationCategory = "個人通知" | "系統通知" | "活動通知" | "行程提醒"
 type FilterType = "all" | "unread" | "read"
@@ -185,22 +185,19 @@ export default function NotificationsPage() {
         </div>
 
         {/* Notifications List */}
-        <div className="space-y-2">
+        <div className="space-y-1">
           {filteredNotifications.length === 0 ? (
-            <Card className="p-8">
-              <div className="text-center text-muted-foreground">
-                <Bell className="h-12 w-12 mx-auto mb-3 opacity-30" />
-                <p className="text-sm">目前沒有{filter === "unread" ? "未讀" : filter === "read" ? "已讀" : ""}通知</p>
-              </div>
-            </Card>
+            <div className="p-8 text-center text-muted-foreground">
+              <Bell className="h-12 w-12 mx-auto mb-3 opacity-30" />
+              <p className="text-sm">目前沒有{filter === "unread" ? "未讀" : filter === "read" ? "已讀" : ""}通知</p>
+            </div>
           ) : (
             filteredNotifications.map((notification) => (
-              <Card
-                key={notification.id}
-                className={`overflow-hidden ${notification.unread ? "border-l-4 border-l-[rgba(43,138,160,1)]" : ""} ${notification.unread ? "cursor-pointer hover:bg-accent/50 transition-colors" : ""}`}
-                onClick={() => notification.unread && handleMarkAsRead(notification.id)}
-              >
-                <CardContent className="p-4">
+              <Link key={notification.id} href={`/notifications/${notification.id}`}>
+                <div
+                  className={`p-4 border-b border-border/50 ${notification.unread ? "border-l-4 border-l-[rgba(43,138,160,1)] bg-muted/30" : ""} ${notification.unread ? "cursor-pointer hover:bg-muted/50 transition-colors" : ""}`}
+                  onClick={() => notification.unread && handleMarkAsRead(notification.id)}
+                >
                   <div className="flex items-start gap-3">
                     {/* Unread Indicator */}
                     {notification.unread && (
@@ -223,8 +220,8 @@ export default function NotificationsPage() {
                       <p className="text-xs text-muted-foreground mt-2">{notification.date}</p>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </Link>
             ))
           )}
         </div>
