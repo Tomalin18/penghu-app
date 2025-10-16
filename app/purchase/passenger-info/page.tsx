@@ -1037,7 +1037,7 @@ const PassengerInfoPage = () => {
                       console.log("[v0] Terms link clicked")
                     }}
                   >
-                    劃位條款
+                    購票&劃位條款
                   </button>
                   *
                 </label>
