@@ -1,12 +1,13 @@
 "use client"
 
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
-import { MapPin, Star, Headphones } from "lucide-react"
+import { MapPin, Star } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { MobileNavigation } from "@/components/mobile-navigation"
 import { HeaderWithMenu } from "@/components/header-with-menu"
+import { AudioPlayer } from "@/components/audio-player"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import { attractions } from "@/data/attractions"
@@ -69,7 +70,7 @@ export default function AttractionDetailPage({ params }: { params: { id: string 
       <main className="max-w-md mx-auto pt-16">
         {/* Hero Image Carousel */}
         <div className="bg-muted">
-          {attraction.images && attraction.images.length > 1 ? (
+          {attraction.images && attraction.images.length && attraction.images.length > 1 ? (
             <Carousel className="w-full">
               <CarouselContent>
                 {attraction.images.map((image, index: number) => (
@@ -104,20 +105,11 @@ export default function AttractionDetailPage({ params }: { params: { id: string 
                 </Badge>
               ))}
             </div>
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <h2 className="text-xl font-bold text-foreground">{attraction.title}</h2>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-8 w-8 p-0 hover:bg-accent flex-shrink-0"
-                onClick={() => {
-                  console.log(`[v0] Audio guide clicked for attraction: ${attraction.title}`)
-                }}
-              >
-                <Headphones className="h-5 w-5 text-foreground font-bold stroke-[2.5]" />
-              </Button>
-            </div>
+            <h2 className="text-xl font-bold text-foreground mb-2">{attraction.title}</h2>
             <p className="text-muted-foreground mb-4">{attraction.description}</p>
+            
+            {/* 音頻播放器 */}
+            <AudioPlayer title={`${attraction.title} 導覽`} className="mb-6" />
           </div>
 
           {/* Quick Info Cards */}

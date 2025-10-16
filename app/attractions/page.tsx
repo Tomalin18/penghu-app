@@ -23,6 +23,7 @@ import {
   BatteryCharging,
   Car,
   Wifi,
+  Headphones,
 } from "lucide-react"
 import Link from "next/link"
 import { attractionsByRoute } from "@/data/attractions"
@@ -222,10 +223,23 @@ export default function AttractionsPage() {
                       ))}
                     </div>
 
-                    {/* Title */}
-                    <h3 className="font-bold text-xl text-foreground mb-3 group-hover:text-primary transition-colors leading-tight">
-                      {attraction.title}
-                    </h3>
+                    {/* Title and Audio Icon */}
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <h3 className="font-bold text-xl text-foreground group-hover:text-primary transition-colors leading-tight flex-1">
+                        {attraction.title}
+                      </h3>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-8 w-8 p-0 hover:bg-accent flex-shrink-0"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          console.log(`[v0] Audio guide clicked for attraction: ${attraction.title}`)
+                        }}
+                      >
+                        <Headphones className="h-4 w-4 text-foreground font-bold stroke-[2.5]" />
+                      </Button>
+                    </div>
 
                     {/* Description */}
                     <p className="text-muted-foreground mb-4 leading-relaxed line-clamp-2">{attraction.description}</p>
