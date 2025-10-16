@@ -303,26 +303,6 @@ export default function PurchaseSuccessPage() {
                       </span>
                     </div>
 
-                    {/* 該路線的票券明細 */}
-                    {orderData.ticketBreakdown && (
-                      <div className="mb-3">
-                        <h5 className="font-medium text-xs text-foreground mb-2">票券明細</h5>
-                        <div className="bg-muted/50 p-3 rounded-lg space-y-1">
-                          {Object.entries(orderData.ticketBreakdown).map(([key, detail]: [string, any]) => (
-                            <div key={key} className="flex justify-between text-xs">
-                              <span className="text-muted-foreground">
-                                {detail.label} x {detail.count}
-                              </span>
-                              <span className="font-medium">NT${detail.subtotal}</span>
-                            </div>
-                          ))}
-                          <div className="pt-2 border-t border-border flex justify-between font-semibold text-xs">
-                            <span>總計</span>
-                            <span className="text-primary">NT${orderData.totalAmount}</span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
 
                     {/* 該路線的乘客資訊 */}
                     <div className="bg-muted/30 p-3 rounded-lg">
