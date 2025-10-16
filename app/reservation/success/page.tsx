@@ -227,6 +227,15 @@ export default function ReservationSuccessPage() {
                     <h3 className="font-semibold text-foreground text-sm mb-2">
                       {reservationData.ticketInfo.name}
                     </h3>
+                    {/* 顯示所有路線資訊 */}
+                    <div className="space-y-1 mb-2">
+                      {reservationData.routes?.map((route: any, routeIndex: number) => (
+                        <div key={routeIndex} className="flex items-center text-xs text-muted-foreground">
+                          <MapPin className="h-3 w-3 mr-1 flex-shrink-0" />
+                          <span>路線{routeIndex + 1}：{route.name} 搭乘日期：{route.date.getFullYear()}/{String(route.date.getMonth() + 1).padStart(2, "0")}/{String(route.date.getDate()).padStart(2, "0")}</span>
+                        </div>
+                      ))}
+                    </div>
                     <div className="text-xs text-muted-foreground">
                       <div>數量: {reservationData.passengers.length} 張</div>
                     </div>
@@ -300,7 +309,7 @@ export default function ReservationSuccessPage() {
                         路線{routeIndex + 1}：{route.name}
                       </h4>
                       <span className="ml-2 text-xs text-muted-foreground">
-                        {route.date.getFullYear()}/{String(route.date.getMonth() + 1).padStart(2, "0")}/{String(route.date.getDate()).padStart(2, "0")}
+                        搭乘日期：{route.date.getFullYear()}/{String(route.date.getMonth() + 1).padStart(2, "0")}/{String(route.date.getDate()).padStart(2, "0")}
                       </span>
                     </div>
 
