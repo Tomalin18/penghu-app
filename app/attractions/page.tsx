@@ -413,9 +413,6 @@ export default function AttractionsPage() {
                                 </a>
                               </div>
                             )}
-                            {facility.distance && (
-                              <div className="text-xs text-muted-foreground">距離約 {facility.distance}</div>
-                            )}
                           </div>
                         </div>
                       ))}
