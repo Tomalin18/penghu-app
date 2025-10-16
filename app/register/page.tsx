@@ -109,7 +109,7 @@ export default function RegisterPage() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="請輸入密碼"
+              placeholder="請輸入密碼（至少 12 個字元，包含大、小寫字母、數字）"
               className="h-12"
               required
             />
@@ -124,7 +124,7 @@ export default function RegisterPage() {
               id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="請再次輸入密碼"
+              placeholder="請再次輸入密碼（至少 12 個字元，包含大、小寫字母、數字）"
               className="h-12"
               required
             />

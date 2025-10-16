@@ -11,12 +11,12 @@ import { MobileNavigation } from "@/components/mobile-navigation"
 import Link from "next/link"
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState("")
+  const [account, setAccount] = useState("")
   const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("[v0] Forgot password request for:", email)
+    console.log("[v0] Forgot password request for:", account)
     setSubmitted(true)
     // Handle forgot password logic here
   }
@@ -29,20 +29,20 @@ export default function ForgotPasswordPage() {
         {!submitted ? (
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="text-center mb-6">
-              <p className="text-muted-foreground">請輸入您的電子郵件地址，我們將發送密碼重設連結給您</p>
+              <p className="text-muted-foreground">請輸入您的手機號碼或電子郵件地址，我們將發送密碼重設連結給您</p>
             </div>
 
-            {/* Email Input */}
+            {/* Account Input */}
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-base">
-                會員帳號 (email)
+              <Label htmlFor="account" className="text-base">
+                會員帳號 (手機號碼/電子郵件)
               </Label>
               <AccountInput
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="請輸入電子郵件"
+                id="account"
+                type="text"
+                value={account}
+                onChange={(e) => setAccount(e.target.value)}
+                placeholder="請輸入手機號碼或電子郵件"
                 className="h-12"
                 required
               />
@@ -70,11 +70,11 @@ export default function ForgotPasswordPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h2 className="text-xl font-semibold">郵件已發送</h2>
+            <h2 className="text-xl font-semibold">重設連結已發送</h2>
             <p className="text-muted-foreground">
-              我們已將密碼重設連結發送至 <strong>{email}</strong>
+              我們已將密碼重設連結發送至 <strong>{account}</strong>
               <br />
-              請檢查您的電子郵件信箱
+              請檢查您的{account.includes('@') ? '電子郵件信箱' : '手機簡訊'}
             </p>
             <Button onClick={() => setSubmitted(false)} variant="outline" className="w-full h-12">
               重新發送
