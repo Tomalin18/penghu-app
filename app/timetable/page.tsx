@@ -469,13 +469,6 @@ export default function TimetablePage() {
 
               return (
                 <div key={index} className="flex items-center">
-                  {!isLast && (
-                    <div
-                      className="absolute left-[7px] w-0.5 bg-gray-200"
-                      style={{ top: `${(index + 1) * 56 - 32}px`, height: "40px" }}
-                    />
-                  )}
-
                   <div className="w-4 h-4 rounded-full flex-shrink-0 z-10" style={{ backgroundColor: dotColor }} />
 
                   <div className="flex-1 flex items-center justify-between ml-4 py-3">
@@ -1028,9 +1021,6 @@ export default function TimetablePage() {
 
                     <div className="flex items-center space-x-2">
                       <span className="font-medium text-foreground">{schedule.time}</span>
-                      {schedule.departure && (
-                        <span className="text-sm text-muted-foreground">→ {schedule.departure}</span>
-                      )}
                     </div>
                   </div>
                 </div>
