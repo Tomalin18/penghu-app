@@ -147,10 +147,10 @@ export default function AttractionsPage() {
                 景點介紹
               </TabsTrigger>
               <TabsTrigger
-                value="商圈優惠"
+                value="特約店家"
                 className="text-xs font-medium rounded-lg data-[state=active]:bg-surface-elevated data-[state=active]:shadow-sm"
               >
-                商圈優惠
+                特約店家
               </TabsTrigger>
               <TabsTrigger
                 value="周邊設施"
@@ -262,7 +262,7 @@ export default function AttractionsPage() {
           </div>
         )}
 
-        {selectedContentTab === "商圈優惠" && (
+        {selectedContentTab === "特約店家" && (
           <div className="space-y-6">
             {currentShoppingDistricts.length > 0 ? (
               currentShoppingDistricts.map((district) => (
@@ -344,7 +344,7 @@ export default function AttractionsPage() {
               ))
             ) : (
               <div className="bg-surface-elevated rounded-2xl p-8 text-center">
-                <p className="text-muted-foreground">此路線暫無商圈優惠資訊</p>
+                <p className="text-muted-foreground">此路線暫無特約店家資訊</p>
               </div>
             )}
           </div>

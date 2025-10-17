@@ -1084,7 +1084,7 @@ export default function MyTicketsPage() {
               </div>
               {needsLowFloorBus && (
                 <div className="flex items-center gap-1 mt-1">
-                  <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">
+                  <Badge variant="outline" className="text-sm bg-blue-50 text-blue-700 border-blue-200">
                     <Accessibility className="h-3 w-3 mr-1" />
                     低地板公車
                   </Badge>
@@ -1285,9 +1285,10 @@ export default function MyTicketsPage() {
       <AlertDialog open={isCancelDialogOpen} onOpenChange={setIsCancelDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>確認取消票券</AlertDialogTitle>
+            <AlertDialogTitle>確定要取消這張票券嗎？</AlertDialogTitle>
             <AlertDialogDescription>
-              您確定要取消此票券？
+              取消後將退款<strong>NT${ticketToCancel?.totalAmount || 0}</strong>。<br />
+              此操作無法復原，是否確認取消？
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
