@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Bus, Plane, Ship, MapIcon, Headphones, Bike, Wifi, BatteryCharging, DoorOpen } from "lucide-react"
+import { Bus, Plane, Ship, MapIcon, Headphones, Navigation, Bike, Wifi, BatteryCharging, DoorOpen } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Image from "next/image"
 import { attractions } from "@/data/attractions"
@@ -1007,16 +1007,28 @@ export default function TimetablePage() {
                           </ScrollArea>
                         </DialogContent>
                       </Dialog>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 w-6 p-0 hover:bg-accent"
-                        onClick={() => {
-                          console.log(`[v0] Audio guide clicked for station: ${schedule.station}`)
-                        }}
-                      >
-                        <Headphones className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
-                      </Button>
+                      <div className="flex items-center space-x-1">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 w-6 p-0 hover:bg-accent"
+                          onClick={() => {
+                            console.log(`[v0] Audio guide clicked for station: ${schedule.station}`)
+                          }}
+                        >
+                          <Headphones className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 w-6 p-0 hover:bg-accent"
+                          onClick={() => {
+                            console.log(`[v0] Navigation clicked for station: ${schedule.station}`)
+                          }}
+                        >
+                          <Navigation className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
+                        </Button>
+                      </div>
                     </div>
 
                     <div className="flex items-center space-x-2">

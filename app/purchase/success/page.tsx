@@ -211,7 +211,7 @@ export default function PurchaseSuccessPage() {
                 className="h-16 px-4 flex flex-col items-center justify-center gap-0.5 bg-primary hover:bg-primary/90 text-primary-foreground"
                 onClick={() => router.push("/survey")}
               >
-                <span className="text-sm leading-tight">填寫</span>
+                <span className="text-sm leading-tight">填寫購票</span>
                 <span className="text-sm leading-tight">滿意度調查</span>
               </Button>
               <Button
