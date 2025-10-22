@@ -914,6 +914,30 @@ export default function MyTicketsPage() {
         </div>
       )}
 
+      {/* 退款明細 - 當票券狀態為已取消或有路線被取消時顯示 */}
+      {((ticket.status === "cancelled") || (ticket.selectedDates?.some((route: any) => route.cancelled))) && ticket.breakdown && (
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <h4 className="font-semibold text-xs text-foreground">退款明細</h4>
+            <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">退款申請中...</span>
+          </div>
+          <div className="bg-muted/50 p-3 rounded-lg space-y-1">
+            {Object.entries(ticket.breakdown).map(([key, detail]: [string, any]) => (
+              <div key={key} className="flex justify-between text-xs">
+                <span className="text-muted-foreground">
+                  {detail.label} x {detail.count}
+                </span>
+                <span className="font-medium">- NT${detail.subtotal}</span>
+              </div>
+            ))}
+            <div className="pt-2 border-t border-border flex justify-between font-semibold text-xs">
+              <span>總計</span>
+              <span className="text-primary">- NT${ticket.totalAmount}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* 每條路線的完整資訊 */}
       {ticket.selectedDates?.map((dateInfo: any, routeIndex: number) => (
         <div key={routeIndex} className="mb-4 last:mb-0">

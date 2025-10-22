@@ -25,7 +25,7 @@ export interface StoredTicket {
   validUntil: string
   type: string
   breakdown: Record<string, { label: string; count: number; price: number; subtotal: number }>
-  selectedDates: Array<{ routeId: string; routeName: string; date: string }>
+  selectedDates: Array<{ routeId: string; routeName: string; date: string; cancelled?: boolean }>
   passengers?: PassengerInfo[]
   contactName?: string
   contactEmail?: string

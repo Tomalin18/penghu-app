@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Link from "next/link"
 import { useRouter, useParams, useSearchParams } from "next/navigation"
@@ -48,6 +49,7 @@ export default function EditReservationPage() {
   )
   const [dateSelectionCollapsed, setDateSelectionCollapsed] = useState(!!ticketDataFromUrl.date)
   const [pickupLocation, setPickupLocation] = useState(ticketDataFromUrl.pickupLocation)
+  const [seatSelectionType, setSeatSelectionType] = useState<string>("cancel")
   const [formData, setFormData] = useState({
     name: ticketDataFromUrl.name,
     email: ticketDataFromUrl.email,
@@ -381,6 +383,12 @@ export default function EditReservationPage() {
   }
 
   const isFormValid = () => {
+    // 如果選擇暫不劃位，只需要驗證乘客資料和條款同意
+    if (seatSelectionType === "postpone") {
+      return formData.name && formData.phone && termsAccepted
+    }
+
+    // 如果選擇取消劃位，需要驗證所有項目
     return selectedDate && pickupLocation && pickupLocation !== "" && formData.name && formData.phone && termsAccepted
   }
 
@@ -409,7 +417,7 @@ export default function EditReservationPage() {
           <Link href="/my-tickets" className="text-primary-foreground">
             <ArrowLeft className="h-6 w-6" />
           </Link>
-          <h1 className="flex-1 font-bold text-xl text-primary-foreground text-center">修改劃位</h1>
+          <h1 className="flex-1 font-bold text-xl text-primary-foreground text-center">取消劃位/修改劃位</h1>
         </div>
       </header>
 
@@ -439,33 +447,61 @@ export default function EditReservationPage() {
                 </div>
               </CardContent>
             </Card>
-          </div>
-
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-2">
-                <h2 className="font-semibold text-lg text-foreground">選擇日期</h2>
-                <span className="text-xs text-red-500">日期下方數字表示尚有空位數</span>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setDateSelectionCollapsed(!dateSelectionCollapsed)}
-                className="text-muted-foreground"
+            
+            {/* 劃位選擇 Radio Group - 放在票券 card 外面 */}
+            <div className="mt-4">
+              <Label className="text-lg font-bold text-foreground mb-4 block">
+                <span className="text-red-500">*</span> 劃位選擇
+              </Label>
+              <RadioGroup
+                value={seatSelectionType}
+                onValueChange={setSeatSelectionType}
+                className="grid grid-cols-2 gap-4"
               >
-                {dateSelectionCollapsed ? <ChevronDown className="h-4 w-4" /> : <ChevronUp className="h-4 w-4" />}
-                {selectedDate && dateSelectionCollapsed ? "已完成" : ""}
-              </Button>
+                <div className="flex items-center space-x-3">
+                  <RadioGroupItem value="cancel" id="cancel" className="w-6 h-6 bg-white border-2 border-gray-300" />
+                  <Label htmlFor="cancel" className="text-lg font-medium text-foreground cursor-pointer">
+                    取消劃位
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <RadioGroupItem value="postpone" id="postpone" className="w-6 h-6 bg-white border-2 border-gray-300" />
+                  <Label htmlFor="postpone" className="text-lg font-medium text-foreground cursor-pointer">
+                    暫不劃位
+                  </Label>
+                </div>
+              </RadioGroup>
             </div>
-
-            {!dateSelectionCollapsed && (
-              <Card className="shadow-sm border border-border bg-card">
-                <CardContent className="p-4">
-                  <CustomCalendar />
-                </CardContent>
-              </Card>
-            )}
           </div>
+
+          {seatSelectionType === "cancel" && (
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-2">
+                  <h2 className="font-semibold text-lg text-foreground">選擇日期</h2>
+                  <span className="text-xs text-red-500">日期下方數字表示尚有空位數</span>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setDateSelectionCollapsed(!dateSelectionCollapsed)}
+                  className="text-muted-foreground"
+                >
+                  {dateSelectionCollapsed ? <ChevronDown className="h-4 w-4" /> : <ChevronUp className="h-4 w-4" />}
+                  {selectedDate && dateSelectionCollapsed ? "已完成" : ""}
+                </Button>
+              </div>
+
+              {!dateSelectionCollapsed && (
+                <Card className="shadow-sm border border-border bg-card">
+                  <CardContent className="p-4">
+                    <CustomCalendar />
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          )}
+
 
           <div>
             <h2 className="font-semibold text-lg text-foreground mb-4">乘客資料</h2>
@@ -647,6 +683,12 @@ export default function EditReservationPage() {
             disabled={!isFormValid()}
           >
             {(() => {
+              if (seatSelectionType === "postpone") {
+                if (!formData.name || !formData.phone) return "請完成乘客資料"
+                if (!termsAccepted) return "請同意劃位條款"
+                return "確認暫不劃位"
+              }
+
               if (!selectedDate) return "請選擇使用日期"
               if (!pickupLocation || pickupLocation === "") return "請選擇上車地點"
               if (!formData.name || !formData.phone) return "請完成乘客資料"
