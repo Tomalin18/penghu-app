@@ -461,7 +461,7 @@ export default function EditReservationPage() {
                 <div className="flex items-center space-x-3">
                   <RadioGroupItem value="cancel" id="cancel" className="w-6 h-6 bg-white border-2 border-gray-300" />
                   <Label htmlFor="cancel" className="text-lg font-medium text-foreground cursor-pointer">
-                    取消劃位
+                    修改劃位
                   </Label>
                 </div>
                 <div className="flex items-center space-x-3">
