@@ -922,14 +922,20 @@ export default function MyTicketsPage() {
             <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">退款申請中...</span>
           </div>
           <div className="bg-muted/50 p-3 rounded-lg space-y-1">
-            {Object.entries(ticket.breakdown).map(([key, detail]: [string, any]) => (
-              <div key={key} className="flex justify-between text-xs">
-                <span className="text-muted-foreground">
-                  {detail.label} x {detail.count}
-                </span>
-                <span className="font-medium">- NT${detail.subtotal}</span>
-              </div>
-            ))}
+            {(() => {
+              // 找到第一個被取消的路線名稱
+              const cancelledRoute = ticket.selectedDates?.find(date => date.cancelled);
+              const routeNamePrefix = cancelledRoute ? `${cancelledRoute.routeName} ` : '';
+              
+              return Object.entries(ticket.breakdown).map(([key, detail]: [string, any]) => (
+                <div key={key} className="flex justify-between text-xs">
+                  <span className="text-muted-foreground">
+                    {routeNamePrefix}{detail.label} x {detail.count}
+                  </span>
+                  <span className="font-medium">- NT${detail.subtotal}</span>
+                </div>
+              ));
+            })()}
             <div className="pt-2 border-t border-border flex justify-between font-semibold text-xs">
               <span>總計</span>
               <span className="text-primary">- NT${ticket.totalAmount}</span>
@@ -1181,7 +1187,7 @@ export default function MyTicketsPage() {
                   className="flex-1 h-8 text-xs bg-transparent"
                   onClick={() => handleEditTicket(ticket)}
                 >
-                  修改
+                  修改/取消 劃位
                 </Button>
                 <Button
                   size="sm"
