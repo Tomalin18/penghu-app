@@ -1080,7 +1080,6 @@ export default function MyTicketsPage() {
       return { label: "已搭乘", variant: "secondary" as const, className: "" }
     }
 
-
     // 如果未劃位，顯示「未劃位」狀態
     if (!ticket.seatAssigned) {
       return { label: "未劃位", variant: "outline" as const, className: "bg-orange-100 text-orange-700 border-orange-200" }
