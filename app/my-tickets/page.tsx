@@ -919,7 +919,7 @@ export default function MyTicketsPage() {
         <div className="mb-4">
           <div className="flex items-center justify-between mb-2">
             <h4 className="font-semibold text-xs text-foreground">退款明細</h4>
-            <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">退款申請中...</span>
+            <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">退款申請中</span>
           </div>
           <div className="bg-muted/50 p-3 rounded-lg space-y-1">
             {(() => {
