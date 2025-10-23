@@ -146,7 +146,7 @@ export default function MyTicketsPage() {
         date: "2025/9/20",
         quantity: 1,
         totalAmount: 300,
-        status: "purchased",
+        status: "completed",
         seatAssigned: true,
         seatNumber: "B08",
         purchaseDate: "2025/9/15",
@@ -387,7 +387,7 @@ export default function MyTicketsPage() {
           },
         ],
       },
-      // 三日券 - 已購買狀態
+      // 三日券 - 未劃位狀態
       {
         id: "TK3D001",
         name: "台灣好行 三日券 北環・湖西・澎南線",
@@ -1071,27 +1071,22 @@ export default function MyTicketsPage() {
   )
 
   const getTicketStatus = (ticket: StoredTicket) => {
-    const ticketDate = new Date(ticket.date)
-    const validUntilDate = new Date(ticket.validUntil)
-    const now = new Date()
-
+    // 單純根據票券的固定狀態判斷，不考慮日期
     if (ticket.status === "cancelled") {
       return { label: "已取消", variant: "destructive" as const, className: "" }
     }
 
-    if (validUntilDate < now) {
-      return { label: "已失效", variant: "secondary" as const, className: "" }
-    }
-
-    if (ticketDate < now) {
+    if (ticket.status === "completed") {
       return { label: "已搭乘", variant: "secondary" as const, className: "" }
     }
+
 
     // 如果未劃位，顯示「未劃位」狀態
     if (!ticket.seatAssigned) {
       return { label: "未劃位", variant: "outline" as const, className: "bg-orange-100 text-orange-700 border-orange-200" }
     }
 
+    // 預設為已劃位
     return { label: "已劃位", variant: "default" as const, className: "" }
   }
 
