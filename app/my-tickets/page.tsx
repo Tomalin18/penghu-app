@@ -90,7 +90,7 @@ export default function MyTicketsPage() {
           },
         ],
       },
-      // 已劃位 (Seat Assigned) - future date
+      // 未劃位 (Not Assigned) - future date
       {
         id: "TK250915",
         name: "媽宮・北環線 一日券",
@@ -99,8 +99,7 @@ export default function MyTicketsPage() {
         quantity: 2,
         totalAmount: 600,
         status: "purchased",
-        seatAssigned: true,
-        seatNumber: "A12, A13",
+        seatAssigned: false,
         purchaseDate: "2025/9/10",
         validUntil: "2025/12/10",
         type: "一日券",
@@ -237,7 +236,7 @@ export default function MyTicketsPage() {
           },
         ],
       },
-      // 二日券 - 已購買狀態
+      // 二日券 - 未劃位狀態
       {
         id: "TK2D001",
         name: "台灣好行 二日券 北環・湖西線",
@@ -575,8 +574,8 @@ export default function MyTicketsPage() {
 
     const allTickets = [...sampleTickets, ...filteredLoadedTickets]
 
-    // Only show tickets with assigned seats
-    const assignedTickets = allTickets.filter((ticket) => ticket.seatAssigned === true)
+    // Show all tickets (both assigned and unassigned)
+    const assignedTickets = allTickets
 
     // Sort tickets: future dates first (ascending), then past dates (descending)
     const sortedTickets = assignedTickets.sort((a, b) => {
@@ -1077,18 +1076,23 @@ export default function MyTicketsPage() {
     const now = new Date()
 
     if (ticket.status === "cancelled") {
-      return { label: "已取消", variant: "destructive" as const }
+      return { label: "已取消", variant: "destructive" as const, className: "" }
     }
 
     if (validUntilDate < now) {
-      return { label: "已失效", variant: "secondary" as const }
+      return { label: "已失效", variant: "secondary" as const, className: "" }
     }
 
     if (ticketDate < now) {
-      return { label: "已搭乘", variant: "secondary" as const }
+      return { label: "已搭乘", variant: "secondary" as const, className: "" }
     }
 
-    return { label: "已劃位", variant: "default" as const }
+    // 如果未劃位，顯示「未劃位」狀態
+    if (!ticket.seatAssigned) {
+      return { label: "未劃位", variant: "outline" as const, className: "bg-orange-100 text-orange-700 border-orange-200" }
+    }
+
+    return { label: "已劃位", variant: "default" as const, className: "" }
   }
 
   const TicketCard = ({ ticket }: { ticket: StoredTicket }) => {
@@ -1122,7 +1126,10 @@ export default function MyTicketsPage() {
               )}
             </div>
             <div className="flex flex-col items-end">
-              <Badge variant={status.variant} className="text-xs">
+              <Badge 
+                variant={status.variant} 
+                className={`text-xs ${status.className || ''}`}
+              >
                 {status.label}
               </Badge>
             </div>
@@ -1200,6 +1207,36 @@ export default function MyTicketsPage() {
                 >
                   我要取消
                 </Button>
+              </>
+            ) : status.label === "未劃位" ? (
+              // 未劃位：劃位、查看詳情
+              <>
+                <Button
+                  size="sm"
+                  variant="default"
+                  className="flex-1 h-8 text-xs"
+                  onClick={() => handleEditTicket(ticket)}
+                >
+                  立即劃位
+                </Button>
+                <Dialog open={isTicketInfoDialogOpen} onOpenChange={setIsTicketInfoDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="flex-1 h-8 text-xs bg-transparent"
+                      onClick={() => handleViewTicketInfo(ticket)}
+                    >
+                      查看詳情
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-sm max-h-[80vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="text-center">票券資訊</DialogTitle>
+                    </DialogHeader>
+                    {selectedTicket && <TicketInfoDisplay ticket={selectedTicket} showQRCode={false} />}
+                  </DialogContent>
+                </Dialog>
               </>
             ) : status.label === "已搭乘" ? (
               // 已搭乘：車票詳情（不顯示QR碼）、為此行程評分
