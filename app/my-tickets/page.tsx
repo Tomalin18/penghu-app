@@ -1203,7 +1203,7 @@ export default function MyTicketsPage() {
                 </Button>
               </>
             ) : status.label === "未劃位" ? (
-              // 未劃位：劃位、查看詳情
+              // 未劃位：劃位、查看詳情、取消
               <>
                 <Button
                   size="sm"
@@ -1231,6 +1231,17 @@ export default function MyTicketsPage() {
                     {selectedTicket && <TicketInfoDisplay ticket={selectedTicket} showQRCode={false} />}
                   </DialogContent>
                 </Dialog>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 h-8 text-xs bg-transparent text-destructive hover:text-destructive"
+                  onClick={() => {
+                    setTicketToCancel(ticket)
+                    setIsCancelDialogOpen(true)
+                  }}
+                >
+                  我要取消
+                </Button>
               </>
             ) : status.label === "已搭乘" ? (
               // 已搭乘：車票詳情（不顯示QR碼）、為此行程評分
